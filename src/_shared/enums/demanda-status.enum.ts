@@ -1,0 +1,6 @@
+export enum DemandaStatus {
+  EM_PROGRESSO = 'EM_PROGRESSO',
+  FINALIZADA = 'FINALIZADA',
+  PAUSA = 'PAUSA',
+  CANCELADA = 'CANCELADA',
+}

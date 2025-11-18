@@ -1,0 +1,7 @@
+export enum DemandaTurno {
+  MANHA = 'MANHA',
+  TARDE = 'TARDE',
+  NOITE = 'NOITE',
+  INTERMEDIARIO = 'INTERMEDIARIO',
+  ADMINISTRATIVO = 'ADMINISTRATIVO',
+}

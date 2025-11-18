@@ -1,0 +1,2624 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>novo_projeto_nest documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">novo_projeto_nest documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content coverage">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">Documentation coverage</li>
+</ol>
+
+<div>
+    <img src="./images/coverage-badge-documentation.svg">
+</div>
+
+<table class="table table-bordered coverage" id="coverage-table">
+    <thead class="coverage-header">
+        <tr>
+            <th>File</th>
+            <th>Type</th>
+            <th>Identifier</th>
+            <th style="text-align:right" class="statements" data-sort-default>Statements</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#AccountId">src/_shared/decorators/account-id.decorator.ts</a>
+            </td>
+            <td>variable</td>
+            <td>AccountId</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#ApiStandardResponses">src/_shared/decorators/api-response.decorator.ts</a>
+            </td>
+            <td>function</td>
+            <td>ApiStandardResponses</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#defaultErrorDescriptions">src/_shared/decorators/api-response.decorator.ts</a>
+            </td>
+            <td>variable</td>
+            <td>defaultErrorDescriptions</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/KeycloakTokenPayload.html">src/_shared/guard/auth.guard.ts</a>
+            </td>
+            <td>interface</td>
+            <td>KeycloakTokenPayload</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/23)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./guards/AuthGuard.html">src/_shared/guard/auth.guard.ts</a>
+            </td>
+            <td>guard</td>
+            <td>AuthGuard</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#DRIZZLE_PROVIDER">src/_shared/infra/drizzle/drizzle.constants.ts</a>
+            </td>
+            <td>variable</td>
+            <td>DRIZZLE_PROVIDER</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#drizzleProvider">src/_shared/infra/drizzle/drizzle.provider.ts</a>
+            </td>
+            <td>variable</td>
+            <td>drizzleProvider</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#DrizzleClient">src/_shared/infra/drizzle/drizzle.provider.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>DrizzleClient</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#centerRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>centerRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#configuracaoImpressaoMapaRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>configuracaoImpressaoMapaRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#configuracaoRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>configuracaoRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#corteMercadoriaRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>corteMercadoriaRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#dashboardProdutividadeCenterRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>dashboardProdutividadeCenterRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#dashboardProdutividadeUserRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>dashboardProdutividadeUserRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#demandaRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>demandaRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaImagensRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaImagensRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoAnomaliasRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoAnomaliasRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoCheckListRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoCheckListRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoDemandaRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoDemandaRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoHistoricoStatusRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoHistoricoStatusRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoItensRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoItensRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoNotasRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoNotasRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoTransportadorasRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoTransportadorasRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#historicoImpressaoMapaRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>historicoImpressaoMapaRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#historicoStatusTransporteRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>historicoStatusTransporteRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#paleteRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>paleteRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#pausaGeralRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>pausaGeralRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#pausaRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>pausaRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#rulesEnginesRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>rulesEnginesRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#transporteRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>transporteRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#userCenterRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>userCenterRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#userRelations">src/_shared/infra/drizzle/schema.relations.ts</a>
+            </td>
+            <td>variable</td>
+            <td>userRelations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#anomaliaProdutividade">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>anomaliaProdutividade</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#center">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>center</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#configuracao">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>configuracao</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#configuracaoImpressaoMapa">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>configuracaoImpressaoMapa</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#corteMercadoria">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>corteMercadoria</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#dashboardProdutividadeCenter">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>dashboardProdutividadeCenter</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#dashboardProdutividadeUser">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>dashboardProdutividadeUser</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#demanda">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>demanda</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaImagens">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaImagens</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoAnomalias">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoAnomalias</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoCheckList">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoCheckList</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoDemanda">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoDemanda</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoHistoricoStatus">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoHistoricoStatus</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoItens">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoItens</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoNotas">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoNotas</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#devolucaoTransportadoras">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>devolucaoTransportadoras</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#empresa">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>empresa</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#exibirClienteCabecalhoEnum">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>exibirClienteCabecalhoEnum</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#historicoImpressaoMapa">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>historicoImpressaoMapa</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#historicoStatusTransporte">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>historicoStatusTransporte</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#imagem">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>imagem</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#motivoCorteMercadoria">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>motivoCorteMercadoria</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#palete">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>palete</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#pausa">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>pausa</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#pausaGeral">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>pausaGeral</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#prismaMigrations">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>prismaMigrations</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#produto">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>produto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#role">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>role</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#rulesEngines">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>rulesEngines</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#segmentoProduto">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>segmentoProduto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#statusDemanda">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>statusDemanda</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#statusDevolucao">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>statusDevolucao</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#statusPalete">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>statusPalete</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#statusTransporte">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>statusTransporte</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#tipoDevolucaoAnomalias">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>tipoDevolucaoAnomalias</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#tipoDevolucaoItens">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>tipoDevolucaoItens</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#tipoDevolucaoNotas">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>tipoDevolucaoNotas</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#tipoEvento">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>tipoEvento</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#tipoImpressao">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>tipoImpressao</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#tipoPeso">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>tipoPeso</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#tipoProcesso">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>tipoProcesso</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#tipoQuebraPalete">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>tipoQuebraPalete</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#transporte">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>transporte</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#turno">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>turno</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#user">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>user</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#userCenter">src/_shared/infra/drizzle/schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>userCenter</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/IIdentityUserRepository.html">src/_shared/infra/keycloak/domain/repository/IIdentityUser.repository.ts</a>
+            </td>
+            <td>interface</td>
+            <td>IIdentityUserRepository</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/CriarFuncionarioKeyCloak.html">src/_shared/infra/keycloak/dto/criarFuncionarioKeCloak.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>CriarFuncionarioKeyCloak</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#CriarFuncionarioAdmSchema">src/_shared/infra/keycloak/dto/criarFuncionarioKeCloak.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>CriarFuncionarioAdmSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/KeycloakService.html">src/_shared/infra/keycloak/keycloak.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>KeycloakService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/12)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/RedisService.html">src/_shared/infra/redis/redis.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>RedisService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/AppService.html">src/app.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>AppService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./controllers/CenterController.html">src/center/center.controller.ts</a>
+            </td>
+            <td>controller</td>
+            <td>CenterController</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/CenterService.html">src/center/center.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>CenterService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/9)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./entitys/Center.html">src/center/domain/entities/Center.entity.ts</a>
+            </td>
+            <td>entity</td>
+            <td>Center</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/ICenterRepository.html">src/center/domain/repositories/center.respository.ts</a>
+            </td>
+            <td>interface</td>
+            <td>ICenterRepository</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/ConfiguracaoImpressaoMapaDto.html">src/center/dto/configuracaoImpressaoMapa.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>ConfiguracaoImpressaoMapaDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#configuracaoImpressaoMapaSchema">src/center/dto/configuracaoImpressaoMapa.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>configuracaoImpressaoMapaSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/CenterDto.html">src/center/dto/create-center.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>CenterDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#CenterSchema">src/center/dto/create-center.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>CenterSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/UpdateCenterDto.html">src/center/dto/update-center.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>UpdateCenterDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#configCenterCommand">src/center/infra/drizzle/commands/config-center.command.ts</a>
+            </td>
+            <td>function</td>
+            <td>configCenterCommand</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#createCenterCommand">src/center/infra/drizzle/commands/create-center.command.ts</a>
+            </td>
+            <td>function</td>
+            <td>createCenterCommand</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#removeCenterCommand">src/center/infra/drizzle/commands/remove-center-command.ts</a>
+            </td>
+            <td>function</td>
+            <td>removeCenterCommand</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#updateCenterCommand">src/center/infra/drizzle/commands/update-center.command.ts</a>
+            </td>
+            <td>function</td>
+            <td>updateCenterCommand</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/FindAllCentersQueryDto.html">src/center/infra/drizzle/queries/find-all-centers.query.ts</a>
+            </td>
+            <td>interface</td>
+            <td>FindAllCentersQueryDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#findAllCentersQuery">src/center/infra/drizzle/queries/find-all-centers.query.ts</a>
+            </td>
+            <td>function</td>
+            <td>findAllCentersQuery</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/FindAllCentersQueryDto.html">src/center/infra/drizzle/queries/find-one-centers.query.ts</a>
+            </td>
+            <td>interface</td>
+            <td>FindAllCentersQueryDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#findOneCenterQuery">src/center/infra/drizzle/queries/find-one-centers.query.ts</a>
+            </td>
+            <td>function</td>
+            <td>findOneCenterQuery</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/GetConfigMapaQueryDto.html">src/center/infra/drizzle/queries/get-config-mapa.query.ts</a>
+            </td>
+            <td>interface</td>
+            <td>GetConfigMapaQueryDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#getConfigMapaQuery">src/center/infra/drizzle/queries/get-config-mapa.query.ts</a>
+            </td>
+            <td>function</td>
+            <td>getConfigMapaQuery</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/CenterRepositoryDrizzle.html">src/center/infra/drizzle/repository.ts</a>
+            </td>
+            <td>class</td>
+            <td>CenterRepositoryDrizzle</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/9)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/ConfigCenterService.html">src/config-center/config-center.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>ConfigCenterService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./entitys/ConfiguracaoImpressaoMapa.html">src/config-center/domain/entities/ConfiguracaoImpressaoMapa.entity.ts</a>
+            </td>
+            <td>entity</td>
+            <td>ConfiguracaoImpressaoMapa</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/ConfiguracaoImpressaoMapa.html">src/config-center/domain/entities/ConfiguracaoImpressaoMapa.entity.ts</a>
+            </td>
+            <td>class</td>
+            <td>ConfiguracaoImpressaoMapa</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/16)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#setupSwagger">src/config/swagger.config.ts</a>
+            </td>
+            <td>function</td>
+            <td>setupSwagger</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#validationSchema">src/config/validation.schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>validationSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/AddPausaGeral.html">src/gestao-produtividade/aplication/addPausaGeral.usecase.ts</a>
+            </td>
+            <td>class</td>
+            <td>AddPausaGeral</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/AddPausaIndividual.html">src/gestao-produtividade/aplication/addPausaIndividual.usecase.ts</a>
+            </td>
+            <td>class</td>
+            <td>AddPausaIndividual</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/BuscarPausasAtivas.html">src/gestao-produtividade/aplication/buscarPausasAtivas.ts</a>
+            </td>
+            <td>class</td>
+            <td>BuscarPausasAtivas</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/CriarDemandaProdutividade.html">src/gestao-produtividade/aplication/criarDemanda.usecase.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>CriarDemandaProdutividade</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/FinalizarPaleteProdutividade.html">src/gestao-produtividade/aplication/finalizarPalete.usecase.ts</a>
+            </td>
+            <td>class</td>
+            <td>FinalizarPaleteProdutividade</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/FinalizarPausaGeral.html">src/gestao-produtividade/aplication/finalizarPausaGeral.usecase.ts</a>
+            </td>
+            <td>class</td>
+            <td>FinalizarPausaGeral</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/FinalizarPausaIndividual.html">src/gestao-produtividade/aplication/finalizarPausaIndividual.usecase.ts</a>
+            </td>
+            <td>class</td>
+            <td>FinalizarPausaIndividual</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/Demanda.html">src/gestao-produtividade/domain/entities/demanda.entity.ts</a>
+            </td>
+            <td>class</td>
+            <td>Demanda</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/14)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/Palete.html">src/gestao-produtividade/domain/entities/palete.entity.ts</a>
+            </td>
+            <td>class</td>
+            <td>Palete</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/Pausa.html">src/gestao-produtividade/domain/entities/pausa.entity.ts</a>
+            </td>
+            <td>class</td>
+            <td>Pausa</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/IDemandaProdutividadeRepository.html">src/gestao-produtividade/domain/repository/IDemandaProdutividade.repository.ts</a>
+            </td>
+            <td>interface</td>
+            <td>IDemandaProdutividadeRepository</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/IPausaRepository.html">src/gestao-produtividade/domain/repository/IPausa.repository.ts</a>
+            </td>
+            <td>interface</td>
+            <td>IPausaRepository</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/DemandaCreateDataComPaletesIds.html">src/gestao-produtividade/dtos/demanda/demanda.create.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>DemandaCreateDataComPaletesIds</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#createDemandaSchema">src/gestao-produtividade/dtos/demanda/demanda.create.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>createDemandaSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#getDemandaSchemaComPaletesIds">src/gestao-produtividade/dtos/demanda/demanda.create.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>getDemandaSchemaComPaletesIds</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#DemandaCreateData">src/gestao-produtividade/dtos/demanda/demanda.create.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>DemandaCreateData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#getDemandaSchema">src/gestao-produtividade/dtos/demanda/demanda.get.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>getDemandaSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#getDemandaSchemaComPausas">src/gestao-produtividade/dtos/demanda/demanda.get.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>getDemandaSchemaComPausas</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#DemandaGetData">src/gestao-produtividade/dtos/demanda/demanda.get.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>DemandaGetData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#updateDemandaSchema">src/gestao-produtividade/dtos/demanda/demanda.update.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>updateDemandaSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#DemandaUpdateData">src/gestao-produtividade/dtos/demanda/demanda.update.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>DemandaUpdateData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#createPaleteSchema">src/gestao-produtividade/dtos/palete/palete.create.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>createPaleteSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#PaleteCreateData">src/gestao-produtividade/dtos/palete/palete.create.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PaleteCreateData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#getPaleteSchema">src/gestao-produtividade/dtos/palete/palete.get.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>getPaleteSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#PaleteGetData">src/gestao-produtividade/dtos/palete/palete.get.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PaleteGetData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#updatePaleteSchema">src/gestao-produtividade/dtos/palete/palete.update.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>updatePaleteSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#PaleteUpdateData">src/gestao-produtividade/dtos/palete/palete.update.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PaleteUpdateData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/FindAllParams.html">src/gestao-produtividade/dtos/params.dto.ts</a>
+            </td>
+            <td>interface</td>
+            <td>FindAllParams</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/PausaCreateDataDto.html">src/gestao-produtividade/dtos/pausa/pausa.create.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>PausaCreateDataDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#createPausaSchema">src/gestao-produtividade/dtos/pausa/pausa.create.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>createPausaSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#PausaCreateData">src/gestao-produtividade/dtos/pausa/pausa.create.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PausaCreateData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#getPausaSchema">src/gestao-produtividade/dtos/pausa/pausa.get.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>getPausaSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#PausaGetData">src/gestao-produtividade/dtos/pausa/pausa.get.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PausaGetData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#updatePausaSchema">src/gestao-produtividade/dtos/pausa/pausa.update.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>updatePausaSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#PausaUpdateData">src/gestao-produtividade/dtos/pausa/pausa.update.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PausaUpdateData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/PausaGeralCreateDataDto.html">src/gestao-produtividade/dtos/pausaGeral/pausaGeral.create.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>PausaGeralCreateDataDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#createPausaGeralSchema">src/gestao-produtividade/dtos/pausaGeral/pausaGeral.create.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>createPausaGeralSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#PausaGeralCreateData">src/gestao-produtividade/dtos/pausaGeral/pausaGeral.create.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PausaGeralCreateData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/PausaGeralGetDataDto.html">src/gestao-produtividade/dtos/pausaGeral/pausaGeral.get.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>PausaGeralGetDataDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#getPausaGeralSchema">src/gestao-produtividade/dtos/pausaGeral/pausaGeral.get.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>getPausaGeralSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#PausaGeralGetData">src/gestao-produtividade/dtos/pausaGeral/pausaGeral.get.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PausaGeralGetData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/PausaGeralSearchParamsDto.html">src/gestao-produtividade/dtos/pausaGeral/pausaGeral.update.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>PausaGeralSearchParamsDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#updatePausaGeralSchema">src/gestao-produtividade/dtos/pausaGeral/pausaGeral.update.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>updatePausaGeralSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#PausaGeralUpdateData">src/gestao-produtividade/dtos/pausaGeral/pausaGeral.update.dto.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PausaGeralUpdateData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./controllers/GestaoProdutividadeController.html">src/gestao-produtividade/gestao-produtividade.controller.ts</a>
+            </td>
+            <td>controller</td>
+            <td>GestaoProdutividadeController</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/GestaoProdutividadeService.html">src/gestao-produtividade/gestao-produtividade.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>GestaoProdutividadeService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/9)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#buscarDemandasQuery">src/gestao-produtividade/infra/queries/buscarDemandas.ts</a>
+            </td>
+            <td>function</td>
+            <td>buscarDemandasQuery</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#buscarPausasGeraisQuery">src/gestao-produtividade/infra/queries/buscarPausasGerais.ts</a>
+            </td>
+            <td>function</td>
+            <td>buscarPausasGeraisQuery</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/ProdutividadeRepositoryDrizzle.html">src/gestao-produtividade/infra/repository.demanda.ts</a>
+            </td>
+            <td>class</td>
+            <td>ProdutividadeRepositoryDrizzle</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/PausaRepositoryDrizzle.html">src/gestao-produtividade/infra/repository.pausa.ts</a>
+            </td>
+            <td>class</td>
+            <td>PausaRepositoryDrizzle</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#agruparDemandasComRelacionamentos">src/gestao-produtividade/utils/agruparDemandasComRelacionamentos.ts</a>
+            </td>
+            <td>function</td>
+            <td>agruparDemandasComRelacionamentos</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#Demanda">src/gestao-produtividade/utils/agruparDemandasComRelacionamentos.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>Demanda</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#Palete">src/gestao-produtividade/utils/agruparDemandasComRelacionamentos.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>Palete</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#Pausa">src/gestao-produtividade/utils/agruparDemandasComRelacionamentos.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>Pausa</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#Registro">src/gestao-produtividade/utils/agruparDemandasComRelacionamentos.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>Registro</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#bootstrap">src/main.ts</a>
+            </td>
+            <td>function</td>
+            <td>bootstrap</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./controllers/MyCustomController.html">src/metrics/my-custom-controller.ts</a>
+            </td>
+            <td>controller</td>
+            <td>MyCustomController</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./entitys/Transporte.html">src/transporte/domain/entities/Transporte.entity.ts</a>
+            </td>
+            <td>entity</td>
+            <td>Transporte</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/AddItemsTransporteDto.html">src/transporte/dto/add-items-transporte.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>AddItemsTransporteDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#addItemsTransporteSchema">src/transporte/dto/add-items-transporte.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>addItemsTransporteSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/CreateTransporteDto.html">src/transporte/dto/create-transporte.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>CreateTransporteDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/CreateTransporteItemDto.html">src/transporte/dto/create-transporte.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>CreateTransporteItemDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#createTransporteArraySchema">src/transporte/dto/create-transporte.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>createTransporteArraySchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#createTransporteSchema">src/transporte/dto/create-transporte.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>createTransporteSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/ResultTransporteDto.html">src/transporte/dto/findAll-transporte.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>ResultTransporteDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#TransporteSchema">src/transporte/dto/findAll-transporte.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>TransporteSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/GetAllTransportesDto.html">src/transporte/dto/getAllTransportes.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>GetAllTransportesDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#getAllTransportesSchema">src/transporte/dto/getAllTransportes.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>getAllTransportesSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/UpdateTransporteDto.html">src/transporte/dto/update-transporte.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>UpdateTransporteDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#createTransporteBatchQuery">src/transporte/infra/queries/create-transporte-batch.ts</a>
+            </td>
+            <td>function</td>
+            <td>createTransporteBatchQuery</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/FindAllCentersQueryDto.html">src/transporte/infra/queries/find-all-transportes.query.ts</a>
+            </td>
+            <td>interface</td>
+            <td>FindAllCentersQueryDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#findAllTransportesQuery">src/transporte/infra/queries/find-all-transportes.query.ts</a>
+            </td>
+            <td>function</td>
+            <td>findAllTransportesQuery</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./controllers/TransporteController.html">src/transporte/transporte.controller.ts</a>
+            </td>
+            <td>controller</td>
+            <td>TransporteController</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/TransporteService.html">src/transporte/transporte.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>TransporteService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/AddNewUser.html">src/user/application/addNewUser.usecase.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>AddNewUser</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/AddUserBatch.html">src/user/application/addUserBatch.usecase.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>AddUserBatch</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./entitys/User.html">src/user/domain/entities/User.entity.ts</a>
+            </td>
+            <td>entity</td>
+            <td>User</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./entitys/UserCenter.html">src/user/domain/entities/UserCenter.entity.ts</a>
+            </td>
+            <td>entity</td>
+            <td>UserCenter</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/CreateUserDto.html">src/user/dto/create-user.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>CreateUserDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#CriarFuncionarioAdmSchema">src/user/dto/create-user.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>CriarFuncionarioAdmSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/InfoMeDto.html">src/user/dto/infoMe.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>InfoMeDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#infoMeSchema">src/user/dto/infoMe.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>infoMeSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/UserDto.html">src/user/dto/listUser.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>UserDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#listUserSchema">src/user/dto/listUser.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>listUserSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/QueriesDtoUserCenter.html">src/user/dto/queries.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>QueriesDtoUserCenter</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#queriesSchema">src/user/dto/queries.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>queriesSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/RoleDto.html">src/user/dto/role.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>RoleDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#roleSchema">src/user/dto/role.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>roleSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/UpdateUserDto.html">src/user/dto/update-user.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>UpdateUserDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/EditUserDto.html">src/user/dto/updateUser.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>EditUserDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#editUserSchema">src/user/dto/updateUser.dto.ts</a>
+            </td>
+            <td>variable</td>
+            <td>editUserSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./controllers/UserController.html">src/user/user.controller.ts</a>
+            </td>
+            <td>controller</td>
+            <td>UserController</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/13)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/UserService.html">src/user/user.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>UserService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/14)</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="js/libs/tablesort.min.js"></script>
+<script src="js/libs/tablesort.number.min.js"></script>
+<script>
+    new Tablesort(document.getElementById('coverage-table'));
+</script>
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'coverage';
+            var COMPODOC_CURRENT_PAGE_URL = 'coverage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,5 @@
+export enum DemandaProcesso {
+  SEPARACAO = 'SEPARACAO',
+  CARREGAMENTO = 'CARREGAMENTO',
+  CONFERENCIA = 'CONFERENCIA',
+}

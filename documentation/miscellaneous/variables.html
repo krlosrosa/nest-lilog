@@ -1,0 +1,4006 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>novo_projeto_nest documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">novo_projeto_nest documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#AccountId" title="src/_shared/decorators/account-id.decorator.ts" ><b>AccountId</b>&nbsp;&nbsp;&nbsp;(src/.../account-id.decorator.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#addItemsTransporteSchema" title="src/transporte/dto/add-items-transporte.dto.ts" ><b>addItemsTransporteSchema</b>&nbsp;&nbsp;&nbsp;(src/.../add-items-transporte.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#anomaliaProdutividade" title="src/_shared/infra/drizzle/schema.ts" ><b>anomaliaProdutividade</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#center" title="src/_shared/infra/drizzle/schema.ts" ><b>center</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#centerRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>centerRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CenterSchema" title="src/center/dto/create-center.dto.ts" ><b>CenterSchema</b>&nbsp;&nbsp;&nbsp;(src/.../create-center.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#configuracao" title="src/_shared/infra/drizzle/schema.ts" ><b>configuracao</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#configuracaoImpressaoMapa" title="src/_shared/infra/drizzle/schema.ts" ><b>configuracaoImpressaoMapa</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#configuracaoImpressaoMapaRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>configuracaoImpressaoMapaRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#configuracaoImpressaoMapaSchema" title="src/center/dto/configuracaoImpressaoMapa.dto.ts" ><b>configuracaoImpressaoMapaSchema</b>&nbsp;&nbsp;&nbsp;(src/.../configuracaoImpressaoMapa.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#configuracaoRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>configuracaoRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#corteMercadoria" title="src/_shared/infra/drizzle/schema.ts" ><b>corteMercadoria</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#corteMercadoriaRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>corteMercadoriaRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createDemandaSchema" title="src/gestao-produtividade/dtos/demanda/demanda.create.dto.ts" ><b>createDemandaSchema</b>&nbsp;&nbsp;&nbsp;(src/.../demanda.create.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createPaleteSchema" title="src/gestao-produtividade/dtos/palete/palete.create.dto.ts" ><b>createPaleteSchema</b>&nbsp;&nbsp;&nbsp;(src/.../palete.create.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createPausaGeralSchema" title="src/gestao-produtividade/dtos/pausaGeral/pausaGeral.create.dto.ts" ><b>createPausaGeralSchema</b>&nbsp;&nbsp;&nbsp;(src/.../pausaGeral.create.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createPausaSchema" title="src/gestao-produtividade/dtos/pausa/pausa.create.dto.ts" ><b>createPausaSchema</b>&nbsp;&nbsp;&nbsp;(src/.../pausa.create.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createTransporteArraySchema" title="src/transporte/dto/create-transporte.dto.ts" ><b>createTransporteArraySchema</b>&nbsp;&nbsp;&nbsp;(src/.../create-transporte.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createTransporteSchema" title="src/transporte/dto/create-transporte.dto.ts" ><b>createTransporteSchema</b>&nbsp;&nbsp;&nbsp;(src/.../create-transporte.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CriarFuncionarioAdmSchema" title="src/user/dto/create-user.dto.ts" ><b>CriarFuncionarioAdmSchema</b>&nbsp;&nbsp;&nbsp;(src/.../create-user.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CriarFuncionarioAdmSchema" title="src/_shared/infra/keycloak/dto/criarFuncionarioKeCloak.dto.ts" ><b>CriarFuncionarioAdmSchema</b>&nbsp;&nbsp;&nbsp;(src/.../criarFuncionarioKeCloak.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#dashboardProdutividadeCenter" title="src/_shared/infra/drizzle/schema.ts" ><b>dashboardProdutividadeCenter</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#dashboardProdutividadeCenterRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>dashboardProdutividadeCenterRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#dashboardProdutividadeUser" title="src/_shared/infra/drizzle/schema.ts" ><b>dashboardProdutividadeUser</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#dashboardProdutividadeUserRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>dashboardProdutividadeUserRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#defaultErrorDescriptions" title="src/_shared/decorators/api-response.decorator.ts" ><b>defaultErrorDescriptions</b>&nbsp;&nbsp;&nbsp;(src/.../api-response.decorator.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#demanda" title="src/_shared/infra/drizzle/schema.ts" ><b>demanda</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#demandaRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>demandaRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaImagens" title="src/_shared/infra/drizzle/schema.ts" ><b>devolucaImagens</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaImagensRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>devolucaImagensRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoAnomalias" title="src/_shared/infra/drizzle/schema.ts" ><b>devolucaoAnomalias</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoAnomaliasRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>devolucaoAnomaliasRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoCheckList" title="src/_shared/infra/drizzle/schema.ts" ><b>devolucaoCheckList</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoCheckListRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>devolucaoCheckListRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoDemanda" title="src/_shared/infra/drizzle/schema.ts" ><b>devolucaoDemanda</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoDemandaRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>devolucaoDemandaRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoHistoricoStatus" title="src/_shared/infra/drizzle/schema.ts" ><b>devolucaoHistoricoStatus</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoHistoricoStatusRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>devolucaoHistoricoStatusRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoItens" title="src/_shared/infra/drizzle/schema.ts" ><b>devolucaoItens</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoItensRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>devolucaoItensRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoNotas" title="src/_shared/infra/drizzle/schema.ts" ><b>devolucaoNotas</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoNotasRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>devolucaoNotasRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoTransportadoras" title="src/_shared/infra/drizzle/schema.ts" ><b>devolucaoTransportadoras</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#devolucaoTransportadorasRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>devolucaoTransportadorasRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DRIZZLE_PROVIDER" title="src/_shared/infra/drizzle/drizzle.constants.ts" ><b>DRIZZLE_PROVIDER</b>&nbsp;&nbsp;&nbsp;(src/.../drizzle.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#drizzleProvider" title="src/_shared/infra/drizzle/drizzle.provider.ts" ><b>drizzleProvider</b>&nbsp;&nbsp;&nbsp;(src/.../drizzle.provider.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#editUserSchema" title="src/user/dto/updateUser.dto.ts" ><b>editUserSchema</b>&nbsp;&nbsp;&nbsp;(src/.../updateUser.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#empresa" title="src/_shared/infra/drizzle/schema.ts" ><b>empresa</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#exibirClienteCabecalhoEnum" title="src/_shared/infra/drizzle/schema.ts" ><b>exibirClienteCabecalhoEnum</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getAllTransportesSchema" title="src/transporte/dto/getAllTransportes.dto.ts" ><b>getAllTransportesSchema</b>&nbsp;&nbsp;&nbsp;(src/.../getAllTransportes.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getDemandaSchema" title="src/gestao-produtividade/dtos/demanda/demanda.get.dto.ts" ><b>getDemandaSchema</b>&nbsp;&nbsp;&nbsp;(src/.../demanda.get.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getDemandaSchemaComPaletesIds" title="src/gestao-produtividade/dtos/demanda/demanda.create.dto.ts" ><b>getDemandaSchemaComPaletesIds</b>&nbsp;&nbsp;&nbsp;(src/.../demanda.create.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getDemandaSchemaComPausas" title="src/gestao-produtividade/dtos/demanda/demanda.get.dto.ts" ><b>getDemandaSchemaComPausas</b>&nbsp;&nbsp;&nbsp;(src/.../demanda.get.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getPaleteSchema" title="src/gestao-produtividade/dtos/palete/palete.get.dto.ts" ><b>getPaleteSchema</b>&nbsp;&nbsp;&nbsp;(src/.../palete.get.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getPausaGeralSchema" title="src/gestao-produtividade/dtos/pausaGeral/pausaGeral.get.dto.ts" ><b>getPausaGeralSchema</b>&nbsp;&nbsp;&nbsp;(src/.../pausaGeral.get.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getPausaSchema" title="src/gestao-produtividade/dtos/pausa/pausa.get.dto.ts" ><b>getPausaSchema</b>&nbsp;&nbsp;&nbsp;(src/.../pausa.get.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#historicoImpressaoMapa" title="src/_shared/infra/drizzle/schema.ts" ><b>historicoImpressaoMapa</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#historicoImpressaoMapaRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>historicoImpressaoMapaRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#historicoStatusTransporte" title="src/_shared/infra/drizzle/schema.ts" ><b>historicoStatusTransporte</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#historicoStatusTransporteRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>historicoStatusTransporteRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#imagem" title="src/_shared/infra/drizzle/schema.ts" ><b>imagem</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#infoMeSchema" title="src/user/dto/infoMe.dto.ts" ><b>infoMeSchema</b>&nbsp;&nbsp;&nbsp;(src/.../infoMe.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#listUserSchema" title="src/user/dto/listUser.dto.ts" ><b>listUserSchema</b>&nbsp;&nbsp;&nbsp;(src/.../listUser.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#motivoCorteMercadoria" title="src/_shared/infra/drizzle/schema.ts" ><b>motivoCorteMercadoria</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#palete" title="src/_shared/infra/drizzle/schema.ts" ><b>palete</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#paleteRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>paleteRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pausa" title="src/_shared/infra/drizzle/schema.ts" ><b>pausa</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pausaGeral" title="src/_shared/infra/drizzle/schema.ts" ><b>pausaGeral</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pausaGeralRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>pausaGeralRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pausaRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>pausaRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#prismaMigrations" title="src/_shared/infra/drizzle/schema.ts" ><b>prismaMigrations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#produto" title="src/_shared/infra/drizzle/schema.ts" ><b>produto</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#queriesSchema" title="src/user/dto/queries.dto.ts" ><b>queriesSchema</b>&nbsp;&nbsp;&nbsp;(src/.../queries.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#role" title="src/_shared/infra/drizzle/schema.ts" ><b>role</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#roleSchema" title="src/user/dto/role.dto.ts" ><b>roleSchema</b>&nbsp;&nbsp;&nbsp;(src/.../role.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#rulesEngines" title="src/_shared/infra/drizzle/schema.ts" ><b>rulesEngines</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#rulesEnginesRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>rulesEnginesRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#segmentoProduto" title="src/_shared/infra/drizzle/schema.ts" ><b>segmentoProduto</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#statusDemanda" title="src/_shared/infra/drizzle/schema.ts" ><b>statusDemanda</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#statusDevolucao" title="src/_shared/infra/drizzle/schema.ts" ><b>statusDevolucao</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#statusPalete" title="src/_shared/infra/drizzle/schema.ts" ><b>statusPalete</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#statusTransporte" title="src/_shared/infra/drizzle/schema.ts" ><b>statusTransporte</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#tipoDevolucaoAnomalias" title="src/_shared/infra/drizzle/schema.ts" ><b>tipoDevolucaoAnomalias</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#tipoDevolucaoItens" title="src/_shared/infra/drizzle/schema.ts" ><b>tipoDevolucaoItens</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#tipoDevolucaoNotas" title="src/_shared/infra/drizzle/schema.ts" ><b>tipoDevolucaoNotas</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#tipoEvento" title="src/_shared/infra/drizzle/schema.ts" ><b>tipoEvento</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#tipoImpressao" title="src/_shared/infra/drizzle/schema.ts" ><b>tipoImpressao</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#tipoPeso" title="src/_shared/infra/drizzle/schema.ts" ><b>tipoPeso</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#tipoProcesso" title="src/_shared/infra/drizzle/schema.ts" ><b>tipoProcesso</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#tipoQuebraPalete" title="src/_shared/infra/drizzle/schema.ts" ><b>tipoQuebraPalete</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#transporte" title="src/_shared/infra/drizzle/schema.ts" ><b>transporte</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#transporteRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>transporteRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TransporteSchema" title="src/transporte/dto/findAll-transporte.dto.ts" ><b>TransporteSchema</b>&nbsp;&nbsp;&nbsp;(src/.../findAll-transporte.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#turno" title="src/_shared/infra/drizzle/schema.ts" ><b>turno</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updateDemandaSchema" title="src/gestao-produtividade/dtos/demanda/demanda.update.dto.ts" ><b>updateDemandaSchema</b>&nbsp;&nbsp;&nbsp;(src/.../demanda.update.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updatePaleteSchema" title="src/gestao-produtividade/dtos/palete/palete.update.dto.ts" ><b>updatePaleteSchema</b>&nbsp;&nbsp;&nbsp;(src/.../palete.update.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updatePausaGeralSchema" title="src/gestao-produtividade/dtos/pausaGeral/pausaGeral.update.dto.ts" ><b>updatePausaGeralSchema</b>&nbsp;&nbsp;&nbsp;(src/.../pausaGeral.update.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updatePausaSchema" title="src/gestao-produtividade/dtos/pausa/pausa.update.dto.ts" ><b>updatePausaSchema</b>&nbsp;&nbsp;&nbsp;(src/.../pausa.update.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#user" title="src/_shared/infra/drizzle/schema.ts" ><b>user</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#userCenter" title="src/_shared/infra/drizzle/schema.ts" ><b>userCenter</b>&nbsp;&nbsp;&nbsp;(src/.../schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#userCenterRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>userCenterRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#userRelations" title="src/_shared/infra/drizzle/schema.relations.ts" ><b>userRelations</b>&nbsp;&nbsp;&nbsp;(src/.../schema.relations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#validationSchema" title="src/config/validation.schema.ts" ><b>validationSchema</b>&nbsp;&nbsp;&nbsp;(src/.../validation.schema.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/_shared/decorators/account-id.decorator.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AccountId"></a>
+                    <span class="name">
+                        <span ><b>AccountId</b></span>
+                        <a href="#AccountId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createParamDecorator(
+  (data: unknown, ctx: ExecutionContext): string | undefined &#x3D;&gt; {
+    const request &#x3D; ctx.switchToHttp().getRequest();
+    return request.accountId; // 👈 pega o valor injetado no request (middleware/guard)
+  },
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/transporte/dto/add-items-transporte.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addItemsTransporteSchema"></a>
+                    <span class="name">
+                        <span ><b>addItemsTransporteSchema</b></span>
+                        <a href="#addItemsTransporteSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  key: z.string(),
+  value: z.string(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/_shared/infra/drizzle/schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="anomaliaProdutividade"></a>
+                    <span class="name">
+                        <span ><b>anomaliaProdutividade</b></span>
+                        <a href="#anomaliaProdutividade"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(&#x27;AnomaliaProdutividade&#x27;, {
+  id: serial().primaryKey().notNull(),
+  demandaId: integer().notNull(),
+  centerId: text().notNull(),
+  funcionarioId: text().notNull(),
+  nomeFuncionario: text().notNull(),
+  cadastroPorId: text().notNull(),
+  nomeCadastradoPor: text().notNull(),
+  inicio: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+  fim: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+  caixas: integer().notNull(),
+  unidades: integer().notNull(),
+  paletes: integer().notNull(),
+  enderecosVisitado: integer().notNull(),
+  produtividade: doublePrecision().notNull(),
+  motivoAnomalia: text().notNull(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="center"></a>
+                    <span class="name">
+                        <span ><b>center</b></span>
+                        <a href="#center"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;Center&#x27;,
+  {
+    centerId: text().primaryKey().notNull(),
+    description: text().notNull(),
+    state: text().notNull(),
+    cluster: text().notNull(),
+  },
+  (table) &#x3D;&gt; [
+    uniqueIndex(&#x27;Center_centerId_key&#x27;).using(
+      &#x27;btree&#x27;,
+      table.centerId.asc().nullsLast().op(&#x27;text_ops&#x27;),
+    ),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configuracao"></a>
+                    <span class="name">
+                        <span ><b>configuracao</b></span>
+                        <a href="#configuracao"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;Configuracao&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    chave: text().notNull(),
+    valor: text().notNull(),
+    descricao: text(),
+    centerId: text(),
+  },
+  (table) &#x3D;&gt; [
+    uniqueIndex(&#x27;Configuracao_chave_centerId_key&#x27;).using(
+      &#x27;btree&#x27;,
+      table.chave.asc().nullsLast().op(&#x27;text_ops&#x27;),
+      table.centerId.asc().nullsLast().op(&#x27;text_ops&#x27;),
+    ),
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;Configuracao_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;set null&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configuracaoImpressaoMapa"></a>
+                    <span class="name">
+                        <span ><b>configuracaoImpressaoMapa</b></span>
+                        <a href="#configuracaoImpressaoMapa"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;ConfiguracaoImpressaoMapa&#x27;,
+  {
+    id: text().primaryKey().notNull(),
+    tipoImpressao: tipoImpressao().notNull(),
+    quebraPalete: boolean().default(false).notNull(),
+    tipoQuebra: tipoQuebraPalete(),
+    valorQuebra: numeric({ precision: 65, scale: 30 }),
+    separarPaleteFull: boolean().default(false).notNull(),
+    separarUnidades: boolean().default(false).notNull(),
+    exibirInfoCabecalho: exibirClienteCabecalhoEnum().default(&#x27;NENHUM&#x27;),
+    segregarFifo: text().array(),
+    dataMaximaPercentual: integer().default(0).notNull(),
+    createdAt: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    centerId: text().notNull(),
+    atribuidoPorId: text(),
+    empresa: text().default(&#x27;LDB&#x27;).notNull(),
+    tipoImpressaoConferencia: tipoImpressao().default(&#x27;TRANSPORTE&#x27;).notNull(),
+    ordemConferencia: text().array().default([&#x27;RAY&#x27;]),
+    ordemFifo: text().array().default([&#x27;RAY&#x27;]),
+    ordemPaletes: text().array().default([&#x27;RAY&#x27;]),
+    ordemPicking: text().array().default([&#x27;RAY&#x27;]),
+    ordemUnidades: text().array().default([&#x27;RAY&#x27;]),
+  },
+  (table) &#x3D;&gt; [
+    uniqueIndex(&#x27;ConfiguracaoImpressaoMapa_centerId_empresa_key&#x27;).using(
+      &#x27;btree&#x27;,
+      table.centerId.asc().nullsLast().op(&#x27;text_ops&#x27;),
+      table.empresa.asc().nullsLast().op(&#x27;text_ops&#x27;),
+    ),
+    foreignKey({
+      columns: [table.atribuidoPorId],
+      foreignColumns: [user.id],
+      name: &#x27;ConfiguracaoImpressaoMapa_atribuidoPorId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;set null&#x27;),
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;ConfiguracaoImpressaoMapa_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="corteMercadoria"></a>
+                    <span class="name">
+                        <span ><b>corteMercadoria</b></span>
+                        <a href="#corteMercadoria"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;CorteMercadoria&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    produto: text().notNull(),
+    lote: text().notNull(),
+    quantidade: integer().notNull(),
+    unidadeMedida: text().notNull(),
+    motivo: motivoCorteMercadoria().notNull(),
+    realizado: boolean().default(false).notNull(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    criadoPorId: text().notNull(),
+    transporteId: text().notNull(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.criadoPorId],
+      foreignColumns: [user.id],
+      name: &#x27;CorteMercadoria_criadoPorId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.transporteId],
+      foreignColumns: [transporte.numeroTransporte],
+      name: &#x27;CorteMercadoria_transporteId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dashboardProdutividadeCenter"></a>
+                    <span class="name">
+                        <span ><b>dashboardProdutividadeCenter</b></span>
+                        <a href="#dashboardProdutividadeCenter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;DashboardProdutividadeCenter&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    dataRegistro: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    centerId: text().notNull(),
+    cluster: text().default(&#x27;distribuicao&#x27;).notNull(),
+    empresa: text().default(&#x27;LACTALIS&#x27;).notNull(),
+    totalCaixas: integer().notNull(),
+    totalUnidades: integer().notNull(),
+    totalPaletes: integer().notNull(),
+    totalEnderecos: integer().notNull(),
+    totalPausasQuantidade: integer().notNull(),
+    totalPausasTempo: integer().notNull(),
+    totalTempoTrabalhado: integer().notNull(),
+    totalDemandas: integer().notNull(),
+    processo: tipoProcesso().notNull(),
+    turno: turno().notNull(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+  },
+  (table) &#x3D;&gt; [
+    uniqueIndex(
+      &#x27;DashboardProdutividadeCenter_centerId_processo_dataRegistro_key&#x27;,
+    ).using(
+      &#x27;btree&#x27;,
+      table.centerId.asc().nullsLast().op(&#x27;text_ops&#x27;),
+      table.processo.asc().nullsLast().op(&#x27;enum_ops&#x27;),
+      table.dataRegistro.asc().nullsLast().op(&#x27;timestamp_ops&#x27;),
+      table.turno.asc().nullsLast().op(&#x27;enum_ops&#x27;),
+    ),
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;DashboardProdutividadeCenter_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dashboardProdutividadeUser"></a>
+                    <span class="name">
+                        <span ><b>dashboardProdutividadeUser</b></span>
+                        <a href="#dashboardProdutividadeUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;DashboardProdutividadeUser&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    dataRegistro: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    centerId: text().notNull(),
+    funcionarioId: text().notNull(),
+    totalCaixas: integer().notNull(),
+    totalUnidades: integer().notNull(),
+    totalPaletes: integer().notNull(),
+    totalEnderecos: integer().notNull(),
+    totalPausasQuantidade: integer().notNull(),
+    totalPausasTempo: integer().notNull(),
+    totalTempoTrabalhado: integer().notNull(),
+    totalDemandas: integer().notNull(),
+    processo: tipoProcesso().notNull(),
+    turno: turno().notNull(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+  },
+  (table) &#x3D;&gt; [
+    uniqueIndex(
+      &#x27;DashboardProdutividadeUser_funcionarioId_centerId_processo__key&#x27;,
+    ).using(
+      &#x27;btree&#x27;,
+      table.funcionarioId.asc().nullsLast().op(&#x27;text_ops&#x27;),
+      table.centerId.asc().nullsLast().op(&#x27;enum_ops&#x27;),
+      table.processo.asc().nullsLast().op(&#x27;timestamp_ops&#x27;),
+      table.dataRegistro.asc().nullsLast().op(&#x27;timestamp_ops&#x27;),
+      table.turno.asc().nullsLast().op(&#x27;enum_ops&#x27;),
+    ),
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;DashboardProdutividadeUser_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.funcionarioId],
+      foreignColumns: [user.id],
+      name: &#x27;DashboardProdutividadeUser_funcionarioId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="demanda"></a>
+                    <span class="name">
+                        <span ><b>demanda</b></span>
+                        <a href="#demanda"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;Demanda&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    processo: tipoProcesso().notNull(),
+    inicio: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    fim: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+    status: statusDemanda().default(&#x27;EM_PROGRESSO&#x27;).notNull(),
+    cadastradoPorId: text().notNull(),
+    turno: turno().notNull(),
+    funcionarioId: text().notNull(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    centerId: text().notNull(),
+    obs: text(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.cadastradoPorId],
+      foreignColumns: [user.id],
+      name: &#x27;Demanda_cadastradoPorId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;Demanda_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.funcionarioId],
+      foreignColumns: [user.id],
+      name: &#x27;Demanda_funcionarioId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaImagens"></a>
+                    <span class="name">
+                        <span ><b>devolucaImagens</b></span>
+                        <a href="#devolucaImagens"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;DevolucaImagens&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    demandaId: integer().notNull(),
+    processo: text().notNull(),
+    tag: text().notNull(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.demandaId],
+      foreignColumns: [devolucaoDemanda.id],
+      name: &#x27;DevolucaImagens_demandaId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoAnomalias"></a>
+                    <span class="name">
+                        <span ><b>devolucaoAnomalias</b></span>
+                        <a href="#devolucaoAnomalias"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;devolucao_anomalias&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    demandaId: integer().notNull(),
+    tipo: tipoDevolucaoAnomalias().notNull(),
+    tratado: boolean().default(false).notNull(),
+    sku: text().notNull(),
+    descricao: text().notNull(),
+    lote: text().notNull(),
+    quantidadeCaixas: integer().notNull(),
+    quantidadeUnidades: integer().notNull(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.demandaId],
+      foreignColumns: [devolucaoDemanda.id],
+      name: &#x27;devolucao_anomalias_demandaId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoCheckList"></a>
+                    <span class="name">
+                        <span ><b>devolucaoCheckList</b></span>
+                        <a href="#devolucaoCheckList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;devolucao_check_list&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    temperaturaBau: doublePrecision().notNull(),
+    temperaturaProduto: doublePrecision().notNull(),
+    demandaId: integer().notNull(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    anomalias: text().array(),
+  },
+  (table) &#x3D;&gt; [
+    uniqueIndex(&#x27;devolucao_check_list_demandaId_key&#x27;).using(
+      &#x27;btree&#x27;,
+      table.demandaId.asc().nullsLast().op(&#x27;int4_ops&#x27;),
+    ),
+    foreignKey({
+      columns: [table.demandaId],
+      foreignColumns: [devolucaoDemanda.id],
+      name: &#x27;devolucao_check_list_demandaId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoDemanda"></a>
+                    <span class="name">
+                        <span ><b>devolucaoDemanda</b></span>
+                        <a href="#devolucaoDemanda"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;devolucao_demanda&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    placa: text().notNull(),
+    motorista: text().notNull(),
+    idTransportadora: text(),
+    telefone: text(),
+    cargaSegregada: boolean().default(false).notNull(),
+    retornoPalete: boolean().default(false).notNull(),
+    quantidadePaletes: integer().default(0),
+    doca: text(),
+    centerId: text().notNull(),
+    adicionadoPorId: text().notNull(),
+    conferenteId: text(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    status: statusDevolucao().default(&#x27;AGUARDANDO_LIBERACAO&#x27;).notNull(),
+    fechouComAnomalia: boolean(),
+    liberadoParaConferenciaEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+    inicioConferenciaEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+    fimConferenciaEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+    finalizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+    senha: text().notNull(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;devolucao_demanda_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.adicionadoPorId],
+      foreignColumns: [user.id],
+      name: &#x27;devolucao_demanda_adicionadoPorId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.conferenteId],
+      foreignColumns: [user.id],
+      name: &#x27;devolucao_demanda_conferenteId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;set null&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoHistoricoStatus"></a>
+                    <span class="name">
+                        <span ><b>devolucaoHistoricoStatus</b></span>
+                        <a href="#devolucaoHistoricoStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;devolucao_historico_status&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    devolucaoDemandaId: integer().notNull(),
+    status: statusDevolucao().notNull(),
+    responsavelId: text(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.devolucaoDemandaId],
+      foreignColumns: [devolucaoDemanda.id],
+      name: &#x27;devolucao_historico_status_devolucaoDemandaId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+    foreignKey({
+      columns: [table.responsavelId],
+      foreignColumns: [user.id],
+      name: &#x27;devolucao_historico_status_responsavelId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;set null&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoItens"></a>
+                    <span class="name">
+                        <span ><b>devolucaoItens</b></span>
+                        <a href="#devolucaoItens"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;devolucao_itens&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    sku: text().notNull(),
+    descricao: text().notNull(),
+    lote: text(),
+    fabricacao: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+    sif: text(),
+    quantidadeCaixas: integer(),
+    quantidadeUnidades: integer(),
+    tipo: tipoDevolucaoItens().notNull(),
+    devolucaoNotasId: text(),
+    demandaId: integer().notNull(),
+    avariaCaixas: integer(),
+    avariaUnidades: integer(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.demandaId],
+      foreignColumns: [devolucaoDemanda.id],
+      name: &#x27;devolucao_itens_demandaId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoNotas"></a>
+                    <span class="name">
+                        <span ><b>devolucaoNotas</b></span>
+                        <a href="#devolucaoNotas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;devolucao_notas&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    empresa: empresa().notNull(),
+    devolucaoDemandaId: integer().notNull(),
+    notaFiscal: text().notNull(),
+    motivoDevolucao: text().notNull(),
+    descMotivoDevolucao: text(),
+    nfParcial: text(),
+    idViagemRavex: text(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    tipo: tipoDevolucaoNotas().default(&#x27;DEVOLUCAO&#x27;).notNull(),
+  },
+  (table) &#x3D;&gt; [
+    uniqueIndex(&#x27;devolucao_notas_empresa_notaFiscal_tipo_key&#x27;).using(
+      &#x27;btree&#x27;,
+      table.empresa.asc().nullsLast().op(&#x27;enum_ops&#x27;),
+      table.notaFiscal.asc().nullsLast().op(&#x27;text_ops&#x27;),
+      table.tipo.asc().nullsLast().op(&#x27;enum_ops&#x27;),
+    ),
+    foreignKey({
+      columns: [table.devolucaoDemandaId],
+      foreignColumns: [devolucaoDemanda.id],
+      name: &#x27;devolucao_notas_devolucaoDemandaId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoTransportadoras"></a>
+                    <span class="name">
+                        <span ><b>devolucaoTransportadoras</b></span>
+                        <a href="#devolucaoTransportadoras"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;devolucao_transportadoras&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    nome: text().notNull(),
+    centerId: text().notNull(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+  },
+  (table) &#x3D;&gt; [
+    uniqueIndex(&#x27;devolucao_transportadoras_nome_centerId_key&#x27;).using(
+      &#x27;btree&#x27;,
+      table.nome.asc().nullsLast().op(&#x27;text_ops&#x27;),
+      table.centerId.asc().nullsLast().op(&#x27;text_ops&#x27;),
+    ),
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;devolucao_transportadoras_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="empresa"></a>
+                    <span class="name">
+                        <span ><b>empresa</b></span>
+                        <a href="#empresa"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;Empresa&#x27;, [&#x27;ITB&#x27;, &#x27;LDB&#x27;, &#x27;DPA&#x27;])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exibirClienteCabecalhoEnum"></a>
+                    <span class="name">
+                        <span ><b>exibirClienteCabecalhoEnum</b></span>
+                        <a href="#exibirClienteCabecalhoEnum"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;ExibirClienteCabecalhoEnum&#x27;, [
+  &#x27;PRIMEIRO&#x27;,
+  &#x27;TODOS&#x27;,
+  &#x27;NENHUM&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="historicoImpressaoMapa"></a>
+                    <span class="name">
+                        <span ><b>historicoImpressaoMapa</b></span>
+                        <a href="#historicoImpressaoMapa"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;HistoricoImpressaoMapa&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    impressoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    transporteId: text().notNull(),
+    impressoPorId: text().notNull(),
+    tipoImpressao: tipoProcesso().notNull(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.impressoPorId],
+      foreignColumns: [user.id],
+      name: &#x27;HistoricoImpressaoMapa_impressoPorId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.transporteId],
+      foreignColumns: [transporte.numeroTransporte],
+      name: &#x27;HistoricoImpressaoMapa_transporteId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="historicoStatusTransporte"></a>
+                    <span class="name">
+                        <span ><b>historicoStatusTransporte</b></span>
+                        <a href="#historicoStatusTransporte"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;HistoricoStatusTransporte&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    alteradoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    tipoEvento: tipoEvento().notNull(),
+    descricao: text().notNull(),
+    transporteId: text().notNull(),
+    alteradoPorId: text(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.alteradoPorId],
+      foreignColumns: [user.id],
+      name: &#x27;HistoricoStatusTransporte_alteradoPorId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;set null&#x27;),
+    foreignKey({
+      columns: [table.transporteId],
+      foreignColumns: [transporte.numeroTransporte],
+      name: &#x27;HistoricoStatusTransporte_transporteId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imagem"></a>
+                    <span class="name">
+                        <span ><b>imagem</b></span>
+                        <a href="#imagem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(&#x27;imagem&#x27;, {
+  id: text().primaryKey().notNull(),
+  url: text().notNull(),
+  tipo: text(),
+  processoId: text(&#x27;processo_id&#x27;).notNull(),
+  tipoProcesso: text().notNull(),
+  createdAt: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+    .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+    .notNull(),
+  updatedAt: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="motivoCorteMercadoria"></a>
+                    <span class="name">
+                        <span ><b>motivoCorteMercadoria</b></span>
+                        <a href="#motivoCorteMercadoria"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;MotivoCorteMercadoria&#x27;, [
+  &#x27;FALTA_MERCADORIA&#x27;,
+  &#x27;FALTA_ESPACO&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="palete"></a>
+                    <span class="name">
+                        <span ><b>palete</b></span>
+                        <a href="#palete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;Palete&#x27;,
+  {
+    id: text().primaryKey().notNull(),
+    empresa: text().notNull(),
+    quantidadeCaixas: integer().notNull(),
+    quantidadeUnidades: integer().notNull(),
+    quantidadePaletes: integer().notNull(),
+    enderecoVisitado: integer().notNull(),
+    segmento: text().notNull(),
+    transporteId: text().notNull(),
+    tipoProcesso: tipoProcesso().default(&#x27;SEPARACAO&#x27;).notNull(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    demandaId: integer(),
+    status: statusPalete().default(&#x27;NAO_INICIADO&#x27;).notNull(),
+    validado: boolean().default(false).notNull(),
+    criadoPorId: text().notNull(),
+    fim: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+    inicio: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.criadoPorId],
+      foreignColumns: [user.id],
+      name: &#x27;Palete_criadoPorId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.demandaId],
+      foreignColumns: [demanda.id],
+      name: &#x27;Palete_demandaId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+    foreignKey({
+      columns: [table.transporteId],
+      foreignColumns: [transporte.numeroTransporte],
+      name: &#x27;Palete_transporteId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pausa"></a>
+                    <span class="name">
+                        <span ><b>pausa</b></span>
+                        <a href="#pausa"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;Pausa&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    inicio: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    fim: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+    motivo: text(),
+    descricao: text(),
+    demandaId: integer().notNull(),
+    registradoPorId: text().notNull(),
+    pausaGeralId: integer(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.demandaId],
+      foreignColumns: [demanda.id],
+      name: &#x27;Pausa_demandaId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;cascade&#x27;),
+    foreignKey({
+      columns: [table.pausaGeralId],
+      foreignColumns: [pausaGeral.id],
+      name: &#x27;Pausa_pausaGeralId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;set null&#x27;),
+    foreignKey({
+      columns: [table.registradoPorId],
+      foreignColumns: [user.id],
+      name: &#x27;Pausa_registradoPorId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pausaGeral"></a>
+                    <span class="name">
+                        <span ><b>pausaGeral</b></span>
+                        <a href="#pausaGeral"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;PausaGeral&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    inicio: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    fim: timestamp({ precision: 3, mode: &#x27;string&#x27; }),
+    motivo: text(),
+    centerId: text().notNull(),
+    processo: tipoProcesso().notNull(),
+    turno: turno().notNull(),
+    registradoPorId: text().notNull(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    segmento: text().notNull(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;PausaGeral_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.registradoPorId],
+      foreignColumns: [user.id],
+      name: &#x27;PausaGeral_registradoPorId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="prismaMigrations"></a>
+                    <span class="name">
+                        <span ><b>prismaMigrations</b></span>
+                        <a href="#prismaMigrations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(&#x27;_prisma_migrations&#x27;, {
+  id: varchar({ length: 36 }).primaryKey().notNull(),
+  checksum: varchar({ length: 64 }).notNull(),
+  finishedAt: timestamp(&#x27;finished_at&#x27;, { withTimezone: true, mode: &#x27;string&#x27; }),
+  migrationName: varchar(&#x27;migration_name&#x27;, { length: 255 }).notNull(),
+  logs: text(),
+  rolledBackAt: timestamp(&#x27;rolled_back_at&#x27;, {
+    withTimezone: true,
+    mode: &#x27;string&#x27;,
+  }),
+  startedAt: timestamp(&#x27;started_at&#x27;, { withTimezone: true, mode: &#x27;string&#x27; })
+    .defaultNow()
+    .notNull(),
+  appliedStepsCount: integer(&#x27;applied_steps_count&#x27;).default(0).notNull(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="produto"></a>
+                    <span class="name">
+                        <span ><b>produto</b></span>
+                        <a href="#produto"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(&#x27;produto&#x27;, {
+  codEan: text(),
+  codDum: text(),
+  sku: text().primaryKey().notNull(),
+  descricao: text().notNull(),
+  shelf: integer().notNull(),
+  tipoPeso: tipoPeso().notNull(),
+  pesoLiquidoCaixa: numeric({ precision: 65, scale: 30 }).notNull(),
+  pesoLiquidoUnidade: numeric({ precision: 65, scale: 30 }).notNull(),
+  unPorCaixa: integer().notNull(),
+  caixaPorPallet: integer().notNull(),
+  createdAt: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+    .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+    .notNull(),
+  updatedAt: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+  segmento: segmentoProduto().notNull(),
+  empresa: empresa().notNull(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="role"></a>
+                    <span class="name">
+                        <span ><b>role</b></span>
+                        <a href="#role"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;Role&#x27;, [&#x27;FUNCIONARIO&#x27;, &#x27;USER&#x27;, &#x27;ADMIN&#x27;, &#x27;MASTER&#x27;])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rulesEngines"></a>
+                    <span class="name">
+                        <span ><b>rulesEngines</b></span>
+                        <a href="#rulesEngines"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;rules_engines&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    name: text().notNull(),
+    description: text().notNull(),
+    centerId: text().notNull(),
+    enabled: boolean().default(true).notNull(),
+    conditions: jsonb().notNull(),
+    createdBy: text(),
+    createdAt: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+  },
+  (table) &#x3D;&gt; [
+    index(&#x27;rules_engines_centerId_enabled_idx&#x27;).using(
+      &#x27;btree&#x27;,
+      table.centerId.asc().nullsLast().op(&#x27;bool_ops&#x27;),
+      table.enabled.asc().nullsLast().op(&#x27;text_ops&#x27;),
+    ),
+    uniqueIndex(&#x27;rules_engines_name_centerId_key&#x27;).using(
+      &#x27;btree&#x27;,
+      table.name.asc().nullsLast().op(&#x27;text_ops&#x27;),
+      table.centerId.asc().nullsLast().op(&#x27;text_ops&#x27;),
+    ),
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;rules_engines_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="segmentoProduto"></a>
+                    <span class="name">
+                        <span ><b>segmentoProduto</b></span>
+                        <a href="#segmentoProduto"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;SegmentoProduto&#x27;, [&#x27;SECO&#x27;, &#x27;REFR&#x27;])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statusDemanda"></a>
+                    <span class="name">
+                        <span ><b>statusDemanda</b></span>
+                        <a href="#statusDemanda"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;StatusDemanda&#x27;, [
+  &#x27;EM_PROGRESSO&#x27;,
+  &#x27;FINALIZADA&#x27;,
+  &#x27;PAUSA&#x27;,
+  &#x27;CANCELADA&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statusDevolucao"></a>
+                    <span class="name">
+                        <span ><b>statusDevolucao</b></span>
+                        <a href="#statusDevolucao"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;StatusDevolucao&#x27;, [
+  &#x27;AGUARDANDO_LIBERACAO&#x27;,
+  &#x27;AGUARDANDO_CONFERENCIA&#x27;,
+  &#x27;EM_CONFERENCIA&#x27;,
+  &#x27;CONFERENCIA_FINALIZADA&#x27;,
+  &#x27;FINALIZADO&#x27;,
+  &#x27;CANCELADO&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statusPalete"></a>
+                    <span class="name">
+                        <span ><b>statusPalete</b></span>
+                        <a href="#statusPalete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;StatusPalete&#x27;, [
+  &#x27;NAO_INICIADO&#x27;,
+  &#x27;EM_PROGRESSO&#x27;,
+  &#x27;CONCLUIDO&#x27;,
+  &#x27;EM_PAUSA&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statusTransporte"></a>
+                    <span class="name">
+                        <span ><b>statusTransporte</b></span>
+                        <a href="#statusTransporte"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;StatusTransporte&#x27;, [
+  &#x27;AGUARDANDO_SEPARACAO&#x27;,
+  &#x27;EM_SEPARACAO&#x27;,
+  &#x27;SEPARACAO_CONCLUIDA&#x27;,
+  &#x27;EM_CONFERENCIA&#x27;,
+  &#x27;CONFERENCIA_CONCLUIDA&#x27;,
+  &#x27;EM_CARREGAMENTO&#x27;,
+  &#x27;CARREGAMENTO_CONCLUIDO&#x27;,
+  &#x27;FATURADO&#x27;,
+  &#x27;LIBERADO_PORTARIA&#x27;,
+  &#x27;CANCELADO&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipoDevolucaoAnomalias"></a>
+                    <span class="name">
+                        <span ><b>tipoDevolucaoAnomalias</b></span>
+                        <a href="#tipoDevolucaoAnomalias"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;TipoDevolucaoAnomalias&#x27;, [
+  &#x27;AVARIA&#x27;,
+  &#x27;FALTA&#x27;,
+  &#x27;SOBRA&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipoDevolucaoItens"></a>
+                    <span class="name">
+                        <span ><b>tipoDevolucaoItens</b></span>
+                        <a href="#tipoDevolucaoItens"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;TipoDevolucaoItens&#x27;, [
+  &#x27;CONTABIL&#x27;,
+  &#x27;FISICO&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipoDevolucaoNotas"></a>
+                    <span class="name">
+                        <span ><b>tipoDevolucaoNotas</b></span>
+                        <a href="#tipoDevolucaoNotas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;TipoDevolucaoNotas&#x27;, [
+  &#x27;DEVOLUCAO&#x27;,
+  &#x27;DEVOLUCAO_PARCIAL&#x27;,
+  &#x27;REENTREGA&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipoEvento"></a>
+                    <span class="name">
+                        <span ><b>tipoEvento</b></span>
+                        <a href="#tipoEvento"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;TipoEvento&#x27;, [
+  &#x27;CRIACAO_TRANSPORTE&#x27;,
+  &#x27;INICIO_SEPARACAO&#x27;,
+  &#x27;TERMINO_SEPARACAO&#x27;,
+  &#x27;INICIO_CONFERENCIA&#x27;,
+  &#x27;TERMINO_CONFERENCIA&#x27;,
+  &#x27;INICIO_CARREGAMENTO&#x27;,
+  &#x27;TERMINO_CARREGAMENTO&#x27;,
+  &#x27;CORTE_PRODUTO&#x27;,
+  &#x27;FATURADO&#x27;,
+  &#x27;LIBERADO_PORTARIA&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipoImpressao"></a>
+                    <span class="name">
+                        <span ><b>tipoImpressao</b></span>
+                        <a href="#tipoImpressao"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;TipoImpressao&#x27;, [&#x27;TRANSPORTE&#x27;, &#x27;CLIENTE&#x27;])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipoPeso"></a>
+                    <span class="name">
+                        <span ><b>tipoPeso</b></span>
+                        <a href="#tipoPeso"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;TipoPeso&#x27;, [&#x27;PVAR&#x27;, &#x27;PPAR&#x27;])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipoProcesso"></a>
+                    <span class="name">
+                        <span ><b>tipoProcesso</b></span>
+                        <a href="#tipoProcesso"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;TipoProcesso&#x27;, [
+  &#x27;SEPARACAO&#x27;,
+  &#x27;CARREGAMENTO&#x27;,
+  &#x27;CONFERENCIA&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipoQuebraPalete"></a>
+                    <span class="name">
+                        <span ><b>tipoQuebraPalete</b></span>
+                        <a href="#tipoQuebraPalete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;TipoQuebraPalete&#x27;, [
+  &#x27;LINHAS&#x27;,
+  &#x27;PERCENTUAL&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transporte"></a>
+                    <span class="name">
+                        <span ><b>transporte</b></span>
+                        <a href="#transporte"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;Transporte&#x27;,
+  {
+    id: serial().primaryKey().notNull(),
+    numeroTransporte: text().notNull(),
+    status: statusTransporte().default(&#x27;AGUARDANDO_SEPARACAO&#x27;).notNull(),
+    nomeRota: text().notNull(),
+    nomeTransportadora: text().notNull(),
+    placa: text().notNull(),
+    criadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    atualizadoEm: timestamp({ precision: 3, mode: &#x27;string&#x27; }).notNull(),
+    cadastradoPorId: text().notNull(),
+    dataExpedicao: timestamp({ precision: 6, mode: &#x27;string&#x27; }).notNull(),
+    centerId: text().notNull(),
+    obs: text(),
+    prioridade: integer().default(0).notNull(),
+    carregamento: statusPalete().default(&#x27;NAO_INICIADO&#x27;).notNull(),
+    conferencia: statusPalete().default(&#x27;NAO_INICIADO&#x27;).notNull(),
+    separacao: statusPalete().default(&#x27;NAO_INICIADO&#x27;).notNull(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.cadastradoPorId],
+      foreignColumns: [user.id],
+      name: &#x27;Transporte_cadastradoPorId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;Transporte_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="turno"></a>
+                    <span class="name">
+                        <span ><b>turno</b></span>
+                        <a href="#turno"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgEnum(&#x27;Turno&#x27;, [
+  &#x27;MANHA&#x27;,
+  &#x27;TARDE&#x27;,
+  &#x27;NOITE&#x27;,
+  &#x27;INTERMEDIARIO&#x27;,
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user"></a>
+                    <span class="name">
+                        <span ><b>user</b></span>
+                        <a href="#user"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;User&#x27;,
+  {
+    id: text().primaryKey().notNull(),
+    name: text().notNull(),
+    password: text(),
+    centerId: text().notNull(),
+    token: text(),
+    turno: turno().default(&#x27;NOITE&#x27;).notNull(),
+    resetSenha: boolean().default(true).notNull(),
+    empresa: text().default(&#x27;LDB&#x27;).notNull(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;User_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userCenter"></a>
+                    <span class="name">
+                        <span ><b>userCenter</b></span>
+                        <a href="#userCenter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pgTable(
+  &#x27;UserCenter&#x27;,
+  {
+    userId: text().notNull(),
+    centerId: text().notNull(),
+    assignedAt: timestamp({ precision: 3, mode: &#x27;string&#x27; })
+      .default(sql&#x60;CURRENT_TIMESTAMP&#x60;)
+      .notNull(),
+    processo: text().default(&#x27;EXPEDICAO&#x27;).notNull(),
+    role: role().default(&#x27;FUNCIONARIO&#x27;).notNull(),
+    roles: text().array(),
+  },
+  (table) &#x3D;&gt; [
+    foreignKey({
+      columns: [table.centerId],
+      foreignColumns: [center.centerId],
+      name: &#x27;UserCenter_centerId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [user.id],
+      name: &#x27;UserCenter_userId_fkey&#x27;,
+    })
+      .onUpdate(&#x27;cascade&#x27;)
+      .onDelete(&#x27;restrict&#x27;),
+    primaryKey({
+      columns: [table.userId, table.centerId, table.processo],
+      name: &#x27;UserCenter_pkey&#x27;,
+    }),
+  ],
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/_shared/infra/drizzle/schema.relations.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="centerRelations"></a>
+                    <span class="name">
+                        <span ><b>centerRelations</b></span>
+                        <a href="#centerRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(center, ({ many }) &#x3D;&gt; ({
+  users: many(user),
+  userCenters: many(userCenter),
+  configuracoesImpressao: many(configuracaoImpressaoMapa),
+  transportes: many(transporte),
+  configuracoes: many(configuracao),
+  demandas: many(demanda),
+  dashboardsProdutividadeUser: many(dashboardProdutividadeUser),
+  dashboardsProdutividadeCenter: many(dashboardProdutividadeCenter),
+  devolucoesDemandas: many(devolucaoDemanda),
+  devolucaoTransportadoras: many(devolucaoTransportadoras),
+  rulesEngines: many(rulesEngines),
+  pausasGerais: many(pausaGeral),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configuracaoImpressaoMapaRelations"></a>
+                    <span class="name">
+                        <span ><b>configuracaoImpressaoMapaRelations</b></span>
+                        <a href="#configuracaoImpressaoMapaRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  configuracaoImpressaoMapa,
+  ({ one }) &#x3D;&gt; ({
+    atribuidoPor: one(user, {
+      fields: [configuracaoImpressaoMapa.atribuidoPorId],
+      references: [user.id],
+    }),
+    center: one(center, {
+      fields: [configuracaoImpressaoMapa.centerId],
+      references: [center.centerId],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configuracaoRelations"></a>
+                    <span class="name">
+                        <span ><b>configuracaoRelations</b></span>
+                        <a href="#configuracaoRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(configuracao, ({ one }) &#x3D;&gt; ({
+  center: one(center, {
+    fields: [configuracao.centerId],
+    references: [center.centerId],
+  }),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="corteMercadoriaRelations"></a>
+                    <span class="name">
+                        <span ><b>corteMercadoriaRelations</b></span>
+                        <a href="#corteMercadoriaRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  corteMercadoria,
+  ({ one }) &#x3D;&gt; ({
+    criadoPor: one(user, {
+      fields: [corteMercadoria.criadoPorId],
+      references: [user.id],
+    }),
+    transporte: one(transporte, {
+      fields: [corteMercadoria.transporteId],
+      references: [transporte.numeroTransporte],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dashboardProdutividadeCenterRelations"></a>
+                    <span class="name">
+                        <span ><b>dashboardProdutividadeCenterRelations</b></span>
+                        <a href="#dashboardProdutividadeCenterRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  dashboardProdutividadeCenter,
+  ({ one }) &#x3D;&gt; ({
+    center: one(center, {
+      fields: [dashboardProdutividadeCenter.centerId],
+      references: [center.centerId],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dashboardProdutividadeUserRelations"></a>
+                    <span class="name">
+                        <span ><b>dashboardProdutividadeUserRelations</b></span>
+                        <a href="#dashboardProdutividadeUserRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  dashboardProdutividadeUser,
+  ({ one }) &#x3D;&gt; ({
+    center: one(center, {
+      fields: [dashboardProdutividadeUser.centerId],
+      references: [center.centerId],
+    }),
+    funcionario: one(user, {
+      fields: [dashboardProdutividadeUser.funcionarioId],
+      references: [user.id],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="demandaRelations"></a>
+                    <span class="name">
+                        <span ><b>demandaRelations</b></span>
+                        <a href="#demandaRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(demanda, ({ one, many }) &#x3D;&gt; ({
+  // Filhos (Agregados)
+  pausas: many(pausa),
+  paletes: many(palete),
+
+  // Pais (Referências)
+  center: one(center, {
+    fields: [demanda.centerId],
+    references: [center.centerId],
+  }),
+  cadastradoPor: one(user, {
+    fields: [demanda.cadastradoPorId],
+    references: [user.id],
+    relationName: &#x27;DemandasCadastradasPeloUser&#x27;, // DEVE bater com o &#x27;userRelations&#x27;
+  }),
+  funcionario: one(user, {
+    fields: [demanda.funcionarioId],
+    references: [user.id],
+    relationName: &#x27;DemandasDoFuncionario&#x27;, // DEVE bater com o &#x27;userRelations&#x27;
+  }),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaImagensRelations"></a>
+                    <span class="name">
+                        <span ><b>devolucaImagensRelations</b></span>
+                        <a href="#devolucaImagensRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  devolucaImagens,
+  ({ one }) &#x3D;&gt; ({
+    demanda: one(devolucaoDemanda, {
+      fields: [devolucaImagens.demandaId],
+      references: [devolucaoDemanda.id],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoAnomaliasRelations"></a>
+                    <span class="name">
+                        <span ><b>devolucaoAnomaliasRelations</b></span>
+                        <a href="#devolucaoAnomaliasRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  devolucaoAnomalias,
+  ({ one }) &#x3D;&gt; ({
+    demanda: one(devolucaoDemanda, {
+      fields: [devolucaoAnomalias.demandaId],
+      references: [devolucaoDemanda.id],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoCheckListRelations"></a>
+                    <span class="name">
+                        <span ><b>devolucaoCheckListRelations</b></span>
+                        <a href="#devolucaoCheckListRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  devolucaoCheckList,
+  ({ one }) &#x3D;&gt; ({
+    demanda: one(devolucaoDemanda, {
+      fields: [devolucaoCheckList.demandaId],
+      references: [devolucaoDemanda.id],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoDemandaRelations"></a>
+                    <span class="name">
+                        <span ><b>devolucaoDemandaRelations</b></span>
+                        <a href="#devolucaoDemandaRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  devolucaoDemanda,
+  ({ one, many }) &#x3D;&gt; ({
+    // Filhos (Agregados)
+    historicoStatus: many(devolucaoHistoricoStatus),
+    notas: many(devolucaoNotas),
+    itens: many(devolucaoItens),
+    anomalias: many(devolucaoAnomalias),
+    checkList: one(devolucaoCheckList), // Relação 1-para-1 (baseado no uniqueIndex)
+    imagens: many(devolucaImagens),
+
+    // Pais (Referências)
+    center: one(center, {
+      fields: [devolucaoDemanda.centerId],
+      references: [center.centerId],
+    }),
+    adicionadoPor: one(user, {
+      fields: [devolucaoDemanda.adicionadoPorId],
+      references: [user.id],
+      relationName: &#x27;DevolucoesAdicionadasPeloUser&#x27;, // DEVE bater
+    }),
+    conferente: one(user, {
+      fields: [devolucaoDemanda.conferenteId],
+      references: [user.id],
+      relationName: &#x27;DevolucoesConferidasPeloUser&#x27;, // DEVE bater
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoHistoricoStatusRelations"></a>
+                    <span class="name">
+                        <span ><b>devolucaoHistoricoStatusRelations</b></span>
+                        <a href="#devolucaoHistoricoStatusRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  devolucaoHistoricoStatus,
+  ({ one }) &#x3D;&gt; ({
+    demanda: one(devolucaoDemanda, {
+      fields: [devolucaoHistoricoStatus.devolucaoDemandaId],
+      references: [devolucaoDemanda.id],
+    }),
+    responsavel: one(user, {
+      fields: [devolucaoHistoricoStatus.responsavelId],
+      references: [user.id],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoItensRelations"></a>
+                    <span class="name">
+                        <span ><b>devolucaoItensRelations</b></span>
+                        <a href="#devolucaoItensRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(devolucaoItens, ({ one }) &#x3D;&gt; ({
+  demanda: one(devolucaoDemanda, {
+    fields: [devolucaoItens.demandaId],
+    references: [devolucaoDemanda.id],
+  }),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoNotasRelations"></a>
+                    <span class="name">
+                        <span ><b>devolucaoNotasRelations</b></span>
+                        <a href="#devolucaoNotasRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(devolucaoNotas, ({ one }) &#x3D;&gt; ({
+  demanda: one(devolucaoDemanda, {
+    fields: [devolucaoNotas.devolucaoDemandaId],
+    references: [devolucaoDemanda.id],
+  }),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devolucaoTransportadorasRelations"></a>
+                    <span class="name">
+                        <span ><b>devolucaoTransportadorasRelations</b></span>
+                        <a href="#devolucaoTransportadorasRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  devolucaoTransportadoras,
+  ({ one }) &#x3D;&gt; ({
+    center: one(center, {
+      fields: [devolucaoTransportadoras.centerId],
+      references: [center.centerId],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="historicoImpressaoMapaRelations"></a>
+                    <span class="name">
+                        <span ><b>historicoImpressaoMapaRelations</b></span>
+                        <a href="#historicoImpressaoMapaRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  historicoImpressaoMapa,
+  ({ one }) &#x3D;&gt; ({
+    impressoPor: one(user, {
+      fields: [historicoImpressaoMapa.impressoPorId],
+      references: [user.id],
+    }),
+    transporte: one(transporte, {
+      fields: [historicoImpressaoMapa.transporteId],
+      references: [transporte.numeroTransporte],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="historicoStatusTransporteRelations"></a>
+                    <span class="name">
+                        <span ><b>historicoStatusTransporteRelations</b></span>
+                        <a href="#historicoStatusTransporteRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(
+  historicoStatusTransporte,
+  ({ one }) &#x3D;&gt; ({
+    alteradoPor: one(user, {
+      fields: [historicoStatusTransporte.alteradoPorId],
+      references: [user.id],
+    }),
+    transporte: one(transporte, {
+      fields: [historicoStatusTransporte.transporteId],
+      references: [transporte.numeroTransporte],
+    }),
+  }),
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="paleteRelations"></a>
+                    <span class="name">
+                        <span ><b>paleteRelations</b></span>
+                        <a href="#paleteRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(palete, ({ one }) &#x3D;&gt; ({
+  demanda: one(demanda, {
+    fields: [palete.demandaId],
+    references: [demanda.id],
+  }),
+  criadoPor: one(user, {
+    fields: [palete.criadoPorId],
+    references: [user.id],
+  }),
+  transporte: one(transporte, {
+    fields: [palete.transporteId],
+    references: [transporte.numeroTransporte],
+  }),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pausaGeralRelations"></a>
+                    <span class="name">
+                        <span ><b>pausaGeralRelations</b></span>
+                        <a href="#pausaGeralRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(pausaGeral, ({ one, many }) &#x3D;&gt; ({
+  pausas: many(pausa), // As pausas individuais que compõem esta pausa geral
+  center: one(center, {
+    fields: [pausaGeral.centerId],
+    references: [center.centerId],
+  }),
+  registradoPor: one(user, {
+    fields: [pausaGeral.registradoPorId],
+    references: [user.id],
+  }),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pausaRelations"></a>
+                    <span class="name">
+                        <span ><b>pausaRelations</b></span>
+                        <a href="#pausaRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(pausa, ({ one }) &#x3D;&gt; ({
+  demanda: one(demanda, {
+    fields: [pausa.demandaId],
+    references: [demanda.id],
+  }),
+  registradoPor: one(user, {
+    fields: [pausa.registradoPorId],
+    references: [user.id],
+  }),
+  pausaGeral: one(pausaGeral, {
+    fields: [pausa.pausaGeralId],
+    references: [pausaGeral.id],
+  }),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rulesEnginesRelations"></a>
+                    <span class="name">
+                        <span ><b>rulesEnginesRelations</b></span>
+                        <a href="#rulesEnginesRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(rulesEngines, ({ one }) &#x3D;&gt; ({
+  center: one(center, {
+    fields: [rulesEngines.centerId],
+    references: [center.centerId],
+  }),
+  // &#x27;createdBy&#x27; não tem FK no seu schema, mas se tivesse, seria &#x27;one(user)&#x27;
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transporteRelations"></a>
+                    <span class="name">
+                        <span ><b>transporteRelations</b></span>
+                        <a href="#transporteRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(transporte, ({ one, many }) &#x3D;&gt; ({
+  // Filhos (Agregados)
+  paletes: many(palete),
+  cortesMercadoria: many(corteMercadoria),
+  historicoImpressaoMapas: many(historicoImpressaoMapa),
+  historicoStatus: many(historicoStatusTransporte),
+
+  // Pais (Referências)
+  cadastradoPor: one(user, {
+    fields: [transporte.cadastradoPorId],
+    references: [user.id],
+  }),
+  center: one(center, {
+    fields: [transporte.centerId],
+    references: [center.centerId],
+  }),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userCenterRelations"></a>
+                    <span class="name">
+                        <span ><b>userCenterRelations</b></span>
+                        <a href="#userCenterRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(userCenter, ({ one }) &#x3D;&gt; ({
+  user: one(user, {
+    fields: [userCenter.userId],
+    references: [user.id],
+  }),
+  center: one(center, {
+    fields: [userCenter.centerId],
+    references: [center.centerId],
+  }),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userRelations"></a>
+                    <span class="name">
+                        <span ><b>userRelations</b></span>
+                        <a href="#userRelations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>relations(user, ({ one, many }) &#x3D;&gt; ({
+  center: one(center, {
+    fields: [user.centerId],
+    references: [center.centerId],
+  }),
+  userCenters: many(userCenter),
+
+  // Relações nomeadas de &#x27;Demanda&#x27;
+  demandasCadastradas: many(demanda, {
+    relationName: &#x27;DemandasCadastradasPeloUser&#x27;,
+  }),
+  demandasDoFuncionario: many(demanda, {
+    relationName: &#x27;DemandasDoFuncionario&#x27;,
+  }),
+
+  // Relações nomeadas de &#x27;DevolucaoDemanda&#x27;
+  devolucoesAdicionadas: many(devolucaoDemanda, {
+    relationName: &#x27;DevolucoesAdicionadasPeloUser&#x27;,
+  }),
+  devolucoesConferidas: many(devolucaoDemanda, {
+    relationName: &#x27;DevolucoesConferidasPeloUser&#x27;,
+  }),
+
+  // Outras relações &#x27;many&#x27;
+  configuracoesImpressaoAtribuidas: many(configuracaoImpressaoMapa),
+  transportesCadastrados: many(transporte),
+  cortesDeMercadoriaCriados: many(corteMercadoria),
+  paletesCriados: many(palete),
+  historicoImpressaoMapas: many(historicoImpressaoMapa),
+  pausasRegistradas: many(pausa),
+  dashboardsProdutividade: many(dashboardProdutividadeUser),
+  historicoStatusDevolucoes: many(devolucaoHistoricoStatus),
+  historicoStatusTransportes: many(historicoStatusTransporte),
+  pausasGeraisRegistradas: many(pausaGeral),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/center/dto/create-center.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CenterSchema"></a>
+                    <span class="name">
+                        <span ><b>CenterSchema</b></span>
+                        <a href="#CenterSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  centerId: z.string().nonempty(&#x27;centerId é obrigatório&#x27;), // obrigatório, não pode ser vazio
+  description: z.string().nonempty(&#x27;description é obrigatório&#x27;),
+  state: z.string().nonempty(&#x27;state é obrigatório&#x27;),
+  cluster: z.string().nonempty(&#x27;cluster é obrigatório&#x27;),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/center/dto/configuracaoImpressaoMapa.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configuracaoImpressaoMapaSchema"></a>
+                    <span class="name">
+                        <span ><b>configuracaoImpressaoMapaSchema</b></span>
+                        <a href="#configuracaoImpressaoMapaSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelectSchema(
+  configuracaoImpressaoMapa,
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/demanda/demanda.create.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createDemandaSchema"></a>
+                    <span class="name">
+                        <span ><b>createDemandaSchema</b></span>
+                        <a href="#createDemandaSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createInsertSchema(demanda)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDemandaSchemaComPaletesIds"></a>
+                    <span class="name">
+                        <span ><b>getDemandaSchemaComPaletesIds</b></span>
+                        <a href="#getDemandaSchemaComPaletesIds"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createDemandaSchema.extend({
+  paletesIds: z.array(z.string()).optional().default([]), // A relação!
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/palete/palete.create.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createPaleteSchema"></a>
+                    <span class="name">
+                        <span ><b>createPaleteSchema</b></span>
+                        <a href="#createPaleteSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createInsertSchema(palete)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/pausaGeral/pausaGeral.create.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createPausaGeralSchema"></a>
+                    <span class="name">
+                        <span ><b>createPausaGeralSchema</b></span>
+                        <a href="#createPausaGeralSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createInsertSchema(pausaGeral)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/pausa/pausa.create.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createPausaSchema"></a>
+                    <span class="name">
+                        <span ><b>createPausaSchema</b></span>
+                        <a href="#createPausaSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createInsertSchema(pausa)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/transporte/dto/create-transporte.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createTransporteArraySchema"></a>
+                    <span class="name">
+                        <span ><b>createTransporteArraySchema</b></span>
+                        <a href="#createTransporteArraySchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z
+  .array(createTransporteSchema)
+  .min(1, &#x27;Array deve conter pelo menos 1 transporte&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createTransporteSchema"></a>
+                    <span class="name">
+                        <span ><b>createTransporteSchema</b></span>
+                        <a href="#createTransporteSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelectSchema(transporte).omit({
+  id: true,
+  criadoEm: true,
+  atualizadoEm: true,
+  cadastradoPorId: true,
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/user/dto/create-user.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CriarFuncionarioAdmSchema"></a>
+                    <span class="name">
+                        <span ><b>CriarFuncionarioAdmSchema</b></span>
+                        <a href="#CriarFuncionarioAdmSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  centerId: z.string(),
+  id: z.string(),
+  name: z.string(),
+  primeiroNome: z.string().optional(),
+  ultimoNome: z.string().optional(),
+  credencial: z.string().optional(),
+  turno: z.nativeEnum(UserTurno),
+  processo: z.string().optional(),
+  empresa: z.string(),
+  role: z.nativeEnum(UserCenterRole).optional(),
+  roles: z.array(z.string()).optional().nullable(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/_shared/infra/keycloak/dto/criarFuncionarioKeCloak.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CriarFuncionarioAdmSchema"></a>
+                    <span class="name">
+                        <span ><b>CriarFuncionarioAdmSchema</b></span>
+                        <a href="#CriarFuncionarioAdmSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  centerId: z.string(),
+  id: z.string(),
+  nome: z.string(),
+  primeiroNome: z.string(),
+  ultimoNome: z.string(),
+  credencial: z.string(),
+  turno: z.string(),
+  processo: z.string().optional(),
+  empresa: z.string(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/_shared/decorators/api-response.decorator.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="defaultErrorDescriptions"></a>
+                    <span class="name">
+                        <span ><b>defaultErrorDescriptions</b></span>
+                        <a href="#defaultErrorDescriptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Record&lt;number, string&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  [HttpStatus.BAD_REQUEST]:
+    &#x27;A requisição é inválida. Verifique os parâmetros enviados.&#x27;,
+  [HttpStatus.UNAUTHORIZED]:
+    &#x27;A autenticação é necessária. Forneça um token válido.&#x27;,
+  [HttpStatus.FORBIDDEN]: &#x27;Você não tem permissão para acessar este recurso.&#x27;,
+  [HttpStatus.NOT_FOUND]: &#x27;O recurso solicitado não foi encontrado.&#x27;,
+  [HttpStatus.CONFLICT]: &#x27;Já existe um recurso com estes identificadores.&#x27;,
+  [HttpStatus.INTERNAL_SERVER_ERROR]: &#x27;Ocorreu um erro inesperado no servidor.&#x27;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/_shared/infra/drizzle/drizzle.constants.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DRIZZLE_PROVIDER"></a>
+                    <span class="name">
+                        <span ><b>DRIZZLE_PROVIDER</b></span>
+                        <a href="#DRIZZLE_PROVIDER"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;DRIZZLE_PROVIDER&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/_shared/infra/drizzle/drizzle.provider.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="drizzleProvider"></a>
+                    <span class="name">
+                        <span ><b>drizzleProvider</b></span>
+                        <a href="#drizzleProvider"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  provide: DRIZZLE_PROVIDER,
+  inject: [ConfigService], // Injete o ConfigService
+  useFactory: (configService: ConfigService) &#x3D;&gt; {
+    // Obtenha a URL do banco de dados do .env
+    const connectionString &#x3D; configService.get&lt;string&gt;(&#x27;DATABASE_URL&#x27;);
+
+    if (!connectionString) {
+      throw new Error(
+        &#x27;DATABASE_URL não está definida nas variáveis de ambiente&#x27;,
+      );
+    }
+
+    const client &#x3D; postgres(connectionString);
+
+    // Instancie o Drizzle e passe o schema
+    return drizzle(client, { schema });
+  },
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/user/dto/updateUser.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editUserSchema"></a>
+                    <span class="name">
+                        <span ><b>editUserSchema</b></span>
+                        <a href="#editUserSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  name: z.string(),
+  turno: z.nativeEnum(UserTurno),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/transporte/dto/getAllTransportes.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllTransportesSchema"></a>
+                    <span class="name">
+                        <span ><b>getAllTransportesSchema</b></span>
+                        <a href="#getAllTransportesSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  transportes: z.array(z.string()),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/demanda/demanda.get.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDemandaSchema"></a>
+                    <span class="name">
+                        <span ><b>getDemandaSchema</b></span>
+                        <a href="#getDemandaSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelectSchema(demanda)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDemandaSchemaComPausas"></a>
+                    <span class="name">
+                        <span ><b>getDemandaSchemaComPausas</b></span>
+                        <a href="#getDemandaSchemaComPausas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>getDemandaSchema.extend({
+  pausas: z.array(getPausaSchema).optional().default([]), // A relação!
+  paletes: z.array(getPaleteSchema).optional().default([]), // A relação!
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/palete/palete.get.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPaleteSchema"></a>
+                    <span class="name">
+                        <span ><b>getPaleteSchema</b></span>
+                        <a href="#getPaleteSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelectSchema(palete)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/pausaGeral/pausaGeral.get.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPausaGeralSchema"></a>
+                    <span class="name">
+                        <span ><b>getPausaGeralSchema</b></span>
+                        <a href="#getPausaGeralSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelectSchema(pausaGeral)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/pausa/pausa.get.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPausaSchema"></a>
+                    <span class="name">
+                        <span ><b>getPausaSchema</b></span>
+                        <a href="#getPausaSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelectSchema(pausa)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/user/dto/infoMe.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="infoMeSchema"></a>
+                    <span class="name">
+                        <span ><b>infoMeSchema</b></span>
+                        <a href="#infoMeSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  id: z.string(),
+  name: z.string(),
+  empresa: z.enum([&#x27;LDB&#x27;, &#x27;ITB&#x27;, &#x27;DPA&#x27;]),
+  roles: z.array(z.string()),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/user/dto/listUser.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="listUserSchema"></a>
+                    <span class="name">
+                        <span ><b>listUserSchema</b></span>
+                        <a href="#listUserSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  centerId: z.string(),
+  id: z.string(),
+  name: z.string(),
+  turno: z.nativeEnum(UserTurno),
+  empresa: z.string(),
+  roles: z.array(z.string()),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/user/dto/queries.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="queriesSchema"></a>
+                    <span class="name">
+                        <span ><b>queriesSchema</b></span>
+                        <a href="#queriesSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  role: z.nativeEnum(UserCenterRole).optional().nullable(),
+  processo: z.string().optional().nullable(),
+  search: z.string().optional().nullable(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/user/dto/role.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="roleSchema"></a>
+                    <span class="name">
+                        <span ><b>roleSchema</b></span>
+                        <a href="#roleSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  id: z.string(),
+  name: z.string(),
+  composite: z.boolean(),
+  clientRole: z.boolean(),
+  containerId: z.string(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/transporte/dto/findAll-transporte.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TransporteSchema"></a>
+                    <span class="name">
+                        <span ><b>TransporteSchema</b></span>
+                        <a href="#TransporteSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z.object({
+  numeroTransporte: z.string(),
+  status: z
+    .enum([
+      &#x27;AGUARDANDO_SEPARACAO&#x27;,
+      &#x27;EM_SEPARACAO&#x27;,
+      &#x27;SEPARACAO_CONCLUIDA&#x27;,
+      &#x27;EM_CONFERENCIA&#x27;,
+      &#x27;CONFERENCIA_CONCLUIDA&#x27;,
+      &#x27;EM_CARREGAMENTO&#x27;,
+      &#x27;CARREGAMENTO_CONCLUIDO&#x27;,
+      &#x27;FATURADO&#x27;,
+      &#x27;LIBERADO_PORTARIA&#x27;,
+      &#x27;CANCELADO&#x27;,
+    ])
+    .default(&#x27;AGUARDANDO_SEPARACAO&#x27;),
+  nomeRota: z.string().nonempty(&#x27;nomeRota é obrigatório&#x27;),
+  nomeTransportadora: z.string().nonempty(&#x27;nomeTransportadora é obrigatório&#x27;),
+  placa: z.string().nonempty(&#x27;placa é obrigatório&#x27;),
+  criadoEm: z.string().nonempty(&#x27;criadoEm é obrigatório&#x27;),
+  atualizadoEm: z.string().nonempty(&#x27;atualizadoEm é obrigatório&#x27;),
+  cadastradoPorId: z.string().nonempty(&#x27;cadastradoPorId é obrigatório&#x27;),
+  dataExpedicao: z.string().nonempty(&#x27;dataExpedicao é obrigatório&#x27;),
+  centerId: z.string().nonempty(&#x27;centerId é obrigatório&#x27;),
+  obs: z.string().nullable(),
+  prioridade: z.number().optional(),
+  carregamento: z.nativeEnum(StatusPalete).optional(),
+  conferencia: z.nativeEnum(StatusPalete).optional(),
+  separacao: z.nativeEnum(StatusPalete).optional(),
+  qtdImpressoes: z.number().optional(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/demanda/demanda.update.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateDemandaSchema"></a>
+                    <span class="name">
+                        <span ><b>updateDemandaSchema</b></span>
+                        <a href="#updateDemandaSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createUpdateSchema(demanda)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/palete/palete.update.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePaleteSchema"></a>
+                    <span class="name">
+                        <span ><b>updatePaleteSchema</b></span>
+                        <a href="#updatePaleteSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createUpdateSchema(palete)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/pausaGeral/pausaGeral.update.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePausaGeralSchema"></a>
+                    <span class="name">
+                        <span ><b>updatePausaGeralSchema</b></span>
+                        <a href="#updatePausaGeralSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createUpdateSchema(pausaGeral).extend({
+  ativo: z.enum([&#x27;true&#x27;, &#x27;false&#x27;]).optional(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/gestao-produtividade/dtos/pausa/pausa.update.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePausaSchema"></a>
+                    <span class="name">
+                        <span ><b>updatePausaSchema</b></span>
+                        <a href="#updatePausaSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createUpdateSchema(pausa)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/config/validation.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validationSchema"></a>
+                    <span class="name">
+                        <span ><b>validationSchema</b></span>
+                        <a href="#validationSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>z
+  .object({
+    KEYCLOAK_URL: z
+      .string()
+      .url({ message: &#x27;KEYCLOAK_URL deve ser uma URL válida.&#x27; }),
+    REALM_NAME: z.string().min(1, { message: &#x27;REALM_NAME é obrigatório.&#x27; }),
+    CLIENT_SECRET_KEYCLOAK: z
+      .string()
+      .min(1, { message: &#x27;CLIENT_SECRET_KEYCLOAK é obrigatório.&#x27; }),
+  })
+  .passthrough()</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

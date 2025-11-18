@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  produtividadenest:
+    build:
+      context: .
+      args:
+        - DATABASE_URL=${DATABASE_URL}
+    container_name: produtividadenest
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - DATABASE_URL=${DATABASE_URL}
+      - PUBLIC_KEY=${PUBLIC_KEY}
+      - PORT=${PORT:-4000}
+      - REALM_NAME=${REALM_NAME}
+      - KEYCLOAK_URL=${KEYCLOAK_URL}
+      - KEYCLOAK_CLIENT_ID=${KEYCLOAK_CLIENT_ID}
+      - CLIENT_SECRET_KEYCLOAK=${CLIENT_SECRET_KEYCLOAK}
+
+    # A seção 'ports' foi removida. Traefik gerencia o acesso externo.
+    networks:
+      - proxy
+    labels:
+      # --- Habilita o Traefik para este serviço ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.produtividadenest.rule=Host(`${PRODUTIVIDADE_HOST}`)"
+      - "traefik.http.routers.produtividadenest.service=produtividadenest"
+      - "traefik.http.routers.produtividadenest.tls.certresolver=letsencrypt"
+      - "traefik.http.services.produtividadenest.loadbalancer.server.port=4000"
+
+networks:
+  proxy:
+    external: true
+    # Simplifiquei a declaração da rede. O nome usado no serviço é o mesmo da rede externa.

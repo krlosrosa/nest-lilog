@@ -1,0 +1,6 @@
+export enum StatusPalete {
+  NAO_INICIADO = 'NAO_INICIADO',
+  EM_PROGRESSO = 'EM_PROGRESSO',
+  CONCLUIDO = 'CONCLUIDO',
+  EM_PAUSA = 'EM_PAUSA',
+}
