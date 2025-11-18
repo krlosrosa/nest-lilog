@@ -17,6 +17,10 @@ services:
       - KEYCLOAK_URL=${KEYCLOAK_URL}
       - KEYCLOAK_CLIENT_ID=${KEYCLOAK_CLIENT_ID}
       - CLIENT_SECRET_KEYCLOAK=${CLIENT_SECRET_KEYCLOAK}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_USERNAME=${REDIS_USERNAME}
+      - REDIS_PORT=${REDIS_PORT}
 
     # A seção 'ports' foi removida. Traefik gerencia o acesso externo.
     networks:
