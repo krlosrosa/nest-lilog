@@ -17,7 +17,6 @@ import {
   transporte,
 } from 'src/_shared/infra/drizzle/migrations/schema';
 import { DemandaProcesso, DemandaStatus } from 'src/_shared/enums';
-import { DateTime } from 'luxon';
 
 export async function overViewProdutividadeQuery(
   db: DrizzleClient,
@@ -26,15 +25,11 @@ export async function overViewProdutividadeQuery(
   dataRegistro: string,
 ) {
   // Converte a data recebida para o início do dia (00:00:00.000)
-  const zone = 'America/Sao_Paulo';
-  const dataInicioISO = DateTime.fromISO(dataRegistro)
-    .setZone(zone)
-    .startOf('day')
-    .toISO();
-  const dataFimISO = DateTime.fromISO(dataRegistro)
-    .setZone(zone)
-    .endOf('day')
-    .toISO();
+  const inicioDia = new Date(dataRegistro);
+  inicioDia.setUTCHours(0, 0, 0, 0);
+
+  const fimDia = new Date(dataRegistro);
+  fimDia.setUTCHours(23, 59, 59, 999);
 
   // Construção das condições de filtro (todos obrigatórios)
   const demandaWhereClause = and(
@@ -51,8 +46,8 @@ export async function overViewProdutividadeQuery(
         .where(
           and(
             eq(palete.demandaId, demanda.id),
-            gte(transporte.dataExpedicao, dataInicioISO),
-            lte(transporte.dataExpedicao, dataFimISO),
+            gte(transporte.dataExpedicao, inicioDia.toISOString()),
+            lte(transporte.dataExpedicao, fimDia.toISOString()),
           ),
         ),
     ),
@@ -114,8 +109,8 @@ export async function overViewProdutividadeQuery(
       and(
         eq(dashboardProdutividadeCenter.centerId, centerId),
         eq(dashboardProdutividadeCenter.processo, processo),
-        gte(dashboardProdutividadeCenter.dataRegistro, dataInicioISO),
-        lte(dashboardProdutividadeCenter.dataRegistro, dataFimISO),
+        gte(dashboardProdutividadeCenter.dataRegistro, inicioDia.toISOString()),
+        lte(dashboardProdutividadeCenter.dataRegistro, fimDia.toISOString()),
       ),
     );
 
