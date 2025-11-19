@@ -36,6 +36,8 @@ export class Palete {
       demandaId: null, // Valor padrão
       inicio: null,
       fim: null,
+      totalCaixas: 0,
+      pesoLiquido: 0,
     });
     palete._isNew = true;
     return palete;

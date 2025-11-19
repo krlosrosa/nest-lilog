@@ -31,6 +31,8 @@ type Palete = {
   criadoPorId: string;
   inicio: string | null;
   fim: string | null;
+  totalCaixas: number;
+  pesoLiquido: number;
 };
 
 type Pausa = {
