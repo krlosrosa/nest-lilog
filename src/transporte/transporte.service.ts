@@ -188,11 +188,6 @@ export class TransporteService {
           // Filtra o TRANSPORTE pela data de expedição (o "dia" principal)
           gte(transporte.dataExpedicao, inicioDiaISO),
           lte(transporte.dataExpedicao, fimDiaISO),
-
-          // Filtra o EVENTO para ter ocorrido também nesse dia
-          // (Um transporte com expedição hoje só conta se foi carregado hoje)
-          gte(historicoStatusTransporte.alteradoEm, inicioDiaISO),
-          lte(historicoStatusTransporte.alteradoEm, fimDiaISO),
         ),
       )
       // Agrupa os resultados pelo campo "hora" que criamos
@@ -202,6 +197,7 @@ export class TransporteService {
 
     // --- Início da Modificação ---
 
+    console.log(totalTransportesDia, carregadosPorHora);
     // Retorna o array formatado
     return {
       totalTransportes: totalTransportesDia,
