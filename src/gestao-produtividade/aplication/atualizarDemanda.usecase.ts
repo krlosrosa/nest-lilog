@@ -41,9 +41,7 @@ export class AtualizarDemandaProdutividade {
               empresa: demanda.empresa,
               processo: demanda.processo,
               turno: demanda.turno,
-              dataRegistro: new Date(demanda.dataExpedicao)
-                .toISOString()
-                .split('T')[0],
+              dataRegistro: demanda.dataExpedicao,
             },
           }),
         );
@@ -56,9 +54,7 @@ export class AtualizarDemandaProdutividade {
               centerId: demanda.centerId,
               processo: demanda.processo,
               turno: demanda.turno,
-              dataRegistro: new Date(demanda.dataExpedicao)
-                .toISOString()
-                .split('T')[0],
+              dataRegistro: demanda.dataExpedicao,
             },
           }),
         );

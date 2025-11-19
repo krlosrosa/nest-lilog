@@ -19,7 +19,7 @@ import {
 } from 'src/_shared/infra/drizzle/migrations/schema';
 import { FindAllParams } from 'src/gestao-produtividade/dtos/params.dto';
 import { agruparDemandasComRelacionamentos } from 'src/gestao-produtividade/utils/agruparDemandasComRelacionamentos';
-import { DateTime } from 'luxon';
+//import { DateTime } from 'luxon';
 
 export async function buscarDemandasQuery(
   db: DrizzleClient,
@@ -123,15 +123,11 @@ export async function buscarDemandasQuery(
     //const dataInicioISO = startOfDay(params.dataRegistro).toUTCString();
     // const dataFimISO = endOfDay(params.dataRegistro).toUTCString();
 
-    const zone = 'America/Sao_Paulo';
-    const dataInicioISO = DateTime.fromISO(params.dataRegistro)
-      .setZone(zone)
-      .startOf('day')
-      .toISO();
-    const dataFimISO = DateTime.fromISO(params.dataRegistro)
-      .setZone(zone)
-      .endOf('day')
-      .toISO();
+    const inicioDia = new Date(params.dataRegistro);
+    inicioDia.setUTCHours(0, 0, 0, 0);
+
+    const fimDia = new Date(params.dataRegistro);
+    fimDia.setUTCHours(23, 59, 59, 999);
 
     conditions.push(
       exists(
@@ -145,8 +141,8 @@ export async function buscarDemandasQuery(
           .where(
             and(
               eq(palete.demandaId, demanda.id),
-              gte(transporte.dataExpedicao, dataInicioISO),
-              lte(transporte.dataExpedicao, dataFimISO),
+              gte(transporte.dataExpedicao, inicioDia.toISOString()),
+              lte(transporte.dataExpedicao, fimDia.toISOString()),
             ),
           ),
       ),
@@ -172,7 +168,8 @@ export async function buscarDemandasQuery(
     .where(whereClause)
     .leftJoin(pausa, eq(demanda.id, pausa.demandaId))
     .leftJoin(palete, eq(demanda.id, palete.demandaId))
-    .leftJoin(user, eq(demanda.funcionarioId, user.id));
+    .leftJoin(user, eq(demanda.funcionarioId, user.id))
+    .leftJoin(transporte, eq(palete.transporteId, transporte.numeroTransporte));
 
   /* const demandas = await db.query.demanda.findMany({
     where: whereClause,

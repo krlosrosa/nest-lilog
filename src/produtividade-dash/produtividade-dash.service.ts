@@ -22,6 +22,7 @@ export class ProdutividadeDashService {
     params: QueryFindDemanda,
     demanda: Demanda,
   ): Promise<void> {
+    console.log(params.dataRegistro);
     const demandas = await this.pausaRepository.findAllCenterDashboards(params);
     if (demandas.length > 0) {
       const item: DashboardProdutividadeCenterGetData = demandas[0];
@@ -46,7 +47,9 @@ export class ProdutividadeDashService {
         empresa: params.empresa,
         processo: params.processo as DemandaProcesso,
         turno: params.turno as DemandaTurno,
-        dataRegistro: params.dataRegistro,
+        dataRegistro: new Date(
+          params.dataRegistro + 'T00:00:00.000Z',
+        ).toISOString(),
         totalCaixas: demanda.quantidadeCaixas(),
         totalUnidades: demanda.quantidadeUnidades(),
         totalPaletes: demanda.quantidadePaletes(),

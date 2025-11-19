@@ -44,7 +44,7 @@ export class Palete {
   public validarSePodeSerFinalizado(): void {
     if (this.props.status !== 'EM_PROGRESSO') {
       throw new BadRequestException(
-        `Palete ${this.props.id} não pode ser finalizada pois não foi concluída. Status: ${this.props.status}`,
+        `Palete ${this.props.id} não pode ser finalizada pois não foi concluída. Status Atual: ${this.props.status}`,
       );
     }
   }
