@@ -5,10 +5,15 @@ import { type DrizzleClient } from 'src/_shared/infra/drizzle/drizzle.provider';
 import { user, userCenter } from 'src/_shared/infra/drizzle/migrations/schema';
 import { and, eq } from 'drizzle-orm';
 import { UserRole } from 'src/_shared/enums/funcionario-role.enum';
+import { type IIdentityUserRepository } from 'src/_shared/infra/keycloak/domain/repository/IIdentityUser.repository';
 
 @Injectable()
 export class AddNewUser {
-  constructor(@Inject(DRIZZLE_PROVIDER) private readonly db: DrizzleClient) {}
+  constructor(
+    @Inject(DRIZZLE_PROVIDER) private readonly db: DrizzleClient,
+    @Inject('IIdentityUserRepository')
+    private readonly identityRepository: IIdentityUserRepository,
+  ) {}
   async execute(createUserDto: CreateUserDto) {
     // O db.transaction() lida automaticamente com begin, commit e rollback
     return await this.db.transaction(async (tx) => {
@@ -40,6 +45,17 @@ export class AddNewUser {
           centerId: createUserDto.centerId,
           turno: createUserDto.turno,
           empresa: createUserDto.empresa,
+        });
+
+        await this.identityRepository.addUser({
+          id: createUserDto.id,
+          nome: createUserDto.name,
+          centerId: createUserDto.centerId,
+          credencial: createUserDto.credencial ?? 'inicial01',
+          empresa: createUserDto.empresa,
+          turno: createUserDto.turno,
+          primeiroNome: createUserDto.primeiroNome ?? '',
+          ultimoNome: createUserDto.ultimoNome ?? '',
         });
       }
 
