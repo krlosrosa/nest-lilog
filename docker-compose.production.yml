@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  produtividadenest:
+  lilog-nest-production:
     build:
       context: .
       args:
         - DATABASE_URL=${DATABASE_URL}
-    container_name: produtividadenest
+    container_name: lilog-nest-production
     restart: unless-stopped
     environment:
       - NODE_ENV=${NODE_ENV:-production}
