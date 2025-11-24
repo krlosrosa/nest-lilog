@@ -112,7 +112,6 @@ export class TransporteService {
 
   async addItemsToTransporte(itens: AddItemsTransporteDto[]) {
     const pipeline = this.redis.pipeline();
-    pipeline.flushdb();
     itens.forEach((item) => {
       pipeline.set(
         `transporte:${item.key}`,
