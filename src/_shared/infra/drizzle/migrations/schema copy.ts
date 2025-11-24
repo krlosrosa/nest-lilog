@@ -1,10 +1,10 @@
-import { pgTable, text, timestamp, varchar, integer, numeric, foreignKey, serial, doublePrecision, uniqueIndex, boolean, index, jsonb, primaryKey, pgEnum } from "drizzle-orm/pg-core"
+import { pgTable, varchar, timestamp, text, integer, numeric, serial, doublePrecision, foreignKey, boolean, uniqueIndex, index, jsonb, primaryKey, pgEnum } from "drizzle-orm/pg-core"
 import { sql } from "drizzle-orm"
 
 export const direcaoCorte = pgEnum("DirecaoCorte", ['OPERACIONAL', 'ADMINISTRATIVO'])
 export const empresa = pgEnum("Empresa", ['ITB', 'LDB', 'DPA'])
 export const exibirClienteCabecalhoEnum = pgEnum("ExibirClienteCabecalhoEnum", ['PRIMEIRO', 'TODOS', 'NENHUM'])
-export const motivoCorteMercadoria = pgEnum("MotivoCorteMercadoria", ['FALTA_MERCADORIA', 'FALTA_ESPACO', 'RECUSA_SEFAZ'])
+export const motivoCorteMercadoria = pgEnum("MotivoCorteMercadoria", ['FALTA_MERCADORIA', 'FALTA_ESPACO'])
 export const role = pgEnum("Role", ['FUNCIONARIO', 'USER', 'ADMIN', 'MASTER'])
 export const segmentoProduto = pgEnum("SegmentoProduto", ['SECO', 'REFR'])
 export const statusDemanda = pgEnum("StatusDemanda", ['EM_PROGRESSO', 'FINALIZADA', 'PAUSA', 'CANCELADA'])
@@ -19,18 +19,8 @@ export const tipoImpressao = pgEnum("TipoImpressao", ['TRANSPORTE', 'CLIENTE'])
 export const tipoPeso = pgEnum("TipoPeso", ['PVAR', 'PPAR'])
 export const tipoProcesso = pgEnum("TipoProcesso", ['SEPARACAO', 'CARREGAMENTO', 'CONFERENCIA'])
 export const tipoQuebraPalete = pgEnum("TipoQuebraPalete", ['LINHAS', 'PERCENTUAL'])
-export const turno = pgEnum("Turno", ['MANHA', 'TARDE', 'NOITE', 'INTERMEDIARIO', 'ADMINISTRATIVO'])
+export const turno = pgEnum("Turno", ['MANHA', 'TARDE', 'NOITE', 'INTERMEDIARIO'])
 
-
-export const imagem = pgTable("imagem", {
-	id: text().primaryKey().notNull(),
-	url: text().notNull(),
-	tipo: text(),
-	processoId: text("processo_id").notNull(),
-	tipoProcesso: text().notNull(),
-	createdAt: timestamp({ precision: 3, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-	updatedAt: timestamp({ precision: 3, mode: 'string' }).notNull(),
-});
 
 export const prismaMigrations = pgTable("_prisma_migrations", {
 	id: varchar({ length: 36 }).primaryKey().notNull(),
@@ -60,11 +50,24 @@ export const produto = pgTable("produto", {
 	empresa: empresa().notNull(),
 });
 
+export const imagem = pgTable("imagem", {
+	id: text().primaryKey().notNull(),
+	url: text().notNull(),
+	tipo: text(),
+	processoId: text("processo_id").notNull(),
+	tipoProcesso: text().notNull(),
+	createdAt: timestamp({ precision: 3, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updatedAt: timestamp({ precision: 3, mode: 'string' }).notNull(),
+});
+
 export const anomaliaProdutividade = pgTable("AnomaliaProdutividade", {
 	id: serial().primaryKey().notNull(),
 	demandaId: integer().notNull(),
 	centerId: text().notNull(),
 	funcionarioId: text().notNull(),
+	nomeFuncionario: text().notNull(),
+	cadastroPorId: text().notNull(),
+	nomeCadastradoPor: text().notNull(),
 	inicio: timestamp({ precision: 3, mode: 'string' }).notNull(),
 	fim: timestamp({ precision: 3, mode: 'string' }),
 	caixas: integer().notNull(),
@@ -73,25 +76,23 @@ export const anomaliaProdutividade = pgTable("AnomaliaProdutividade", {
 	enderecosVisitado: integer().notNull(),
 	produtividade: doublePrecision().notNull(),
 	motivoAnomalia: text().notNull(),
-	motivoAnomaliaDescricao: text(),
-	criadoPorId: text().notNull(),
-	paletesNaDemanda: integer().notNull(),
+});
+
+export const user = pgTable("User", {
+	id: text().primaryKey().notNull(),
+	name: text().notNull(),
+	password: text(),
+	centerId: text().notNull(),
+	token: text(),
+	turno: turno().default('NOITE').notNull(),
+	resetSenha: boolean().default(true).notNull(),
+	empresa: text().default('LDB').notNull(),
 }, (table) => [
 	foreignKey({
-			columns: [table.funcionarioId],
-			foreignColumns: [user.id],
-			name: "AnomaliaProdutividade_funcionarioId_fkey"
+			columns: [table.centerId],
+			foreignColumns: [center.centerId],
+			name: "User_centerId_fkey"
 		}).onUpdate("cascade").onDelete("restrict"),
-	foreignKey({
-			columns: [table.criadoPorId],
-			foreignColumns: [user.id],
-			name: "AnomaliaProdutividade_criadoPorId_fkey"
-		}).onUpdate("cascade").onDelete("restrict"),
-	foreignKey({
-			columns: [table.demandaId],
-			foreignColumns: [demanda.id],
-			name: "AnomaliaProdutividade_demandaId_fkey"
-		}).onUpdate("cascade").onDelete("cascade"),
 ]);
 
 export const configuracaoImpressaoMapa = pgTable("ConfiguracaoImpressaoMapa", {
@@ -130,50 +131,20 @@ export const configuracaoImpressaoMapa = pgTable("ConfiguracaoImpressaoMapa", {
 		}).onUpdate("cascade").onDelete("restrict"),
 ]);
 
-export const user = pgTable("User", {
-	id: text().primaryKey().notNull(),
-	name: text().notNull(),
-	password: text(),
-	centerId: text().notNull(),
-	token: text(),
-	turno: turno().default('NOITE').notNull(),
-	resetSenha: boolean().default(true).notNull(),
-	empresa: text().default('LDB').notNull(),
-}, (table) => [
-	foreignKey({
-			columns: [table.centerId],
-			foreignColumns: [center.centerId],
-			name: "User_centerId_fkey"
-		}).onUpdate("cascade").onDelete("restrict"),
-]);
-
 export const corteMercadoria = pgTable("CorteMercadoria", {
 	id: serial().primaryKey().notNull(),
 	produto: text().notNull(),
 	lote: text().notNull(),
+	quantidade: integer().notNull(),
+	unidadeMedida: text().notNull(),
 	motivo: motivoCorteMercadoria().notNull(),
 	realizado: boolean().default(false).notNull(),
 	criadoEm: timestamp({ precision: 3, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	atualizadoEm: timestamp({ precision: 3, mode: 'string' }).notNull(),
-	criadoPorId: text().notNull().default('421931'),
+	criadoPorId: text().notNull(),
 	transporteId: text().notNull(),
-	caixas: integer().notNull(),
 	direcao: direcaoCorte(),
-	unidades: integer().notNull(),
-	centerId: text().notNull(),
-	descricao: text(),
-	realizadoPorId: text(),
 }, (table) => [
-	foreignKey({
-			columns: [table.centerId],
-			foreignColumns: [center.centerId],
-			name: "CorteMercadoria_centerId_fkey"
-		}).onUpdate("cascade").onDelete("restrict"),
-	foreignKey({
-			columns: [table.realizadoPorId],
-			foreignColumns: [user.id],
-			name: "CorteMercadoria_realizadoPorId_fkey"
-		}).onUpdate("cascade").onDelete("set null"),
 	foreignKey({
 			columns: [table.criadoPorId],
 			foreignColumns: [user.id],
@@ -234,8 +205,6 @@ export const palete = pgTable("Palete", {
 	criadoPorId: text().notNull(),
 	fim: timestamp({ precision: 3, mode: 'string' }),
 	inicio: timestamp({ precision: 3, mode: 'string' }),
-	totalCaixas: integer().default(0).notNull(),
-	pesoLiquido: doublePrecision().default(0).notNull(),
 }, (table) => [
 	foreignKey({
 			columns: [table.criadoPorId],
@@ -437,14 +406,14 @@ export const devolucaoDemanda = pgTable("devolucao_demanda", {
 	senha: text().notNull(),
 }, (table) => [
 	foreignKey({
-			columns: [table.centerId],
-			foreignColumns: [center.centerId],
-			name: "devolucao_demanda_centerId_fkey"
-		}).onUpdate("cascade").onDelete("restrict"),
-	foreignKey({
 			columns: [table.adicionadoPorId],
 			foreignColumns: [user.id],
 			name: "devolucao_demanda_adicionadoPorId_fkey"
+		}).onUpdate("cascade").onDelete("restrict"),
+	foreignKey({
+			columns: [table.centerId],
+			foreignColumns: [center.centerId],
+			name: "devolucao_demanda_centerId_fkey"
 		}).onUpdate("cascade").onDelete("restrict"),
 	foreignKey({
 			columns: [table.conferenteId],
@@ -580,11 +549,31 @@ export const devolucaImagens = pgTable("DevolucaImagens", {
 		}).onUpdate("cascade").onDelete("cascade"),
 ]);
 
+export const rulesEngines = pgTable("rules_engines", {
+	id: serial().primaryKey().notNull(),
+	name: text().notNull(),
+	description: text().notNull(),
+	centerId: text().notNull(),
+	enabled: boolean().default(true).notNull(),
+	conditions: jsonb().notNull(),
+	createdBy: text(),
+	createdAt: timestamp({ precision: 3, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updatedAt: timestamp({ precision: 3, mode: 'string' }).notNull(),
+}, (table) => [
+	index("rules_engines_centerId_enabled_idx").using("btree", table.centerId.asc().nullsLast().op("bool_ops"), table.enabled.asc().nullsLast().op("text_ops")),
+	uniqueIndex("rules_engines_name_centerId_key").using("btree", table.name.asc().nullsLast().op("text_ops"), table.centerId.asc().nullsLast().op("text_ops")),
+	foreignKey({
+			columns: [table.centerId],
+			foreignColumns: [center.centerId],
+			name: "rules_engines_centerId_fkey"
+		}).onUpdate("cascade").onDelete("restrict"),
+]);
+
 export const pausaGeral = pgTable("PausaGeral", {
 	id: serial().primaryKey().notNull(),
 	inicio: timestamp({ precision: 3, mode: 'string' }).notNull(),
 	fim: timestamp({ precision: 3, mode: 'string' }),
-	motivo: text().notNull(),
+	motivo: text(),
 	centerId: text().notNull(),
 	processo: tipoProcesso().notNull(),
 	turno: turno().notNull(),
@@ -605,33 +594,6 @@ export const pausaGeral = pgTable("PausaGeral", {
 		}).onUpdate("cascade").onDelete("restrict"),
 ]);
 
-export const rulesEngines = pgTable("rules_engines", {
-	id: serial().primaryKey().notNull(),
-	name: text().notNull(),
-	description: text(),
-	centerId: text().notNull(),
-	enabled: boolean().default(true).notNull(),
-	conditions: jsonb().notNull(),
-	createdBy: text(),
-	createdAt: timestamp({ precision: 3, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-	updatedAt: timestamp({ precision: 3, mode: 'string' }).notNull(),
-	processo: text().notNull(),
-	criadoPorId: text().notNull(),
-}, (table) => [
-	index("rules_engines_centerId_enabled_idx").using("btree", table.centerId.asc().nullsLast().op("bool_ops"), table.enabled.asc().nullsLast().op("text_ops")),
-	uniqueIndex("rules_engines_name_centerId_key").using("btree", table.name.asc().nullsLast().op("text_ops"), table.centerId.asc().nullsLast().op("text_ops")),
-	foreignKey({
-			columns: [table.criadoPorId],
-			foreignColumns: [user.id],
-			name: "rules_engines_criadoPorId_fkey"
-		}).onUpdate("cascade").onDelete("restrict"),
-	foreignKey({
-			columns: [table.centerId],
-			foreignColumns: [center.centerId],
-			name: "rules_engines_centerId_fkey"
-		}).onUpdate("cascade").onDelete("restrict"),
-]);
-
 export const historicoStatusTransporte = pgTable("HistoricoStatusTransporte", {
 	id: serial().primaryKey().notNull(),
 	alteradoEm: timestamp({ precision: 3, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -639,7 +601,6 @@ export const historicoStatusTransporte = pgTable("HistoricoStatusTransporte", {
 	descricao: text().notNull(),
 	transporteId: text().notNull(),
 	alteradoPorId: text(),
-	processo: tipoProcesso().default('SEPARACAO').notNull(),
 }, (table) => [
 	foreignKey({
 			columns: [table.alteradoPorId],

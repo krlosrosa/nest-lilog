@@ -18,6 +18,7 @@ import { CorteProdutoModule } from './corte-produto/corte-produto.module';
 import { SentryGlobalFilter, SentryModule } from '@sentry/nestjs/setup';
 import { APP_FILTER } from '@nestjs/core';
 import { HealthModule } from './health/health.module';
+import { DevolucaoModule } from './devolucao/devolucao.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { HealthModule } from './health/health.module';
     AnomaliasProdutividadeModule,
     CorteProdutoModule,
     HealthModule,
+    DevolucaoModule,
   ],
   controllers: [],
   providers: [
