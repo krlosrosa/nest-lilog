@@ -4,4 +4,4 @@
 export * from './migrations/schema';
 
 // Importa e exporta todas as relações
-export * from './migrations/schema.relations';
+export * from './migrations/relations';
