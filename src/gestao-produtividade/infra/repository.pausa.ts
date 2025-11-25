@@ -108,6 +108,13 @@ export class PausaRepositoryDrizzle implements IPausaRepository {
           status: DemandaStatus.PAUSA,
         })
         .where(inArray(demanda.id, demandaIds));
+
+      await tx
+        .update(palete)
+        .set({
+          status: StatusPalete.EM_PAUSA,
+        })
+        .where(inArray(palete.demandaId, demandaIds));
     });
   }
 
@@ -127,6 +134,12 @@ export class PausaRepositoryDrizzle implements IPausaRepository {
             status: DemandaStatus.EM_PROGRESSO,
           })
           .where(inArray(demanda.id, demandasIds));
+        await tx
+          .update(palete)
+          .set({
+            status: StatusPalete.EM_PROGRESSO,
+          })
+          .where(inArray(palete.demandaId, demandasIds));
       }
 
       // Atualiza o fim da pausa geral

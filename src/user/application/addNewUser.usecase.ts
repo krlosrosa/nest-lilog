@@ -25,19 +25,6 @@ export class AddNewUser {
       // 2. Se o usuário NÃO existir, crie-o
       // (Isso replica a lógica do seu bloco 'if (hasUser) { ... } else { ... }' comentado)
       if (!existingUser) {
-        /*
-         * NOTA SOBRE IDENTITYUSER:
-         * A lógica 'this.identityUserRepository.addUser' é uma chamada de serviço externa.
-         * Idealmente, ela deve ser chamada ANTES desta função de comando.
-         * Se falhar, você nem deveria tentar a transação no DB.
-         * Ex:
-         * if (createUserDto.role !== UserCenterRole.FUNCIONARIO) {
-         * await this.identityUserRepository.addUser(...);
-         * }
-         * // Só então chame o comando:
-         * await createAndAssociateUserCommand(this.db, createUserDto, processo);
-         */
-
         // Criando o usuário no banco de dados local
         await tx.insert(user).values({
           id: createUserDto.id,
@@ -47,16 +34,18 @@ export class AddNewUser {
           empresa: createUserDto.empresa,
         });
 
-        await this.identityRepository.addUser({
-          id: createUserDto.id,
-          nome: createUserDto.name,
-          centerId: createUserDto.centerId,
-          credencial: createUserDto.credencial ?? 'inicial01',
-          empresa: createUserDto.empresa,
-          turno: createUserDto.turno,
-          primeiroNome: createUserDto.primeiroNome ?? '',
-          ultimoNome: createUserDto.ultimoNome ?? '',
-        });
+        if (createUserDto.role !== UserRole.FUNCIONARIO) {
+          await this.identityRepository.addUser({
+            id: createUserDto.id,
+            nome: createUserDto.name,
+            centerId: createUserDto.centerId,
+            credencial: createUserDto.credencial ?? 'inicial01',
+            empresa: createUserDto.empresa,
+            turno: createUserDto.turno,
+            primeiroNome: createUserDto.primeiroNome ?? '',
+            ultimoNome: createUserDto.ultimoNome ?? '',
+          });
+        }
       }
 
       // 3. Crie a associação 'UserCenter'
