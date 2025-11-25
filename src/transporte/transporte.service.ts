@@ -23,6 +23,7 @@ import { DemandaProcesso } from 'src/_shared/enums';
 import { agruparTransporteComTodosRelacionamentos } from './utils/agruparTransporteComTodosRelacionamentos';
 import { TransporteComRelacionamentosGetDto } from './dto/transporte.get.dto';
 import { ListarClientesDto } from './dto/listarClientes.dto';
+import { TipoEvento } from 'src/_shared/enums/tipoEvento.enum';
 
 @Injectable()
 export class TransporteService {
@@ -126,6 +127,7 @@ export class TransporteService {
   async horaAHoraTransporte(
     data: string,
     centerId: string,
+    tipoEvento: TipoEvento = TipoEvento.TERMINO_CARREGAMENTO,
   ): Promise<ResultadoHoraHoraDto> {
     // Cria a data no formato UTC para evitar problemas de timezone
     const dataObj = new Date(data + 'T00:00:00.000Z');
@@ -181,7 +183,7 @@ export class TransporteService {
       .where(
         and(
           // Filtra pelo evento que nos interessa
-          eq(historicoStatusTransporte.tipoEvento, 'TERMINO_CARREGAMENTO'),
+          eq(historicoStatusTransporte.tipoEvento, tipoEvento),
           eq(transporte.centerId, centerId),
 
           // Filtra o TRANSPORTE pela data de expedição (o "dia" principal)

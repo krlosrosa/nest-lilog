@@ -25,6 +25,7 @@ import { AddItemsTransporteDto } from './dto/add-items-transporte.dto';
 import { ResultadoHoraHoraDto } from './dto/historicoTransporte/resultadoHoraHora.dto';
 import { PaleteCreateDataDto } from 'src/gestao-produtividade/dtos/palete/palete.create.dto';
 import { TransporteComRelacionamentosGetDto } from './dto/transporte.get.dto';
+import { TipoEvento } from 'src/_shared/enums/tipoEvento.enum';
 
 @Controller('transporte')
 @UseGuards(AuthGuard)
@@ -74,7 +75,7 @@ export class TransporteController {
     return this.transporteService.findAllWithoutTransporte(query, centerId);
   }
 
-  @Get('hora-a-hora-transporte/:data/:centerId')
+  @Get('hora-a-hora-transporte/:data/:centerId/:tipoEvento')
   @ApiOperation({
     summary: 'Buscar a hora a hora de transportes',
     operationId: 'buscarHoraAHoraTransportes',
@@ -83,8 +84,13 @@ export class TransporteController {
   horaAHoraTransporte(
     @Param('data') data: string,
     @Param('centerId') centerId: string,
+    @Param('tipoEvento') tipoEvento: TipoEvento,
   ) {
-    return this.transporteService.horaAHoraTransporte(data, centerId);
+    return this.transporteService.horaAHoraTransporte(
+      data,
+      centerId,
+      tipoEvento,
+    );
   }
 
   @Post('add-items-to-transporte')
