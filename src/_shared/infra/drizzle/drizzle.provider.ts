@@ -11,7 +11,7 @@ export const drizzleProvider = {
   inject: [ConfigService], // Injete o ConfigService
   useFactory: (configService: ConfigService) => {
     // Obtenha a URL do banco de dados do .env
-    const connectionString = configService.get<string>('DATABASE_URL_NOVA');
+    const connectionString = configService.get<string>('DATABASE_URL');
 
     if (!connectionString) {
       throw new Error(

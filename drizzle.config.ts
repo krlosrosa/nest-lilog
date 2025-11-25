@@ -5,7 +5,7 @@ export default defineConfig({
   out: './src/_shared/infra/drizzle/migrations',
   dialect: 'postgresql', // 'mysql' ou 'sqlite',
   dbCredentials: {
-    url: process.env.DATABASE_URL_NOVA as string,
+    url: process.env.DATABASE_URL as string,
     // Certifique-se de que estas variáveis de ambiente estão carregadas
     // ao executar o script do drizzle-kit
 
