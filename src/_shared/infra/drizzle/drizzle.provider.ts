@@ -1,7 +1,7 @@
 // 1. Remova 'FactoryProvider' daqui
 import { ConfigService } from '@nestjs/config';
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
 import { DRIZZLE_PROVIDER } from './drizzle.constants';
 import * as schema from './'; // Importe seu schema
 
@@ -11,7 +11,7 @@ export const drizzleProvider = {
   inject: [ConfigService], // Injete o ConfigService
   useFactory: (configService: ConfigService) => {
     // Obtenha a URL do banco de dados do .env
-    const connectionString = configService.get<string>('DATABASE_URL');
+    const connectionString = configService.get<string>('DATABASE_URL_NOVA');
 
     if (!connectionString) {
       throw new Error(
@@ -19,17 +19,18 @@ export const drizzleProvider = {
       );
     }
 
-    const client = postgres(connectionString, {
-      max: 900,
+    /*const client = postgres(connectionString, {
       idle_timeout: 20,
       connect_timeout: 30,
+      db: 'lilogDb',
       ssl: {
         rejectUnauthorized: false,
       },
-    });
+    });*/
+    const sql = neon(connectionString);
 
     // Instancie o Drizzle e passe o schema
-    return drizzle(client, { schema });
+    return drizzle({ client: sql, schema });
   },
 };
 

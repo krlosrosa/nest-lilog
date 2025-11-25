@@ -4,7 +4,7 @@ import { type DrizzleClient } from 'src/_shared/infra/drizzle/drizzle.provider';
 import { IDemandaProdutividadeRepository } from '../domain/repository/IDemandaProdutividade.repository';
 import { Demanda } from '../domain/entities/demanda.entity';
 import { FindAllParams } from '../dtos/params.dto';
-import { buscarDemandasQuery } from './queries/buscarDemandas';
+// import { buscarDemandasQuery } from './queries/buscarDemandas';
 import { overViewProdutividadeQuery } from './queries/overViewProdutividade';
 import { demanda, palete } from 'src/_shared/infra/drizzle';
 import { eq, inArray } from 'drizzle-orm';
@@ -13,6 +13,7 @@ import { DemandaProcesso } from 'src/_shared/enums';
 import { OverViewProdutividadeDataDto } from '../dtos/produtividade/produtivididade.overView.dto';
 import { pausa, user } from 'src/_shared/infra/drizzle/migrations/schema';
 import { agruparDemandasComRelacionamentos } from '../utils/agruparDemandasComRelacionamentos';
+import { buscarDemandasQuery } from './queries/buscarDemandas';
 
 export class ProdutividadeRepositoryDrizzle
   implements IDemandaProdutividadeRepository
