@@ -19,54 +19,50 @@ export class PausaRepositoryDrizzle implements IPausaRepository {
   constructor(@Inject(DRIZZLE_PROVIDER) private readonly db: DrizzleClient) {}
 
   async create(params: PausaCreateData): Promise<void> {
-    await this.db.transaction(async (tx) => {
-      // Insere a pausa
-      await tx.insert(pausa).values(params);
+    // Insere a pausa
+    await this.db.insert(pausa).values(params);
 
-      // Atualiza o status da demanda para pausada
-      await tx
-        .update(demanda)
-        .set({
-          status: DemandaStatus.PAUSA,
-        })
-        .where(eq(demanda.id, params.demandaId));
+    // Atualiza o status da demanda para pausada
+    await this.db
+      .update(demanda)
+      .set({
+        status: DemandaStatus.PAUSA,
+      })
+      .where(eq(demanda.id, params.demandaId));
 
-      // Atualiza o status das paletes para em pausa
-      await tx
-        .update(palete)
-        .set({
-          status: StatusPalete.EM_PAUSA,
-        })
-        .where(eq(palete.demandaId, params.demandaId));
-    });
+    // Atualiza o status das paletes para em pausa
+    await this.db
+      .update(palete)
+      .set({
+        status: StatusPalete.EM_PAUSA,
+      })
+      .where(eq(palete.demandaId, params.demandaId));
   }
 
   async finalizar(demandaId: number): Promise<void> {
-    await this.db.transaction(async (tx) => {
-      // Atualiza o status das paletes para em produção
-      await tx
-        .update(palete)
-        .set({
-          status: StatusPalete.EM_PROGRESSO,
-        })
-        .where(eq(palete.demandaId, demandaId));
+    // Atualiza o status das paletes para em produção
+    await this.db
+      .update(palete)
+      .set({
+        status: StatusPalete.EM_PROGRESSO,
+      })
+      .where(eq(palete.demandaId, demandaId));
 
-      // Atualiza o status da demanda para em produção
-      await tx
-        .update(demanda)
-        .set({
-          status: DemandaStatus.EM_PROGRESSO,
-        })
-        .where(eq(demanda.id, demandaId));
+    // Atualiza o status da demanda para em produção
+    await this.db
+      .update(demanda)
+      .set({
+        status: DemandaStatus.EM_PROGRESSO,
+      })
+      .where(eq(demanda.id, demandaId));
 
-      // Atualiza o fim da pausa
-      await tx
-        .update(pausa)
-        .set({
-          fim: new Date().toISOString(),
-        })
-        .where(eq(pausa.demandaId, demandaId));
-    });
+    // Atualiza o fim da pausa
+    await this.db
+      .update(pausa)
+      .set({
+        fim: new Date().toISOString(),
+      })
+      .where(eq(pausa.demandaId, demandaId));
   }
 
   async criarPausaGeral(
@@ -75,90 +71,86 @@ export class PausaRepositoryDrizzle implements IPausaRepository {
     demandaIds: number[],
   ): Promise<void> {
     console.log('demandaIds', demandaIds);
-    await this.db.transaction(async (tx) => {
-      const pausaGeralId = await tx
-        .insert(pausaGeral)
-        .values({
-          inicio: new Date().toISOString(),
-          centerId: params.centerId,
-          processo: params.processo,
-          turno: params.turno,
-          motivo: params.motivo,
-          registradoPorId: registradoPorId,
-          atualizadoEm: new Date().toISOString(),
-          segmento: params.segmento,
-        })
-        .returning({ id: pausaGeral.id });
-
-      const pausas = demandaIds.map((demandaId) => ({
+    const pausaGeralId = await this.db
+      .insert(pausaGeral)
+      .values({
         inicio: new Date().toISOString(),
-        registradoPorId: registradoPorId,
+        centerId: params.centerId,
+        processo: params.processo,
+        turno: params.turno,
         motivo: params.motivo,
-        demandaId: demandaId,
-        pausaGeralId: pausaGeralId[0].id,
-      }));
+        registradoPorId: registradoPorId,
+        atualizadoEm: new Date().toISOString(),
+        segmento: params.segmento,
+      })
+      .returning({ id: pausaGeral.id });
 
-      if (pausas.length > 0) {
-        await tx.insert(pausa).values(pausas);
-      }
+    const pausas = demandaIds.map((demandaId) => ({
+      inicio: new Date().toISOString(),
+      registradoPorId: registradoPorId,
+      motivo: params.motivo,
+      demandaId: demandaId,
+      pausaGeralId: pausaGeralId[0].id,
+    }));
 
-      await tx
-        .update(demanda)
-        .set({
-          status: DemandaStatus.PAUSA,
-        })
-        .where(inArray(demanda.id, demandaIds));
+    if (pausas.length > 0) {
+      await this.db.insert(pausa).values(pausas);
+    }
 
-      await tx
-        .update(palete)
-        .set({
-          status: StatusPalete.EM_PAUSA,
-        })
-        .where(inArray(palete.demandaId, demandaIds));
-    });
+    await this.db
+      .update(demanda)
+      .set({
+        status: DemandaStatus.PAUSA,
+      })
+      .where(inArray(demanda.id, demandaIds));
+
+    await this.db
+      .update(palete)
+      .set({
+        status: StatusPalete.EM_PAUSA,
+      })
+      .where(inArray(palete.demandaId, demandaIds));
   }
 
   async finalizarPausaGeral(ids: number[]): Promise<void> {
-    await this.db.transaction(async (tx) => {
-      const pausas = await tx
-        .select()
-        .from(pausa)
-        .where(inArray(pausa.pausaGeralId, ids));
+    const pausas = await this.db
+      .select()
+      .from(pausa)
+      .where(inArray(pausa.pausaGeralId, ids));
 
-      const demandasIds = pausas.map((pausa) => pausa.demandaId);
+    const demandasIds = pausas.map((pausa) => pausa.demandaId);
 
-      if (demandasIds.length > 0) {
-        await tx
-          .update(demanda)
-          .set({
-            status: DemandaStatus.EM_PROGRESSO,
-          })
-          .where(inArray(demanda.id, demandasIds));
-        await tx
-          .update(palete)
-          .set({
-            status: StatusPalete.EM_PROGRESSO,
-          })
-          .where(inArray(palete.demandaId, demandasIds));
-      }
-
-      // Atualiza o fim da pausa geral
-      await tx
-        .update(pausaGeral)
+    if (demandasIds.length > 0) {
+      await this.db
+        .update(demanda)
         .set({
-          fim: new Date().toISOString(),
+          status: DemandaStatus.EM_PROGRESSO,
         })
-        .where(inArray(pausaGeral.id, ids));
-
-      await tx
-        .update(pausa)
+        .where(inArray(demanda.id, demandasIds));
+      await this.db
+        .update(palete)
         .set({
-          fim: new Date().toISOString(),
+          status: StatusPalete.EM_PROGRESSO,
         })
-        .where(inArray(pausa.pausaGeralId, ids));
+        .where(inArray(palete.demandaId, demandasIds));
+    }
 
-      //
-    });
+    // Atualiza o fim da pausa geral
+    await this.db
+      .update(pausaGeral)
+      .set({
+        fim: new Date().toISOString(),
+      })
+      .where(inArray(pausaGeral.id, ids));
+
+    await this.db
+      .update(pausa)
+      .set({
+        fim: new Date().toISOString(),
+      })
+      .where(inArray(pausa.pausaGeralId, ids));
+
+    //
   }
 
   async findAll(

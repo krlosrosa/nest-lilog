@@ -218,52 +218,48 @@ export class TransporteService {
     paletes: PaleteCreateDataDto[],
     accountId: string,
   ) {
-    await this.db.transaction(async (tx) => {
-      const transportesIds = paletes.map((palete) => palete.transporteId);
-      const paletesEmTransporte = await tx
-        .select()
-        .from(palete)
-        .where(
-          and(
-            inArray(palete.transporteId, transportesIds),
-            eq(palete.tipoProcesso, paletes[0].tipoProcesso as DemandaProcesso),
-          ),
-        );
-      if (paletesEmTransporte.length > 0) {
-        const paletesIds = paletesEmTransporte.map((palete) => palete.id);
-        await tx.delete(palete).where(inArray(palete.id, paletesIds));
-      }
-      const paletesWithAccountId = paletes.map((palete) => ({
-        ...palete,
-        criadoPorId: accountId,
-        atualizadoEm: new Date().toISOString(),
-      }));
-
-      const historicoImpressaoMapaValues = paletesWithAccountId.map(
-        (palete) => ({
-          tipoImpressao: palete.tipoProcesso as DemandaProcesso,
-          transporteId: palete.transporteId,
-          impressoPorId: accountId,
-          impressoEm: new Date().toISOString(),
-        }),
+    const transportesIds = paletes.map((palete) => palete.transporteId);
+    const paletesEmTransporte = await this.db
+      .select()
+      .from(palete)
+      .where(
+        and(
+          inArray(palete.transporteId, transportesIds),
+          eq(palete.tipoProcesso, paletes[0].tipoProcesso as DemandaProcesso),
+        ),
       );
+    if (paletesEmTransporte.length > 0) {
+      const paletesIds = paletesEmTransporte.map((palete) => palete.id);
+      await this.db.delete(palete).where(inArray(palete.id, paletesIds));
+    }
+    const paletesWithAccountId = paletes.map((palete) => ({
+      ...palete,
+      criadoPorId: accountId,
+      atualizadoEm: new Date().toISOString(),
+    }));
 
-      // Remove duplicatas considerando transporteId e tipoImpressao
-      const historicoUnico = new Map<
-        string,
-        (typeof historicoImpressaoMapaValues)[0]
-      >();
-      historicoImpressaoMapaValues.forEach((item) => {
-        const chave = `${item.transporteId}-${item.tipoImpressao}`;
-        if (!historicoUnico.has(chave)) {
-          historicoUnico.set(chave, item);
-        }
-      });
+    const historicoImpressaoMapaValues = paletesWithAccountId.map((palete) => ({
+      tipoImpressao: palete.tipoProcesso as DemandaProcesso,
+      transporteId: palete.transporteId,
+      impressoPorId: accountId,
+      impressoEm: new Date().toISOString(),
+    }));
 
-      await tx
-        .insert(historicoImpressaoMapa)
-        .values(Array.from(historicoUnico.values()));
-      await tx.insert(palete).values(paletesWithAccountId);
+    // Remove duplicatas considerando transporteId e tipoImpressao
+    const historicoUnico = new Map<
+      string,
+      (typeof historicoImpressaoMapaValues)[0]
+    >();
+    historicoImpressaoMapaValues.forEach((item) => {
+      const chave = `${item.transporteId}-${item.tipoImpressao}`;
+      if (!historicoUnico.has(chave)) {
+        historicoUnico.set(chave, item);
+      }
     });
+
+    await this.db
+      .insert(historicoImpressaoMapa)
+      .values(Array.from(historicoUnico.values()));
+    await this.db.insert(palete).values(paletesWithAccountId);
   }
 }

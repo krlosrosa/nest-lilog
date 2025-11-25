@@ -77,61 +77,59 @@ export class AddUserBatch {
     // Agora tentamos o banco de dados.
 
     try {
-      await this.db.transaction(async (tx) => {
-        // --- 3a. Inserir Usuários no DB ---
-        if (newUsersToCreateDtos.length > 0) {
-          await tx.insert(user).values(
-            newUsersToCreateDtos.map((dto) => ({
-              id: dto.id,
-              name: dto.name,
-              centerId: dto.centerId,
-            })),
-          );
-        }
-
-        // --- 3b. Inserir Associações no DB ---
-        // (Lógica de verificação de associações existentes)
-        const conditions = createUserDtos.map((dto) =>
-          and(
-            eq(userCenter.userId, dto.id),
-            eq(userCenter.centerId, dto.centerId),
-            eq(userCenter.processo, dto.processo as string),
-          ),
-        );
-        const existingAssociations = await tx.query.userCenter.findMany({
-          where: or(...conditions),
-        });
-        const existingAssocSet = new Set(
-          existingAssociations.map(
-            (a) => `${a.userId}-${a.centerId}-${a.processo}`,
-          ),
-        );
-
-        const newAssociationsToInsert: (typeof userCenter.$inferInsert)[] = [];
-        for (const dto of createUserDtos) {
-          const key = `${dto.id}-${dto.centerId}-${dto.processo}`;
-          if (existingAssocSet.has(key)) {
-            continue;
-          }
-          newAssociationsToInsert.push({
-            userId: dto.id,
+      // --- 3a. Inserir Usuários no DB ---
+      if (newUsersToCreateDtos.length > 0) {
+        await this.db.insert(user).values(
+          newUsersToCreateDtos.map((dto) => ({
+            id: dto.id,
+            name: dto.name,
             centerId: dto.centerId,
-            processo: dto.processo,
-            role: dto.role ?? UserRole.FUNCIONARIO,
-            roles: dto.roles,
-          });
-          existingAssocSet.add(key);
-        }
+          })),
+        );
+      }
 
-        if (newAssociationsToInsert.length === 0) {
-          return [];
-        }
-
-        return await tx
-          .insert(userCenter)
-          .values(newAssociationsToInsert)
-          .returning();
+      // --- 3b. Inserir Associações no DB ---
+      // (Lógica de verificação de associações existentes)
+      const conditions = createUserDtos.map((dto) =>
+        and(
+          eq(userCenter.userId, dto.id),
+          eq(userCenter.centerId, dto.centerId),
+          eq(userCenter.processo, dto.processo as string),
+        ),
+      );
+      const existingAssociations = await this.db.query.userCenter.findMany({
+        where: or(...conditions),
       });
+      const existingAssocSet = new Set(
+        existingAssociations.map(
+          (a) => `${a.userId}-${a.centerId}-${a.processo}`,
+        ),
+      );
+
+      const newAssociationsToInsert: (typeof userCenter.$inferInsert)[] = [];
+      for (const dto of createUserDtos) {
+        const key = `${dto.id}-${dto.centerId}-${dto.processo}`;
+        if (existingAssocSet.has(key)) {
+          continue;
+        }
+        newAssociationsToInsert.push({
+          userId: dto.id,
+          centerId: dto.centerId,
+          processo: dto.processo,
+          role: dto.role ?? UserRole.FUNCIONARIO,
+          roles: dto.roles,
+        });
+        existingAssocSet.add(key);
+      }
+
+      if (newAssociationsToInsert.length === 0) {
+        return;
+      }
+
+      await this.db
+        .insert(userCenter)
+        .values(newAssociationsToInsert)
+        .returning();
     } catch (dbError) {
       // --- 4. Compensação (Rollback da Ação Externa) ---
       // O banco de dados falhou! Precisamos deletar os usuários do Keycloak.

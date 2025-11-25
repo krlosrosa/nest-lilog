@@ -140,12 +140,10 @@ export class ProdutividadeRepositoryDrizzle
   }
 
   async delete(demandaId: number): Promise<void> {
-    await this.db.transaction(async (tx) => {
-      await tx
-        .update(palete)
-        .set({ demandaId: null })
-        .where(eq(palete.demandaId, demandaId));
-      await tx.delete(demanda).where(eq(demanda.id, demandaId));
-    });
+    await this.db
+      .update(palete)
+      .set({ demandaId: null })
+      .where(eq(palete.demandaId, demandaId));
+    await this.db.delete(demanda).where(eq(demanda.id, demandaId));
   }
 }

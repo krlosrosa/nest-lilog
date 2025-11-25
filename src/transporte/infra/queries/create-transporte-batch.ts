@@ -13,36 +13,34 @@ export async function createTransporteBatchQuery(
     throw new BadRequestException('Array de transportes não pode estar vazio');
   }
 
-  return await db.transaction(async (tx) => {
-    // Busca transportes já existentes pelos numeroTransporte
-    const numerosTransporte = transportes.map((t) => t.numeroTransporte);
-    const transportesExistentes = await tx
-      .select({ numeroTransporte: transporte.numeroTransporte })
-      .from(transporte)
-      .where(inArray(transporte.numeroTransporte, numerosTransporte));
+  // Busca transportes já existentes pelos numeroTransporte
+  const numerosTransporte = transportes.map((t) => t.numeroTransporte);
+  const transportesExistentes = await db
+    .select({ numeroTransporte: transporte.numeroTransporte })
+    .from(transporte)
+    .where(inArray(transporte.numeroTransporte, numerosTransporte));
 
-    // Cria um Set com os números de transporte já existentes para busca rápida
-    const numerosExistentes = new Set(
-      transportesExistentes.map((t) => t.numeroTransporte),
-    );
+  // Cria um Set com os números de transporte já existentes para busca rápida
+  const numerosExistentes = new Set(
+    transportesExistentes.map((t) => t.numeroTransporte),
+  );
 
-    // Filtra apenas os transportes que não existem
-    const transportesNovos = transportes.filter(
-      (t) => !numerosExistentes.has(t.numeroTransporte),
-    );
+  // Filtra apenas os transportes que não existem
+  const transportesNovos = transportes.filter(
+    (t) => !numerosExistentes.has(t.numeroTransporte),
+  );
 
-    // Se não houver transportes novos, retorna sem inserir
-    if (transportesNovos.length === 0) {
-      return [];
-    }
+  // Se não houver transportes novos, retorna sem inserir
+  if (transportesNovos.length === 0) {
+    return [];
+  }
 
-    // Prepara os transportes para inserção
-    const transportesToInsert = transportesNovos.map((transporteDto) => ({
-      ...transporteDto,
-      cadastradoPorId: cadastradoPorId,
-      atualizadoEm: new Date().toISOString(),
-    }));
+  // Prepara os transportes para inserção
+  const transportesToInsert = transportesNovos.map((transporteDto) => ({
+    ...transporteDto,
+    cadastradoPorId: cadastradoPorId,
+    atualizadoEm: new Date().toISOString(),
+  }));
 
-    return await tx.insert(transporte).values(transportesToInsert);
-  });
+  return await db.insert(transporte).values(transportesToInsert);
 }
