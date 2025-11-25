@@ -47,6 +47,7 @@ export class Transporte {
       conferencia: TransporteStatus.NAO_INICIADO, // Valor padrão
       separacao: TransporteStatus.NAO_INICIADO, // Valor padrão
       paletes: [],
+      cargaParada: false,
     };
 
     const transporte = new Transporte(transporteCompleta, []);

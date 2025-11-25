@@ -24,6 +24,7 @@ import {
   rulesEngines,
   anomaliaProdutividade,
   devolucaoTransportadoras,
+  transporteCargaParada,
   userCenter,
 } from './schema';
 
@@ -86,6 +87,7 @@ export const userRelations = relations(user, ({ one, many }) => ({
   anomaliaProdutividades_funcionarioId: many(anomaliaProdutividade, {
     relationName: 'anomaliaProdutividade_funcionarioId_user_id',
   }),
+  transporteCargaParadas: many(transporteCargaParada),
   userCenters: many(userCenter),
 }));
 
@@ -149,6 +151,7 @@ export const transporteRelations = relations(transporte, ({ one, many }) => ({
     fields: [transporte.centerId],
     references: [center.centerId],
   }),
+  transporteCargaParadas: many(transporteCargaParada),
 }));
 
 export const dashboardProdutividadeCenterRelations = relations(
@@ -380,6 +383,20 @@ export const devolucaoTransportadorasRelations = relations(
     center: one(center, {
       fields: [devolucaoTransportadoras.centerId],
       references: [center.centerId],
+    }),
+  }),
+);
+
+export const transporteCargaParadaRelations = relations(
+  transporteCargaParada,
+  ({ one }) => ({
+    transporte: one(transporte, {
+      fields: [transporteCargaParada.transportId],
+      references: [transporte.numeroTransporte],
+    }),
+    user: one(user, {
+      fields: [transporteCargaParada.userId],
+      references: [user.id],
     }),
   }),
 );

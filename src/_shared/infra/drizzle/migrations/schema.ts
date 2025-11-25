@@ -12,6 +12,7 @@ import {
   doublePrecision,
   varchar,
   jsonb,
+  date,
   primaryKey,
   pgEnum,
 } from 'drizzle-orm/pg-core';
@@ -680,6 +681,7 @@ export const transporte = pgTable(
     carregamento: statusPalete().default('NAO_INICIADO').notNull(),
     conferencia: statusPalete().default('NAO_INICIADO').notNull(),
     separacao: statusPalete().default('NAO_INICIADO').notNull(),
+    cargaParada: boolean().default(false),
   },
   (table) => [
     index('idx_transporte_data_expedicao').using(
@@ -1097,6 +1099,36 @@ export const devolucaoTransportadoras = pgTable(
     })
       .onUpdate('cascade')
       .onDelete('restrict'),
+  ],
+);
+
+export const transporteCargaParada = pgTable(
+  'TransporteCargaParada',
+  {
+    id: integer().primaryKey().generatedAlwaysAsIdentity({
+      name: 'transporte_carga_parada_id_seq',
+      startWith: 1,
+      increment: 1,
+      minValue: 1,
+      maxValue: 2147483647,
+    }),
+    motivo: text(),
+    dataExpedicao: date(),
+    transportId: text(),
+    userId: text(),
+    observacao: text('Observacao'),
+  },
+  (table) => [
+    foreignKey({
+      columns: [table.transportId],
+      foreignColumns: [transporte.numeroTransporte],
+      name: 'transporte_id',
+    }),
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [user.id],
+      name: 'user_id',
+    }),
   ],
 );
 

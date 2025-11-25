@@ -11,6 +11,8 @@ import { listarClientesSchema } from './listarClientes.dto';
 // --- 1. Para LER do banco (EXISTENTE) ---
 export const getTransporteSchema = createSelectSchema(transporte);
 
+export class GetTransporteDto extends createZodDto(getTransporteSchema) {}
+
 export const getTransporteSchemaComPaletes = getTransporteSchema.extend({
   paletes: z.array(getPaleteSchema).optional().default([]), // A relação!
 });

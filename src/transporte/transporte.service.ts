@@ -21,9 +21,14 @@ import { PaleteCreateDataDto } from 'src/gestao-produtividade/dtos/palete/palete
 import { ResultadoHoraHoraDto } from './dto/historicoTransporte/resultadoHoraHora.dto';
 import { DemandaProcesso } from 'src/_shared/enums';
 import { agruparTransporteComTodosRelacionamentos } from './utils/agruparTransporteComTodosRelacionamentos';
-import { TransporteComRelacionamentosGetDto } from './dto/transporte.get.dto';
+import {
+  GetTransporteDto,
+  TransporteComRelacionamentosGetDto,
+} from './dto/transporte.get.dto';
 import { ListarClientesDto } from './dto/listarClientes.dto';
 import { TipoEvento } from 'src/_shared/enums/tipoEvento.enum';
+import { type ICargaParadaRepository } from './domain/repository/ICargaParadaInterface';
+import { CreateCargaParadaDto } from './dto/cargaParada/createCargaParada.dto';
 
 interface HoraHoraResult {
   hora: number;
@@ -35,6 +40,8 @@ export class TransporteService {
   constructor(
     @Inject(DRIZZLE_PROVIDER) private readonly db: DrizzleClient,
     private readonly redis: RedisService,
+    @Inject('ICargaParadaRepository')
+    private readonly cargaParadaRepository: ICargaParadaRepository,
   ) {}
 
   async findTransporteByNumeroTransporte(
@@ -333,5 +340,17 @@ export class TransporteService {
       .insert(historicoImpressaoMapa)
       .values(Array.from(historicoUnico.values()));
     await this.db.insert(palete).values(paletesWithAccountId);
+  }
+
+  async createCargaParada(cargaParada: CreateCargaParadaDto) {
+    await this.cargaParadaRepository.createCargaParada(cargaParada);
+  }
+
+  async getInfoTransporteByTransportId(
+    transportId: string,
+  ): Promise<GetTransporteDto | null> {
+    return this.cargaParadaRepository.getInfoTransporteByTransportId(
+      transportId,
+    );
   }
 }

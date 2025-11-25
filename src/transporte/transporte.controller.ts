@@ -24,8 +24,12 @@ import { ApiStandardResponses } from 'src/_shared/decorators/api-response.decora
 import { AddItemsTransporteDto } from './dto/add-items-transporte.dto';
 import { ResultadoHoraHoraDto } from './dto/historicoTransporte/resultadoHoraHora.dto';
 import { PaleteCreateDataDto } from 'src/gestao-produtividade/dtos/palete/palete.create.dto';
-import { TransporteComRelacionamentosGetDto } from './dto/transporte.get.dto';
+import {
+  GetTransporteDto,
+  TransporteComRelacionamentosGetDto,
+} from './dto/transporte.get.dto';
 import { TipoEvento } from 'src/_shared/enums/tipoEvento.enum';
+import { CreateCargaParadaDto } from './dto/cargaParada/createCargaParada.dto';
 
 @Controller('transporte')
 @UseGuards(AuthGuard)
@@ -47,6 +51,17 @@ export class TransporteController {
     @AccountId() accountId: string,
   ) {
     return this.transporteService.create(createTransporteDto, accountId);
+  }
+
+  @Post('create-carga-parada')
+  @ApiOperation({
+    summary: 'Criar carga parada',
+    operationId: 'criarCargaParada',
+  })
+  @ApiBody({ type: CreateCargaParadaDto })
+  createCargaParada(@Body() body: CreateCargaParadaDto) {
+    console.log(body);
+    return this.transporteService.createCargaParada(body);
   }
 
   @Post('find-all')
@@ -73,6 +88,22 @@ export class TransporteController {
     @Param('centerId') centerId: string,
   ) {
     return this.transporteService.findAllWithoutTransporte(query, centerId);
+  }
+
+  @Get('get-info-transporte-by-transport-id/:transportId')
+  @ApiOperation({
+    summary: 'Buscar informações do transporte',
+    operationId: 'buscarInfoTransportePorTransportId',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Transporte encontrado com sucesso',
+    type: GetTransporteDto,
+  })
+  getInfoTransporteByTransportId(
+    @Param('transportId') transportId: string,
+  ): Promise<GetTransporteDto | null> {
+    return this.transporteService.getInfoTransporteByTransportId(transportId);
   }
 
   @Get('hora-a-hora-transporte/:data/:centerId/:tipoEvento')

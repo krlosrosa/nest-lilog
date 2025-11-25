@@ -5,6 +5,7 @@ import { AtualizarStatusTransportes } from './application/atualizarStatusTranspo
 import { TransporteRepositoryDrizzle } from './infra/repository';
 import { TransporteListener } from './events/listeners/transporte.listener';
 import { AdicionarHistorioTransporte } from './application/adicionarHistorioTransporte.ts.usecase';
+import { CargaParadaRepositoryDrizzle } from './infra/cargaParada.repository';
 
 @Module({
   controllers: [TransporteController],
@@ -16,6 +17,10 @@ import { AdicionarHistorioTransporte } from './application/adicionarHistorioTran
     {
       provide: 'ITransporteRepository',
       useClass: TransporteRepositoryDrizzle,
+    },
+    {
+      provide: 'ICargaParadaRepository',
+      useClass: CargaParadaRepositoryDrizzle,
     },
   ],
 })
