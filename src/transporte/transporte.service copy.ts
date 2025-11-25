@@ -25,11 +25,6 @@ import { TransporteComRelacionamentosGetDto } from './dto/transporte.get.dto';
 import { ListarClientesDto } from './dto/listarClientes.dto';
 import { TipoEvento } from 'src/_shared/enums/tipoEvento.enum';
 
-interface HoraHoraResult {
-  hora: number;
-  totalCarregados: number;
-}
-
 @Injectable()
 export class TransporteService {
   constructor(
@@ -145,7 +140,6 @@ export class TransporteService {
 
     const inicioDiaISO = inicioDia.toISOString();
     const fimDiaISO = fimDia.toISOString();
-
     // 1. Total de carros COM EXPEDIÇÃO para o dia
     const totalTransportesQuery = await this.db
       .select({
@@ -162,8 +156,8 @@ export class TransporteService {
 
     const totalTransportesDia = totalTransportesQuery[0]?.total || 0;
 
-    // 2. Total de carros CARREGADOS POR HORA nesse dia (Resultado Esparso)
-    // O campo 'hora' será um número (0 a 23)
+    // 2. Total de carros CARREGADOS POR HORA nesse dia
+    // (Apenas de transportes com dataExpedicao nesse dia)
     const campoHora =
       sql<number>`extract(hour from ${historicoStatusTransporte.alteradoEm}::timestamp AT TIME ZONE 'UTC' AT TIME ZONE 'America/Sao_Paulo')`.as(
         'hora',
@@ -190,6 +184,7 @@ export class TransporteService {
         and(
           // Filtra pelo evento que nos interessa
           eq(historicoStatusTransporte.tipoEvento, tipoEvento),
+          eq(transporte.centerId, centerId),
 
           // Filtra o TRANSPORTE pela data de expedição (o "dia" principal)
           gte(transporte.dataExpedicao, inicioDiaISO),
@@ -198,92 +193,25 @@ export class TransporteService {
       )
       // Agrupa os resultados pelo campo "hora" que criamos
       .groupBy(campoHora)
-      // A ordenação aqui não é estritamente necessária, mas ajuda na depuração
-      .orderBy(campoHora);
+      // Opcional: ordena pela hora para o gráfico vir pronto
+      .orderBy(campoHora); // Corrigido de "campoHopscara" para "campoHora"
 
-    // ---------------------------------------------------------------------
-    // 3. PÓS-PROCESSAMENTO EM TYPESCRIPT: Definir Range, Preencher Gaps e Ordenar
-    // ---------------------------------------------------------------------
+    // --- Início da Modificação ---
+    // Retorna o array formatado
+    return {
+      totalTransportes: totalTransportesDia,
+      horaHora: carregadosPorHora,
+    };
 
-    const countsMap = new Map<number, number>();
-    carregadosPorHora.forEach((item) => {
-      // Garante que 'hora' seja tratado como número
-      countsMap.set(Number(item.hora), item.totalCarregados);
-    });
+    // --- Fim da Modificação ---
 
-    // 3a. Determinar o intervalo de horas ou usar a hora atual como fallback
-    if (carregadosPorHora.length === 0) {
-      // Caso 1: Nenhuma informação registrada. Retorna a hora atual com 0.
-
-      // Determina a hora atual no fuso 'America/Sao_Paulo'
-      const now = new Date();
-      const formatter = new Intl.DateTimeFormat('en-US', {
-        hour: 'numeric',
-        hourCycle: 'h23', // Garante o formato 0-23
-        timeZone: 'America/Sao_Paulo',
-      });
-      const spHourString = formatter.format(now);
-      const currentHourSP = parseInt(spHourString, 10);
-
-      // Retorno com apenas a hora atual e total 0
-      return {
-        totalTransportes: totalTransportesDia,
-        horaHora: [{ hora: currentHourSP, totalCarregados: 0 }],
-      } as ResultadoHoraHoraDto;
-    } else {
-      // Caso 2: Registros encontrados. Definir min e max baseados nos dados.
-
-      const hours = carregadosPorHora.map((item) => Number(item.hora));
-
-      // Determinar o menor e maior valor de hora *registrados*
-      const minRegisteredHour = Math.min(...hours);
-      const maxRegisteredHour = Math.max(...hours);
-
-      // Heurística para detectar o "wrap-around" (operação noturna que cruza meia-noite)
-      // Se houver registros muito próximos de 23h (>= 20) E registros muito próximos de 0h (<= 5),
-      // assumimos que é uma operação que cruza a meia-noite e precisa de ordenação especial.
-      const hasLateNight = hours.some((h) => h >= 20); // Ex: 20, 21, 22, 23
-      const hasEarlyMorning = hours.some((h) => h <= 5); // Ex: 0, 1, 2, 3, 4, 5
-
-      const hoursSequence: number[] = [];
-
-      if (hasLateNight && hasEarlyMorning) {
-        // Cenário 2: O intervalo atravessa a meia-noite (Exemplo: 22h a 4h)
-
-        // Encontra a primeira hora "alta" que marca o início do ciclo noturno
-        const startHour = Math.min(...hours.filter((h) => h >= 20));
-
-        // Encontra a última hora "baixa" que marca o fim do ciclo matinal
-        const endHour = Math.max(...hours.filter((h) => h <= 5));
-
-        // 1. Horas do dia anterior (startHour até 23h)
-        for (let h = startHour; h <= 23; h++) {
-          hoursSequence.push(h);
-        }
-        // 2. Horas do dia atual (0h até endHour)
-        for (let h = 0; h <= endHour; h++) {
-          hoursSequence.push(h);
-        }
-      } else {
-        // Cenário 1: O intervalo é contínuo (ex: 8h a 17h, OU 20h a 23h, OU 0h a 4h)
-        // A ordem é simplesmente minRegisteredHour até maxRegisteredHour
-        for (let h = minRegisteredHour; h <= maxRegisteredHour; h++) {
-          hoursSequence.push(h);
-        }
-      }
-
-      // 3c. Preencher a sequência com os totais ou 0.
-      const fullDayData: HoraHoraResult[] = hoursSequence.map((hour) => ({
-        hora: hour,
-        totalCarregados: countsMap.get(hour) || 0,
-      }));
-
-      // Retorna o objeto formatado com o range dinâmico e preenchido
-      return {
-        totalTransportes: totalTransportesDia,
-        horaHora: fullDayData,
-      } as ResultadoHoraHoraDto;
-    }
+    /* Bloco anterior removido:
+    // Retorna um objeto com as duas informações
+    return {
+      totalTransportesDia,
+      carregadosPorHora,
+    };
+    */
   }
 
   async addPaletesInTransporte(

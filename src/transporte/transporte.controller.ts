@@ -81,16 +81,18 @@ export class TransporteController {
     operationId: 'buscarHoraAHoraTransportes',
   })
   @ZodResponse({ type: ResultadoHoraHoraDto, status: HttpStatus.OK })
-  horaAHoraTransporte(
+  async horaAHoraTransporte(
     @Param('data') data: string,
     @Param('centerId') centerId: string,
     @Param('tipoEvento') tipoEvento: TipoEvento,
   ) {
-    return this.transporteService.horaAHoraTransporte(
+    const resultado = await this.transporteService.horaAHoraTransporte(
       data,
       centerId,
       tipoEvento,
     );
+    console.log(resultado);
+    return resultado;
   }
 
   @Post('add-items-to-transporte')
