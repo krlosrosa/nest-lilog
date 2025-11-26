@@ -250,7 +250,7 @@ export class TransporteService {
       // Se houver registros muito próximos de 23h (>= 20) E registros muito próximos de 0h (<= 5),
       // assumimos que é uma operação que cruza a meia-noite e precisa de ordenação especial.
       const hasLateNight = hours.some((h) => h >= 20); // Ex: 20, 21, 22, 23
-      const hasEarlyMorning = hours.some((h) => h <= 5); // Ex: 0, 1, 2, 3, 4, 5
+      const hasEarlyMorning = hours.some((h) => h <= 12); // Ex: 0, 1, 2, 3, 4, 5
 
       const hoursSequence: number[] = [];
 
