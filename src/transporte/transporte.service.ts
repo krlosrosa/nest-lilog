@@ -261,7 +261,7 @@ export class TransporteService {
         const startHour = Math.min(...hours.filter((h) => h >= 20));
 
         // Encontra a última hora "baixa" que marca o fim do ciclo matinal
-        const endHour = Math.max(...hours.filter((h) => h <= 5));
+        const endHour = Math.max(...hours.filter((h) => h <= 12));
 
         // 1. Horas do dia anterior (startHour até 23h)
         for (let h = startHour; h <= 23; h++) {
