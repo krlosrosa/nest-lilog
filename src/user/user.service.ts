@@ -84,9 +84,6 @@ export class UserService {
   }
 
   async infoMe(accountId: string): Promise<InfoMeDto> {
-    console.log('infoMe', accountId);
-    //Buscar no REdis
-    // 1️⃣ Busca UserCenter + JOIN em users
     const userCenters = await this.db
       .select({
         userId: userCenter.userId,

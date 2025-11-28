@@ -22,9 +22,10 @@ import {
   devolucaoItens,
   devolucaoNotas,
   rulesEngines,
-  anomaliaProdutividade,
   devolucaoTransportadoras,
   transporteCargaParada,
+  produtividadeAnomalia,
+  transporteAnomalia,
   userCenter,
 } from './schema';
 
@@ -45,7 +46,7 @@ export const demandaRelations = relations(demanda, ({ one, many }) => ({
   }),
   paletes: many(palete),
   pausas: many(pausa),
-  anomaliaProdutividades: many(anomaliaProdutividade),
+  produtividadeAnomalias: many(produtividadeAnomalia),
 }));
 
 export const userRelations = relations(user, ({ one, many }) => ({
@@ -81,13 +82,13 @@ export const userRelations = relations(user, ({ one, many }) => ({
     relationName: 'devolucaoDemanda_conferenteId_user_id',
   }),
   rulesEngines: many(rulesEngines),
-  anomaliaProdutividades_criadoPorId: many(anomaliaProdutividade, {
-    relationName: 'anomaliaProdutividade_criadoPorId_user_id',
-  }),
-  anomaliaProdutividades_funcionarioId: many(anomaliaProdutividade, {
-    relationName: 'anomaliaProdutividade_funcionarioId_user_id',
-  }),
   transporteCargaParadas: many(transporteCargaParada),
+  produtividadeAnomalias_criadoPorId: many(produtividadeAnomalia, {
+    relationName: 'produtividadeAnomalia_criadoPorId_user_id',
+  }),
+  produtividadeAnomalias_funcionarioId: many(produtividadeAnomalia, {
+    relationName: 'produtividadeAnomalia_funcionarioId_user_id',
+  }),
   userCenters: many(userCenter),
 }));
 
@@ -152,6 +153,7 @@ export const transporteRelations = relations(transporte, ({ one, many }) => ({
     references: [center.centerId],
   }),
   transporteCargaParadas: many(transporteCargaParada),
+  transporteAnomalias: many(transporteAnomalia),
 }));
 
 export const dashboardProdutividadeCenterRelations = relations(
@@ -357,26 +359,6 @@ export const rulesEnginesRelations = relations(rulesEngines, ({ one }) => ({
   }),
 }));
 
-export const anomaliaProdutividadeRelations = relations(
-  anomaliaProdutividade,
-  ({ one }) => ({
-    user_criadoPorId: one(user, {
-      fields: [anomaliaProdutividade.criadoPorId],
-      references: [user.id],
-      relationName: 'anomaliaProdutividade_criadoPorId_user_id',
-    }),
-    demanda: one(demanda, {
-      fields: [anomaliaProdutividade.demandaId],
-      references: [demanda.id],
-    }),
-    user_funcionarioId: one(user, {
-      fields: [anomaliaProdutividade.funcionarioId],
-      references: [user.id],
-      relationName: 'anomaliaProdutividade_funcionarioId_user_id',
-    }),
-  }),
-);
-
 export const devolucaoTransportadorasRelations = relations(
   devolucaoTransportadoras,
   ({ one }) => ({
@@ -397,6 +379,36 @@ export const transporteCargaParadaRelations = relations(
     user: one(user, {
       fields: [transporteCargaParada.userId],
       references: [user.id],
+    }),
+  }),
+);
+
+export const produtividadeAnomaliaRelations = relations(
+  produtividadeAnomalia,
+  ({ one }) => ({
+    user_criadoPorId: one(user, {
+      fields: [produtividadeAnomalia.criadoPorId],
+      references: [user.id],
+      relationName: 'produtividadeAnomalia_criadoPorId_user_id',
+    }),
+    demanda: one(demanda, {
+      fields: [produtividadeAnomalia.demandaId],
+      references: [demanda.id],
+    }),
+    user_funcionarioId: one(user, {
+      fields: [produtividadeAnomalia.funcionarioId],
+      references: [user.id],
+      relationName: 'produtividadeAnomalia_funcionarioId_user_id',
+    }),
+  }),
+);
+
+export const transporteAnomaliaRelations = relations(
+  transporteAnomalia,
+  ({ one }) => ({
+    transporte: one(transporte, {
+      fields: [transporteAnomalia.transporteId],
+      references: [transporte.numeroTransporte],
     }),
   }),
 );

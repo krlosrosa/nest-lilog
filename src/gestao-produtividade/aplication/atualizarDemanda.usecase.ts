@@ -58,13 +58,14 @@ export class AtualizarDemandaProdutividade {
             },
           }),
         );
-        this.eventEmitter.emit(
-          DemandaProdutividadeFinishAnomalyEvent.eventName,
-          new DemandaProdutividadeFinishAnomalyEvent(demanda),
-        );
       }
     });
 
     await this.demandaRepository.finalizarDemandas(demandasFinalizadas);
+
+    this.eventEmitter.emit(
+      DemandaProdutividadeFinishAnomalyEvent.eventName,
+      new DemandaProdutividadeFinishAnomalyEvent(demandasFinalizadas[0]),
+    );
   }
 }

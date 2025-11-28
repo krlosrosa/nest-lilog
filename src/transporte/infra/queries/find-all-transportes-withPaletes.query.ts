@@ -25,6 +25,10 @@ export async function findAllTransportesWithPaletesQuery(
 ): Promise<ResultTransporteDto[]> {
   const conditions: SQL[] = [];
 
+  if (query.cargaParada) {
+    conditions.push(eq(transporte.cargaParada, query.cargaParada));
+  }
+
   if (query.centerId) {
     conditions.push(eq(transporte.centerId, query.centerId));
   }

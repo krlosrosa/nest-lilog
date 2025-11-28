@@ -33,7 +33,6 @@ export class CargaParadaRepositoryDrizzle implements ICargaParadaRepository {
         eq(transporte.numeroTransporte, cargaParada.transportId as string),
       );
 
-    console.log({ dataExpedicao: cargaParada });
     await this.db.insert(transporteCargaParada).values({
       ...cargaParada,
       dataExpedicao: infoTransporte[0].dataExpedicao,

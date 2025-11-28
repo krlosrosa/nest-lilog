@@ -60,7 +60,6 @@ export class TransporteController {
   })
   @ApiBody({ type: CreateCargaParadaDto })
   createCargaParada(@Body() body: CreateCargaParadaDto) {
-    console.log(body);
     return this.transporteService.createCargaParada(body);
   }
 
@@ -122,7 +121,6 @@ export class TransporteController {
       centerId,
       tipoEvento,
     );
-    console.log(resultado);
     return resultado;
   }
 

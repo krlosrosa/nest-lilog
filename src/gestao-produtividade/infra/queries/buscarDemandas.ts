@@ -26,9 +26,6 @@ export async function buscarDemandasQuery(
   params?: FindAllParams,
 ) {
   const conditions: (SQL<unknown> | undefined)[] = [];
-
-  const inicio = new Date();
-
   if (params?.demandaIds && params.demandaIds.length > 0) {
     conditions.push(inArray(demanda.id, params.demandaIds));
   }
@@ -182,9 +179,6 @@ export async function buscarDemandasQuery(
   });*/
 
   const ajustedDemandas = agruparDemandasComRelacionamentos(demandas);
-
-  const fim = new Date();
-  console.log(`Tempo de execução: ${fim.getTime() - inicio.getTime()}ms`);
 
   return ajustedDemandas;
 }

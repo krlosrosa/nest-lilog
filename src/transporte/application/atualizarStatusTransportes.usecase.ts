@@ -4,6 +4,7 @@ import { type ITransporteRepository } from '../domain/repository/ITransporte.int
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { TransporteHistoricoUpdatedEvent } from '../events/events/transporteHistorico-update.event';
 import { DemandaProcesso } from 'src/_shared/enums';
+import { TransporteAnomaliaUpdatedEvent } from 'src/anomalias-produtividade/events/demanda-update-transporte';
 
 @Injectable()
 export class AtualizarStatusTransportes {
@@ -70,5 +71,12 @@ export class AtualizarStatusTransportes {
         );
       }
     }
+    this.eventEmitter.emit(
+      TransporteAnomaliaUpdatedEvent.eventName,
+      new TransporteAnomaliaUpdatedEvent({
+        transporteId: transportes[0].numeroTransporte,
+        centerId: 'pavuna',
+      }),
+    );
   }
 }

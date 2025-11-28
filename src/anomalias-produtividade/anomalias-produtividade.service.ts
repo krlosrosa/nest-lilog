@@ -5,6 +5,7 @@ import { Demanda } from 'src/gestao-produtividade/domain/entities/demanda.entity
 import { type IRegistroAnomaliaProdutividadeRepository } from './domain/repository/IRegistroAnomalia';
 import { AnomaliaProdutividadeUpdateDataWithDateStartAndEnd } from './dto/anomaliaProdutividade.update.dto';
 import { AnomaliaProdutividadeGetData } from './dto/anomaliaProdutividade.get.dto';
+import { timeToSecondsLuxon } from 'src/_shared/utils/convert';
 
 @Injectable()
 export class AnomaliasProdutividadeService {
@@ -16,44 +17,61 @@ export class AnomaliasProdutividadeService {
   ) {}
 
   async verificarAnomalias(demanda: Demanda): Promise<void> {
+    const demandaData =
+      await this.registroAnomaliaProdutividadeRepo.getDemandaById(
+        demanda.id.toString(),
+      );
+    if (!demandaData) {
+      return;
+    }
     const engineRules = await this.engineRulesRepo.findAll(demanda.centerId);
+    const engineFilter = engineRules.filter(
+      (rule) => rule.processo === 'ANOMALIA_PRODUTIVIDADE',
+    );
     const engine = new Engine();
-    engineRules.forEach((rule) => {
+    engineFilter.forEach((rule) => {
       engine.addRule(new Rule(rule.conditions as RuleProperties));
     });
 
     const facts = {
-      tempoPorVisitaEmSegundos: demanda.tempoPorVisitaEmSegundos(), // Tempo médio gasto por visita em milissegundos
-      tempoTrabalhadoDemandaEmSegundos:
-        demanda.calcularTempoTrabalhado() / 1000, // Tempo total trabalhado dividido pela quantidade de visitas
-      tempoTotalDemandaEmSegundos: demanda.calcularTempoTotal() / 1000, // Quantidade de Caixas
-      tempoTotalPausasEmSegundos: demanda.calcularTempoPausas() / 1000, // Quantidade de Caixas
-      quantidadeCaixas: demanda.quantidadeCaixas(), // Quantidade de Caixas
-      quantidadeVisitas: demanda.quantidadeVisitas(), // Quantidade de Endereços Visitados
-      quantidadeUnidades: demanda.quantidadeUnidades(), // Quantidade de Unidades
-      quantidadePaletes: demanda.quantidadePaletesDemanda(), // Quantidade de Paletes
-      statusDemanda: demanda.status, // Status da Demanda
-      produtividade: demanda.calcularProdutividade(), // Produtividade
-      inicio: demanda.inicio, // Início da Demanda
-      fim: demanda.fim, // Fim da Demanda
+      tempoPorVisitaEmSegundos:
+        timeToSecondsLuxon(demandaData.tempoTrabalhado ?? '') /
+        (Number(demandaData.totalEnderecosVisitado ?? 0) || 1), // Tempo médio gasto por visita em milissegundos
+      tempoTotalDemandaEmSegundos: timeToSecondsLuxon(
+        demandaData.tempoTrabalhado ?? '',
+      ), // Quantidade de Caixas
+      tempoTotalPausasEmSegundos: timeToSecondsLuxon(
+        demandaData.tempoTotal ?? '',
+      ), // Quantidade de Caixas
+      quantidadeCaixas: demandaData.totalCaixas ?? 0, // Quantidade de Caixas
+      quantidadeVisitas: demandaData.totalEnderecosVisitado ?? 0, // Quantidade de Endereços Visitados
+      quantidadeUnidades: demandaData.totalUnidades ?? 0, // Quantidade de Unidades
+      quantidadePaletes: demandaData.qtdPaletes ?? 0, // Quantidade de Paletes
+      statusDemanda: demandaData.status ?? '', // Status da Demanda
+      produtividade: Number(demandaData.produtividadeCaixaPorHora ?? 0), // Produtividade
+      inicio: demandaData.inicio ?? '', // Início da Demanda
+      fim: demandaData.fim ?? '', // Fim da Demanda
+      processo: demandaData.processo ?? '', // Processo da Demanda
+      turno: demandaData.turno ?? '', // Turno da Demanda
+      status: demandaData.status ?? '', // Status da Demanda
     };
 
     const result = await engine.run(facts);
     if (result.events) {
       for (const event of result.events) {
         await this.registroAnomaliaProdutividadeRepo.create({
-          criadoPorId: demanda.cadastradoPorId,
-          demandaId: demanda.id,
-          centerId: demanda.centerId,
-          funcionarioId: demanda.funcionarioId,
-          inicio: demanda.inicio,
-          fim: demanda.fim,
-          caixas: demanda.quantidadeCaixas(),
-          unidades: demanda.quantidadeUnidades(),
-          paletes: demanda.quantidadePaletesDemanda(),
-          paletesNaDemanda: demanda.quantidadePaletesDemanda(),
-          enderecosVisitado: demanda.quantidadeVisitas(),
-          produtividade: demanda.calcularProdutividade(),
+          criadoPorId: demandaData.criadoporid ?? '',
+          demandaId: demandaData.demandaid ?? 0,
+          centerId: demandaData.centerid ?? '',
+          funcionarioId: demandaData.funcionarioid ?? '',
+          inicio: demandaData.inicio ?? '',
+          fim: demandaData.fim ?? '',
+          caixas: demandaData.totalCaixas ?? 0,
+          unidades: demandaData.totalUnidades ?? 0,
+          paletes: demandaData.totalPaletes ?? 0,
+          paletesNaDemanda: demandaData.qtdPaletes ?? 0,
+          enderecosVisitado: demandaData.totalEnderecosVisitado ?? 0,
+          produtividade: Number(demandaData.produtividadeCaixaPorHora ?? 0),
           motivoAnomalia: event.type.toString(),
           motivoAnomaliaDescricao: event?.params?.message,
         });
@@ -69,5 +87,60 @@ export class AnomaliasProdutividadeService {
       centerId,
       params,
     );
+  }
+
+  async verificarAnomaliasTransporte(
+    transporteId: string,
+    centerId: string,
+  ): Promise<void> {
+    const transporte =
+      await this.registroAnomaliaProdutividadeRepo.getTransporteById(
+        transporteId,
+      );
+    if (!transporte) {
+      return;
+    }
+    const engineRules = await this.engineRulesRepo.findAll(centerId);
+    const engineFilter = engineRules.filter(
+      (rule) => rule.processo === 'TRANSPORTE',
+    );
+    const engine = new Engine();
+    engine.addOperator('greaterThan', (a: Date, b: Date) => a > b);
+    engine.addOperator('lessThan', (a: Date, b: Date) => a < b);
+
+    engineFilter.forEach((rule) => {
+      engine.addRule(new Rule(rule.conditions as unknown as RuleProperties));
+    });
+
+    const facts = {
+      INICIO_SEPARACAO: new Date(transporte.inicioSeparacao ?? '').getTime(),
+      TERMINO_SEPARACAO: new Date(transporte.terminoSeparacao ?? '').getTime(),
+      INICIO_CONFERENCIA: new Date(
+        transporte.inicioConferencia ?? '',
+      ).getTime(),
+      TERMINO_CONFERENCIA: new Date(
+        transporte.terminoConferencia ?? '',
+      ).getTime(),
+      INICIO_CARREGAMENTO: new Date(
+        transporte.inicioCarregamento ?? '',
+      ).getTime(),
+      TERMINO_CARREGAMENTO: new Date(
+        transporte.terminoCarregamento ?? '',
+      ).getTime(),
+    };
+
+    console.log(facts);
+    const result = await engine.run(facts);
+    console.log(result);
+    if (result.events) {
+      for (const event of result.events) {
+        console.log(event);
+        await this.registroAnomaliaProdutividadeRepo.createTransporteAnomalia({
+          anomalia: 'TRANSPORTE_ANOMALIA',
+          transporteId: transporteId,
+          anomaliaPersonalizada: '',
+        });
+      }
+    }
   }
 }

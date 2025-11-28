@@ -33,6 +33,7 @@ export const TransporteSchema = z.object({
   centerId: z.string().nonempty('centerId é obrigatório'),
   obs: z.string().nullable(),
   prioridade: z.number().optional(),
+  cargaParada: z.boolean().optional(),
   carregamento: z.nativeEnum(StatusPalete).optional(),
   conferencia: z.nativeEnum(StatusPalete).optional(),
   separacao: z.nativeEnum(StatusPalete).optional(),

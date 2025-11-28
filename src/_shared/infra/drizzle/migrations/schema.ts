@@ -13,7 +13,11 @@ import {
   varchar,
   jsonb,
   date,
+  real,
   primaryKey,
+  pgView,
+  interval,
+  bigint,
   pgEnum,
 } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
@@ -1031,50 +1035,6 @@ export const rulesEngines = pgTable(
   ],
 );
 
-export const anomaliaProdutividade = pgTable(
-  'AnomaliaProdutividade',
-  {
-    id: serial().primaryKey().notNull(),
-    demandaId: integer().notNull(),
-    centerId: text().notNull(),
-    funcionarioId: text().notNull(),
-    criadoPorId: text().notNull(),
-    inicio: timestamp({ precision: 3, mode: 'string' }).notNull(),
-    fim: timestamp({ precision: 3, mode: 'string' }),
-    caixas: integer().notNull(),
-    unidades: integer().notNull(),
-    paletes: integer().notNull(),
-    enderecosVisitado: integer().notNull(),
-    produtividade: doublePrecision().notNull(),
-    motivoAnomalia: text().notNull(),
-    motivoAnomaliaDescricao: text(),
-    paletesNaDemanda: integer().notNull(),
-  },
-  (table) => [
-    foreignKey({
-      columns: [table.criadoPorId],
-      foreignColumns: [user.id],
-      name: 'AnomaliaProdutividade_criadoPorId_fkey',
-    })
-      .onUpdate('cascade')
-      .onDelete('restrict'),
-    foreignKey({
-      columns: [table.demandaId],
-      foreignColumns: [demanda.id],
-      name: 'AnomaliaProdutividade_demandaId_fkey',
-    })
-      .onUpdate('cascade')
-      .onDelete('cascade'),
-    foreignKey({
-      columns: [table.funcionarioId],
-      foreignColumns: [user.id],
-      name: 'AnomaliaProdutividade_funcionarioId_fkey',
-    })
-      .onUpdate('cascade')
-      .onDelete('restrict'),
-  ],
-);
-
 export const devolucaoTransportadoras = pgTable(
   'devolucao_transportadoras',
   {
@@ -1132,6 +1092,80 @@ export const transporteCargaParada = pgTable(
   ],
 );
 
+export const playingWithNeon = pgTable('playing_with_neon', {
+  id: serial().primaryKey().notNull(),
+  name: text().notNull(),
+  value: real(),
+});
+
+export const produtividadeAnomalia = pgTable(
+  'produtividade_anomalia',
+  {
+    id: serial().primaryKey().notNull(),
+    demandaId: integer().notNull(),
+    centerId: text().notNull(),
+    funcionarioId: text().notNull(),
+    criadoPorId: text().notNull(),
+    inicio: timestamp({ precision: 3, mode: 'string' }).notNull(),
+    fim: timestamp({ precision: 3, mode: 'string' }),
+    caixas: integer().notNull(),
+    unidades: integer().notNull(),
+    paletes: integer().notNull(),
+    enderecosVisitado: integer().notNull(),
+    produtividade: doublePrecision().notNull(),
+    motivoAnomalia: text().notNull(),
+    motivoAnomaliaDescricao: text(),
+    paletesNaDemanda: integer().notNull(),
+  },
+  (table) => [
+    foreignKey({
+      columns: [table.criadoPorId],
+      foreignColumns: [user.id],
+      name: 'AnomaliaProdutividade_criadoPorId_fkey',
+    })
+      .onUpdate('cascade')
+      .onDelete('restrict'),
+    foreignKey({
+      columns: [table.demandaId],
+      foreignColumns: [demanda.id],
+      name: 'AnomaliaProdutividade_demandaId_fkey',
+    })
+      .onUpdate('cascade')
+      .onDelete('cascade'),
+    foreignKey({
+      columns: [table.funcionarioId],
+      foreignColumns: [user.id],
+      name: 'AnomaliaProdutividade_funcionarioId_fkey',
+    })
+      .onUpdate('cascade')
+      .onDelete('restrict'),
+  ],
+);
+
+export const transporteAnomalia = pgTable(
+  'transporte_anomalia',
+  {
+    id: integer().primaryKey().generatedAlwaysAsIdentity({
+      name: 'transporte_anomalia_id_seq',
+      startWith: 1,
+      increment: 1,
+      minValue: 1,
+      maxValue: 2147483647,
+      cache: 1,
+    }),
+    transporteId: text(),
+    anomalia: text(),
+    anomaliaPersonalizada: text(),
+  },
+  (table) => [
+    foreignKey({
+      columns: [table.transporteId],
+      foreignColumns: [transporte.numeroTransporte],
+      name: 'transporteId',
+    }),
+  ],
+);
+
 export const userCenter = pgTable(
   'UserCenter',
   {
@@ -1164,4 +1198,136 @@ export const userCenter = pgTable(
       name: 'UserCenter_pkey',
     }),
   ],
+);
+export const viewProdutividadePorDia = pgView('view_produtividade_por_dia', {
+  centerid: text(),
+  data: date(),
+  totalTempoPausa: interval('total_tempo_pausa'),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  totalCaixas: bigint('total_caixas', { mode: 'number' }),
+  tempoTotal: interval('tempo_total'),
+  tempoTrabalhado: interval('tempo_trabalhado'),
+  produtividadeCaixaPorHora: numeric('produtividade_caixa_por_hora'),
+}).as(
+  sql`SELECT centerid, data, total_tempo_pausa, total_caixas, tempo_total, tempo_trabalhado, CASE WHEN EXTRACT(epoch FROM tempo_trabalhado) > 0::numeric THEN total_caixas::numeric / (EXTRACT(epoch FROM tempo_trabalhado) / 3600::numeric) ELSE NULL::numeric END AS produtividade_caixa_por_hora FROM ( SELECT d."centerId" AS centerid, d."criadoEm"::date AS data, sum(p.fim - p.inicio) AS total_tempo_pausa, sum(palete."quantidadeCaixas") AS total_caixas, sum(d.fim - d.inicio) AS tempo_total, sum(d.fim - d.inicio) - sum(p.fim - p.inicio) AS tempo_trabalhado FROM "Demanda" d LEFT JOIN "Pausa" p ON p."demandaId" = d.id LEFT JOIN "Palete" palete ON palete."demandaId" = d.id GROUP BY d."centerId", (d."criadoEm"::date)) t ORDER BY centerid, data`,
+);
+
+export const viewProdutividadePorFuncionarioPorDia = pgView(
+  'view_produtividade_por_funcionario_por_dia',
+  {
+    centerid: text(),
+    funcionarioid: text(),
+    funcionarionome: text(),
+    data: date(),
+    totalTempoPausa: interval('total_tempo_pausa'),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    totalCaixas: bigint('total_caixas', { mode: 'number' }),
+    tempoTotal: interval('tempo_total'),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    totalDemandas: bigint('total_demandas', { mode: 'number' }),
+    tempoTrabalhado: interval('tempo_trabalhado'),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    totalEnderecosVisitados: bigint('total_enderecos_visitados', {
+      mode: 'number',
+    }),
+    produtividadeCaixaPorHora: numeric('produtividade_caixa_por_hora'),
+    mediaEnderecosPorDemanda: numeric('media_enderecos_por_demanda'),
+  },
+).as(
+  sql`SELECT centerid, funcionarioid, funcionarionome, data, total_tempo_pausa, total_caixas, tempo_total, total_demandas, tempo_trabalhado, total_enderecos_visitados, CASE WHEN EXTRACT(epoch FROM tempo_trabalhado) > 0::numeric THEN total_caixas::numeric / (EXTRACT(epoch FROM tempo_trabalhado) / 3600::numeric) ELSE NULL::numeric END AS produtividade_caixa_por_hora, CASE WHEN total_demandas > 0 THEN total_enderecos_visitados::numeric / total_demandas::numeric ELSE NULL::numeric END AS media_enderecos_por_demanda FROM ( SELECT d."centerId" AS centerid, d."funcionarioId" AS funcionarioid, u.name AS funcionarionome, d."criadoEm"::date AS data, count(d.id) AS total_demandas, sum(p.fim - p.inicio) AS total_tempo_pausa, sum(palete."quantidadeCaixas") AS total_caixas, sum(d.fim - d.inicio) AS tempo_total, sum(palete."enderecoVisitado") AS total_enderecos_visitados, sum(d.fim - d.inicio) - sum(p.fim - p.inicio) AS tempo_trabalhado FROM "Demanda" d LEFT JOIN "User" u ON u.id = d."funcionarioId" LEFT JOIN "Pausa" p ON p."demandaId" = d.id LEFT JOIN "Palete" palete ON palete."demandaId" = d.id GROUP BY d."centerId", d."funcionarioId", u.name, (d."criadoEm"::date)) t ORDER BY centerid, funcionarioid, data`,
+);
+
+export const viewProdutividadeFuncionario = pgView(
+  'view_produtividade_funcionario',
+  {
+    funcionarioid: text(),
+    funcionarionome: text(),
+    centerid: text(),
+    periodoInicio: date('periodo_inicio'),
+    periodoFim: date('periodo_fim'),
+    totalTempoPausa: interval('total_tempo_pausa'),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    totalCaixas: bigint('total_caixas', { mode: 'number' }),
+    tempoTotal: interval('tempo_total'),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    totalDemandas: bigint('total_demandas', { mode: 'number' }),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    totalEnderecosVisitados: bigint('total_enderecos_visitados', {
+      mode: 'number',
+    }),
+    tempoTrabalhado: interval('tempo_trabalhado'),
+    produtividadeCaixaPorHora: numeric('produtividade_caixa_por_hora'),
+    mediaEnderecosPorDemanda: numeric('media_enderecos_por_demanda'),
+  },
+).as(
+  sql`SELECT d."funcionarioId" AS funcionarioid, u.name AS funcionarionome, d."centerId" AS centerid, min(d."criadoEm"::date) AS periodo_inicio, max(d."criadoEm"::date) AS periodo_fim, sum( CASE WHEN p.id IS NOT NULL THEN p.fim - p.inicio ELSE NULL::interval END) AS total_tempo_pausa, sum( CASE WHEN palete.id IS NOT NULL THEN palete."quantidadeCaixas" ELSE NULL::integer END) AS total_caixas, sum(d.fim - d.inicio) AS tempo_total, count(d.id) AS total_demandas, sum( CASE WHEN palete.id IS NOT NULL THEN palete."enderecoVisitado" ELSE NULL::integer END) AS total_enderecos_visitados, sum(d.fim - d.inicio) - sum( CASE WHEN p.id IS NOT NULL THEN p.fim - p.inicio ELSE NULL::interval END) AS tempo_trabalhado, CASE WHEN EXTRACT(epoch FROM sum(d.fim - d.inicio) - sum( CASE WHEN p.id IS NOT NULL THEN p.fim - p.inicio ELSE NULL::interval END)) > 0::numeric THEN sum(palete."quantidadeCaixas")::numeric / (EXTRACT(epoch FROM sum(d.fim - d.inicio) - sum( CASE WHEN p.id IS NOT NULL THEN p.fim - p.inicio ELSE NULL::interval END)) / 3600::numeric) ELSE NULL::numeric END AS produtividade_caixa_por_hora, CASE WHEN count(d.id) > 0 THEN sum( CASE WHEN palete.id IS NOT NULL THEN palete."enderecoVisitado" ELSE NULL::integer END)::numeric / count(d.id)::numeric ELSE NULL::numeric END AS media_enderecos_por_demanda FROM "Demanda" d LEFT JOIN "User" u ON u.id = d."funcionarioId" LEFT JOIN "Pausa" p ON p."demandaId" = d.id LEFT JOIN "Palete" palete ON palete."demandaId" = d.id GROUP BY d."funcionarioId", u.name, d."centerId" ORDER BY u.name`,
+);
+
+export const viewProdutividadeEmpresa = pgView('view_produtividade_empresa', {
+  centerid: text(),
+  empresa: text(),
+  periodoInicio: date('periodo_inicio'),
+  periodoFim: date('periodo_fim'),
+  totalTempoPausa: interval('total_tempo_pausa'),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  totalCaixas: bigint('total_caixas', { mode: 'number' }),
+  tempoTotal: interval('tempo_total'),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  totalDemandas: bigint('total_demandas', { mode: 'number' }),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  totalEnderecosVisitados: bigint('total_enderecos_visitados', {
+    mode: 'number',
+  }),
+  tempoTrabalhado: interval('tempo_trabalhado'),
+  produtividadeCaixaPorHora: numeric('produtividade_caixa_por_hora'),
+  mediaEnderecosPorDemanda: numeric('media_enderecos_por_demanda'),
+}).as(
+  sql`SELECT d."centerId" AS centerid, palete.empresa, min(d."criadoEm"::date) AS periodo_inicio, max(d."criadoEm"::date) AS periodo_fim, sum( CASE WHEN p.id IS NOT NULL THEN p.fim - p.inicio ELSE NULL::interval END) AS total_tempo_pausa, sum( CASE WHEN palete.id IS NOT NULL THEN palete."quantidadeCaixas" ELSE NULL::integer END) AS total_caixas, sum(d.fim - d.inicio) AS tempo_total, count(d.id) AS total_demandas, sum( CASE WHEN palete.id IS NOT NULL THEN palete."enderecoVisitado" ELSE NULL::integer END) AS total_enderecos_visitados, sum(d.fim - d.inicio) - sum( CASE WHEN p.id IS NOT NULL THEN p.fim - p.inicio ELSE NULL::interval END) AS tempo_trabalhado, CASE WHEN EXTRACT(epoch FROM sum(d.fim - d.inicio) - sum( CASE WHEN p.id IS NOT NULL THEN p.fim - p.inicio ELSE NULL::interval END)) > 0::numeric THEN sum(palete."quantidadeCaixas")::numeric / (EXTRACT(epoch FROM sum(d.fim - d.inicio) - sum( CASE WHEN p.id IS NOT NULL THEN p.fim - p.inicio ELSE NULL::interval END)) / 3600::numeric) ELSE NULL::numeric END AS produtividade_caixa_por_hora, CASE WHEN count(d.id) > 0 THEN sum( CASE WHEN palete.id IS NOT NULL THEN palete."enderecoVisitado" ELSE NULL::integer END)::numeric / count(d.id)::numeric ELSE NULL::numeric END AS media_enderecos_por_demanda FROM "Demanda" d LEFT JOIN "Pausa" p ON p."demandaId" = d.id LEFT JOIN "Palete" palete ON palete."demandaId" = d.id GROUP BY d."centerId", palete.empresa`,
+);
+
+export const viewDemandaProdutividade = pgView('view_demanda_produtividade', {
+  centerid: text(),
+  demandaid: integer(),
+  criadoporid: text(),
+  funcionarioid: text(),
+  data: date(),
+  turno: turno(),
+  processo: tipoProcesso(),
+  inicio: timestamp({ mode: 'string' }),
+  fim: timestamp({ mode: 'string' }),
+  status: statusDemanda(),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  totalUnidades: bigint('total_unidades', { mode: 'number' }),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  totalPaletes: bigint('total_paletes', { mode: 'number' }),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  totalEnderecosVisitado: bigint('total_enderecos_visitado', {
+    mode: 'number',
+  }),
+  totalTempoPausa: interval('total_tempo_pausa'),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  totalCaixas: bigint('total_caixas', { mode: 'number' }),
+  tempoTotal: interval('tempo_total'),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  qtdPaletes: bigint('qtd_paletes', { mode: 'number' }),
+  tempoTrabalhado: interval('tempo_trabalhado'),
+  produtividadeCaixaPorHora: numeric('produtividade_caixa_por_hora'),
+}).as(
+  sql`SELECT centerid, demandaid, criadoporid, funcionarioid, data, turno, processo, inicio, fim, status, total_unidades, total_paletes, total_enderecos_visitado, total_tempo_pausa, total_caixas, tempo_total, qtd_paletes, tempo_trabalhado, CASE WHEN EXTRACT(epoch FROM tempo_trabalhado) > 0::numeric THEN total_caixas::numeric / (EXTRACT(epoch FROM tempo_trabalhado) / 3600::numeric) ELSE NULL::numeric END AS produtividade_caixa_por_hora FROM ( SELECT d."centerId" AS centerid, d."criadoEm"::date AS data, d.processo, d.status, d."cadastradoPorId" AS criadoporid, d."funcionarioId" AS funcionarioid, d.turno, d.id AS demandaid, min(d.inicio) AS inicio, max(d.fim) AS fim, count(palete."demandaId") AS qtd_paletes, COALESCE(sum(p.fim - p.inicio), '00:00:00'::interval) AS total_tempo_pausa, sum(palete."quantidadeCaixas") AS total_caixas, sum(palete."quantidadeUnidades") AS total_unidades, sum(palete."enderecoVisitado") AS total_enderecos_visitado, sum(palete."quantidadePaletes") AS total_paletes, sum(d.fim - d.inicio) AS tempo_total, sum(d.fim - d.inicio) - COALESCE(sum(p.fim - p.inicio), '00:00:00'::interval) AS tempo_trabalhado FROM "Demanda" d LEFT JOIN "Pausa" p ON p."demandaId" = d.id LEFT JOIN "Palete" palete ON palete."demandaId" = d.id GROUP BY d."cadastradoPorId", d."funcionarioId", d.id, d."centerId", (d."criadoEm"::date), d.processo, d.status, d.turno) t ORDER BY centerid, data`,
+);
+
+export const viewTransporteStatus = pgView('view_transporte_status', {
+  transporteId: text(),
+  criacaoTransporte: timestamp('criacao_transporte', { mode: 'string' }),
+  inicioSeparacao: timestamp('inicio_separacao', { mode: 'string' }),
+  terminoSeparacao: timestamp('termino_separacao', { mode: 'string' }),
+  inicioConferencia: timestamp('inicio_conferencia', { mode: 'string' }),
+  terminoConferencia: timestamp('termino_conferencia', { mode: 'string' }),
+  inicioCarregamento: timestamp('inicio_carregamento', { mode: 'string' }),
+  terminoCarregamento: timestamp('termino_carregamento', { mode: 'string' }),
+  corteProduto: timestamp('corte_produto', { mode: 'string' }),
+  faturado: timestamp({ mode: 'string' }),
+  liberadoPortaria: timestamp('liberado_portaria', { mode: 'string' }),
+}).as(
+  sql`SELECT "transporteId", max( CASE WHEN "tipoEvento" = 'CRIACAO_TRANSPORTE'::"TipoEvento" THEN "alteradoEm" ELSE NULL::timestamp without time zone END) AS criacao_transporte, max( CASE WHEN "tipoEvento" = 'INICIO_SEPARACAO'::"TipoEvento" THEN "alteradoEm" ELSE NULL::timestamp without time zone END) AS inicio_separacao, max( CASE WHEN "tipoEvento" = 'TERMINO_SEPARACAO'::"TipoEvento" THEN "alteradoEm" ELSE NULL::timestamp without time zone END) AS termino_separacao, max( CASE WHEN "tipoEvento" = 'INICIO_CONFERENCIA'::"TipoEvento" THEN "alteradoEm" ELSE NULL::timestamp without time zone END) AS inicio_conferencia, max( CASE WHEN "tipoEvento" = 'TERMINO_CONFERENCIA'::"TipoEvento" THEN "alteradoEm" ELSE NULL::timestamp without time zone END) AS termino_conferencia, max( CASE WHEN "tipoEvento" = 'INICIO_CARREGAMENTO'::"TipoEvento" THEN "alteradoEm" ELSE NULL::timestamp without time zone END) AS inicio_carregamento, max( CASE WHEN "tipoEvento" = 'TERMINO_CARREGAMENTO'::"TipoEvento" THEN "alteradoEm" ELSE NULL::timestamp without time zone END) AS termino_carregamento, max( CASE WHEN "tipoEvento" = 'CORTE_PRODUTO'::"TipoEvento" THEN "alteradoEm" ELSE NULL::timestamp without time zone END) AS corte_produto, max( CASE WHEN "tipoEvento" = 'FATURADO'::"TipoEvento" THEN "alteradoEm" ELSE NULL::timestamp without time zone END) AS faturado, max( CASE WHEN "tipoEvento" = 'LIBERADO_PORTARIA'::"TipoEvento" THEN "alteradoEm" ELSE NULL::timestamp without time zone END) AS liberado_portaria FROM "HistoricoStatusTransporte" h GROUP BY "transporteId" ORDER BY "transporteId"`,
 );

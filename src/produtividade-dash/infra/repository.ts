@@ -5,18 +5,24 @@ import { type IDashProdutividadeRepository } from '../domain/repositories/IDashP
 import {
   dashboardProdutividadeCenter,
   dashboardProdutividadeUser,
+  palete,
+  transporte,
 } from 'src/_shared/infra/drizzle';
 import {
   QueryFindDemanda,
   QueryFindUserDashboard,
 } from '../dtos/queryFindDemanda';
 
-import { and, eq } from 'drizzle-orm';
+import { and, eq, ne } from 'drizzle-orm';
 import { DemandaProcesso, DemandaTurno } from 'src/_shared/enums';
 import { DashboardProdutividadeCenterGetData } from '../dtos/produtividade-dash.get.dto';
 import { DashboardProdutividadeCenterCreateData } from '../dtos/produtividade-dash.create.dto';
 import { DashboardProdutividadeUserCreateData } from '../dtos/produtividade-user-dash.create.dto';
 import { DashboardProdutividadeUserGetData } from '../dtos/produtividade-user-dash.get.dto';
+import { dashDiaDia, DashDiaDiaParams } from './dashDiaDia';
+import { ProdutividadeDiaDiaGetDataDto } from '../dtos/dash/produtividadeDiaDia';
+import { PaleteGetDataTransporteDto } from 'src/gestao-produtividade/dtos/palete/palete.get.dto';
+import { sql } from 'drizzle-orm';
 
 export class DashProdutividadeRepositoryDrizzle
   implements IDashProdutividadeRepository
@@ -97,5 +103,48 @@ export class DashProdutividadeRepositoryDrizzle
       .update(dashboardProdutividadeUser)
       .set(data)
       .where(eq(dashboardProdutividadeUser.id, id));
+  }
+
+  async dashDiaDia(
+    params: DashDiaDiaParams,
+  ): Promise<ProdutividadeDiaDiaGetDataDto> {
+    return await dashDiaDia(this.db, params);
+  }
+
+  async getPaletesEmAberto(
+    centerId: string,
+    data: string,
+    processo: DemandaProcesso,
+  ): Promise<PaleteGetDataTransporteDto[]> {
+    const paletes = await this.db
+      .select({
+        palete_id: palete.id,
+        empresa: palete.empresa,
+        quantidadeCaixas: palete.quantidadeCaixas,
+        quantidadeUnidades: palete.quantidadeUnidades,
+        quantidadePaletes: palete.quantidadePaletes,
+        enderecoVisitado: palete.enderecoVisitado,
+        segmento: palete.segmento,
+        tipoProcesso: palete.tipoProcesso,
+        status_palete: palete.status,
+        transporteId: palete.transporteId,
+        centerId: transporte.centerId,
+        data_expedicao: sql<string>`${transporte.dataExpedicao}::date`,
+      })
+      .from(palete)
+      .innerJoin(
+        transporte,
+        eq(palete.transporteId, transporte.numeroTransporte),
+      )
+      .where(
+        and(
+          ne(palete.status, 'CONCLUIDO'),
+          eq(palete.tipoProcesso, processo),
+          eq(transporte.centerId, centerId),
+          sql`${transporte.dataExpedicao}::date = ${data}`,
+        ),
+      )
+      .orderBy(palete.id);
+    return paletes;
   }
 }

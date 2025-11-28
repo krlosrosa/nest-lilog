@@ -2,11 +2,19 @@ import { DRIZZLE_PROVIDER } from 'src/_shared/infra/drizzle/drizzle.constants';
 import { IRegistroAnomaliaProdutividadeRepository } from '../domain/repository/IRegistroAnomalia';
 import { type DrizzleClient } from 'src/_shared/infra/drizzle/drizzle.provider';
 import { AnomaliaProdutividadeCreateData } from '../dto/anomaliaProdutividade.create.dto';
-import { anomaliaProdutividade } from 'src/_shared/infra/drizzle';
+import {
+  produtividadeAnomalia,
+  transporteAnomalia,
+  viewDemandaProdutividade,
+  viewTransporteStatus,
+} from 'src/_shared/infra/drizzle';
 import { Inject } from '@nestjs/common';
 import { AnomaliaProdutividadeUpdateDataWithDateStartAndEnd } from '../dto/anomaliaProdutividade.update.dto';
 import { AnomaliaProdutividadeGetData } from '../dto/anomaliaProdutividade.get.dto';
 import { and, eq, exists, gte, ilike, lte, SQL } from 'drizzle-orm';
+import { DemandaGetDataForAnomaliaDto } from '../dto/demanda/getDemanda.get.dto';
+import { TransporteGetDataForAnomaliaDto } from '../dto/transporte/transporteAnomalia.dto';
+import { TransporteAnomaliaCreateData } from '../dto/transporte/createAnomalia.dtos';
 
 export class AnomaliaProdutividadeRepositoryDrizzle
   implements IRegistroAnomaliaProdutividadeRepository
@@ -16,7 +24,7 @@ export class AnomaliaProdutividadeRepositoryDrizzle
   async create(
     registroAnomalia: AnomaliaProdutividadeCreateData,
   ): Promise<void> {
-    await this.db.insert(anomaliaProdutividade).values(registroAnomalia);
+    await this.db.insert(produtividadeAnomalia).values(registroAnomalia);
   }
 
   async getAllAnomalias(
@@ -25,7 +33,7 @@ export class AnomaliaProdutividadeRepositoryDrizzle
   ): Promise<AnomaliaProdutividadeGetData[]> {
     const conditions: (SQL<unknown> | undefined)[] = [];
 
-    conditions.push(eq(anomaliaProdutividade.centerId, centerId));
+    conditions.push(eq(produtividadeAnomalia.centerId, centerId));
 
     if (params?.inicio && params?.fim) {
       // Converte a data recebida para o início do dia (00:00:00.000)
@@ -39,11 +47,11 @@ export class AnomaliaProdutividadeRepositoryDrizzle
         exists(
           this.db
             .select()
-            .from(anomaliaProdutividade)
+            .from(produtividadeAnomalia)
             .where(
               and(
-                gte(anomaliaProdutividade.inicio, dataInicio.toISOString()),
-                lte(anomaliaProdutividade.inicio, dataFim.toISOString()),
+                gte(produtividadeAnomalia.inicio, dataInicio.toISOString()),
+                lte(produtividadeAnomalia.inicio, dataFim.toISOString()),
               ),
             ),
         ),
@@ -53,7 +61,7 @@ export class AnomaliaProdutividadeRepositoryDrizzle
     if (params?.motivoAnomalia) {
       conditions.push(
         ilike(
-          anomaliaProdutividade.motivoAnomalia,
+          produtividadeAnomalia.motivoAnomalia,
           `%${params.motivoAnomalia}%`,
         ),
       );
@@ -61,7 +69,7 @@ export class AnomaliaProdutividadeRepositoryDrizzle
 
     if (params?.funcionarioId) {
       conditions.push(
-        eq(anomaliaProdutividade.funcionarioId, params.funcionarioId),
+        eq(produtividadeAnomalia.funcionarioId, params.funcionarioId),
       );
     }
 
@@ -69,8 +77,34 @@ export class AnomaliaProdutividadeRepositoryDrizzle
 
     const anomalias = await this.db
       .select()
-      .from(anomaliaProdutividade)
+      .from(produtividadeAnomalia)
       .where(whereClause);
     return anomalias;
+  }
+
+  async getDemandaById(
+    id: string,
+  ): Promise<DemandaGetDataForAnomaliaDto | undefined> {
+    const demanda = await this.db
+      .select()
+      .from(viewDemandaProdutividade)
+      .where(eq(viewDemandaProdutividade.demandaid, Number(id)));
+    return demanda[0];
+  }
+
+  async getTransporteById(
+    id: string,
+  ): Promise<TransporteGetDataForAnomaliaDto | undefined> {
+    const transporte = await this.db
+      .select()
+      .from(viewTransporteStatus)
+      .where(eq(viewTransporteStatus.transporteId, id));
+    return transporte[0];
+  }
+
+  async createTransporteAnomalia(
+    transporteAnomaliaValue: TransporteAnomaliaCreateData,
+  ): Promise<void> {
+    await this.db.insert(transporteAnomalia).values(transporteAnomaliaValue);
   }
 }

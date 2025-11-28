@@ -25,6 +25,10 @@ export async function findAllTransportesQuery(
 ): Promise<ResultTransporteDto[]> {
   const conditions: (SQL<unknown> | undefined)[] = [];
 
+  if (query.cargaParada) {
+    conditions.push(eq(transporte.cargaParada, query.cargaParada));
+  }
+
   conditions.push(eq(transporte.centerId, centerId));
 
   if (query.status) {
@@ -103,6 +107,7 @@ export async function findAllTransportesQuery(
       centerId: transporte.centerId,
       obs: transporte.obs || '',
       prioridade: transporte.prioridade,
+      cargaParada: transporte.cargaParada,
       conferencia: transporte.conferencia,
       carregamento: transporte.carregamento,
       separacao: transporte.separacao,

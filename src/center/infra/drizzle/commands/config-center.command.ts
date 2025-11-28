@@ -48,7 +48,7 @@ export async function configCenterCommand(
     updatedAt: now.toISOString(),
   };
 
-  const result = await this.db
+  const result = await db
     .insert(configuracaoImpressaoMapa)
     .values(configData)
     .onConflictDoUpdate({

@@ -1,10 +1,10 @@
 import { createUpdateSchema } from 'drizzle-zod';
-import { anomaliaProdutividade } from 'src/_shared/infra/drizzle/migrations/schema';
+import { produtividadeAnomalia } from 'src/_shared/infra/drizzle/migrations/schema';
 import z from 'zod';
 
 // --- 1. Para LER do banco (EXISTENTE) ---
 export const updateAnomaliaProdutividadeSchema = createUpdateSchema(
-  anomaliaProdutividade,
+  produtividadeAnomalia,
 );
 
 export const updateWithDateStartAndEndSchema =

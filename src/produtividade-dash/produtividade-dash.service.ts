@@ -10,20 +10,23 @@ import { DashboardProdutividadeCenterCreateData } from './dtos/produtividade-das
 import { DemandaProcesso, DemandaTurno } from 'src/_shared/enums';
 import { DashboardProdutividadeUserCreateData } from './dtos/produtividade-user-dash.create.dto';
 import { DashboardProdutividadeUserGetData } from './dtos/produtividade-user-dash.get.dto';
+import { DashDiaDiaParams } from './infra/dashDiaDia';
+import { ProdutividadeDiaDiaGetDataDto } from './dtos/dash/produtividadeDiaDia';
+import { PaleteGetDataTransporteDto } from 'src/gestao-produtividade/dtos/palete/palete.get.dto';
 
 @Injectable()
 export class ProdutividadeDashService {
   constructor(
     @Inject('IDashProdutividadeRepository')
-    private readonly pausaRepository: IDashProdutividadeRepository,
+    private readonly produtividadeRepository: IDashProdutividadeRepository,
   ) {}
 
   async atualizarProdutividadePorCentro(
     params: QueryFindDemanda,
     demanda: Demanda,
   ): Promise<void> {
-    console.log(params.dataRegistro);
-    const demandas = await this.pausaRepository.findAllCenterDashboards(params);
+    const demandas =
+      await this.produtividadeRepository.findAllCenterDashboards(params);
     if (demandas.length > 0) {
       const item: DashboardProdutividadeCenterGetData = demandas[0];
       const novoRegistro: DashboardProdutividadeCenterCreateData = {
@@ -39,7 +42,10 @@ export class ProdutividadeDashService {
           item.totalTempoTrabalhado + demanda.calcularTempoTrabalhado(),
         totalDemandas: item.totalDemandas + demanda.quantidadePaletesDemanda(),
       };
-      await this.pausaRepository.updateCenterDashboard(item.id, novoRegistro);
+      await this.produtividadeRepository.updateCenterDashboard(
+        item.id,
+        novoRegistro,
+      );
     } else {
       const novoRegistro: DashboardProdutividadeCenterCreateData = {
         centerId: params.centerId,
@@ -60,7 +66,7 @@ export class ProdutividadeDashService {
         totalDemandas: demanda.quantidadePaletesDemanda(),
         atualizadoEm: new Date().toISOString(),
       };
-      await this.pausaRepository.createCenterDashboard(novoRegistro);
+      await this.produtividadeRepository.createCenterDashboard(novoRegistro);
     }
     return;
   }
@@ -68,7 +74,8 @@ export class ProdutividadeDashService {
     params: QueryFindUserDashboard,
     demanda: Demanda,
   ): Promise<void> {
-    const demandas = await this.pausaRepository.findAllUserDashboards(params);
+    const demandas =
+      await this.produtividadeRepository.findAllUserDashboards(params);
     if (demandas.length > 0) {
       const item: DashboardProdutividadeUserGetData = demandas[0];
       const novoRegistro: DashboardProdutividadeUserGetData = {
@@ -84,7 +91,10 @@ export class ProdutividadeDashService {
           item.totalTempoTrabalhado + demanda.calcularTempoTrabalhado(),
         totalDemandas: item.totalDemandas + demanda.quantidadePaletesDemanda(),
       };
-      await this.pausaRepository.updateUserDashboard(item.id, novoRegistro);
+      await this.produtividadeRepository.updateUserDashboard(
+        item.id,
+        novoRegistro,
+      );
     } else {
       const novoRegistro: DashboardProdutividadeUserCreateData = {
         centerId: params.centerId,
@@ -102,8 +112,26 @@ export class ProdutividadeDashService {
         totalDemandas: demanda.quantidadePaletesDemanda(),
         atualizadoEm: new Date().toISOString(),
       };
-      await this.pausaRepository.createUserDashboard(novoRegistro);
+      await this.produtividadeRepository.createUserDashboard(novoRegistro);
     }
     return;
+  }
+
+  async dashDiaDia(
+    params: DashDiaDiaParams,
+  ): Promise<ProdutividadeDiaDiaGetDataDto> {
+    return await this.produtividadeRepository.dashDiaDia(params);
+  }
+
+  async getPaletesEmAberto(
+    centerId: string,
+    data: string,
+    processo: DemandaProcesso,
+  ): Promise<PaleteGetDataTransporteDto[]> {
+    return await this.produtividadeRepository.getPaletesEmAberto(
+      centerId,
+      data,
+      processo,
+    );
   }
 }

@@ -70,7 +70,6 @@ export class PausaRepositoryDrizzle implements IPausaRepository {
     params: PausaGeralCreateDataDto,
     demandaIds: number[],
   ): Promise<void> {
-    console.log('demandaIds', demandaIds);
     const pausaGeralId = await this.db
       .insert(pausaGeral)
       .values({
