@@ -4,17 +4,17 @@ import { type DrizzleClient } from 'src/_shared/infra/drizzle/drizzle.provider';
 import { AnomaliaProdutividadeCreateData } from '../dto/anomaliaProdutividade.create.dto';
 import {
   produtividadeAnomalia,
+  transporte,
   transporteAnomalia,
   viewDemandaProdutividade,
-  viewTransporteStatus,
 } from 'src/_shared/infra/drizzle';
 import { Inject } from '@nestjs/common';
 import { AnomaliaProdutividadeUpdateDataWithDateStartAndEnd } from '../dto/anomaliaProdutividade.update.dto';
 import { AnomaliaProdutividadeGetData } from '../dto/anomaliaProdutividade.get.dto';
 import { and, eq, exists, gte, ilike, lte, SQL } from 'drizzle-orm';
 import { DemandaGetDataForAnomaliaDto } from '../dto/demanda/getDemanda.get.dto';
-import { TransporteGetDataForAnomaliaDto } from '../dto/transporte/transporteAnomalia.dto';
 import { TransporteAnomaliaCreateData } from '../dto/transporte/createAnomalia.dtos';
+import { GetTransporteDto } from 'src/transporte/dto/transporte.get.dto';
 
 export class AnomaliaProdutividadeRepositoryDrizzle
   implements IRegistroAnomaliaProdutividadeRepository
@@ -92,14 +92,12 @@ export class AnomaliaProdutividadeRepositoryDrizzle
     return demanda[0];
   }
 
-  async getTransporteById(
-    id: string,
-  ): Promise<TransporteGetDataForAnomaliaDto | undefined> {
-    const transporte = await this.db
+  async getTransporteById(id: string): Promise<GetTransporteDto | undefined> {
+    const transporteValue = await this.db
       .select()
-      .from(viewTransporteStatus)
-      .where(eq(viewTransporteStatus.transporteId, id));
-    return transporte[0];
+      .from(transporte)
+      .where(eq(transporte.numeroTransporte, id));
+    return transporteValue[0];
   }
 
   async createTransporteAnomalia(

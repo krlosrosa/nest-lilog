@@ -3,7 +3,7 @@ import { AnomaliaProdutividadeGetData } from 'src/anomalias-produtividade/dto/an
 import { AnomaliaProdutividadeUpdateDataWithDateStartAndEnd } from 'src/anomalias-produtividade/dto/anomaliaProdutividade.update.dto';
 import { DemandaGetDataForAnomaliaDto } from 'src/anomalias-produtividade/dto/demanda/getDemanda.get.dto';
 import { TransporteAnomaliaCreateData } from 'src/anomalias-produtividade/dto/transporte/createAnomalia.dtos';
-import { TransporteGetDataForAnomaliaDto } from 'src/anomalias-produtividade/dto/transporte/transporteAnomalia.dto';
+import { GetTransporteDto } from 'src/transporte/dto/transporte.get.dto';
 
 export interface IRegistroAnomaliaProdutividadeRepository {
   create(registroAnomalia: AnomaliaProdutividadeCreateData): Promise<void>;
@@ -12,9 +12,7 @@ export interface IRegistroAnomaliaProdutividadeRepository {
     params: AnomaliaProdutividadeUpdateDataWithDateStartAndEnd,
   ): Promise<AnomaliaProdutividadeGetData[]>;
   getDemandaById(id: string): Promise<DemandaGetDataForAnomaliaDto | undefined>;
-  getTransporteById(
-    id: string,
-  ): Promise<TransporteGetDataForAnomaliaDto | undefined>;
+  getTransporteById(id: string): Promise<GetTransporteDto | undefined>;
   createTransporteAnomalia(
     transporteAnomalia: TransporteAnomaliaCreateData,
   ): Promise<void>;

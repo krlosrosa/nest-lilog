@@ -113,20 +113,13 @@ export class AnomaliasProdutividadeService {
     });
 
     const facts = {
-      INICIO_SEPARACAO: new Date(transporte.inicioSeparacao ?? '').getTime(),
-      TERMINO_SEPARACAO: new Date(transporte.terminoSeparacao ?? '').getTime(),
-      INICIO_CONFERENCIA: new Date(
-        transporte.inicioConferencia ?? '',
-      ).getTime(),
-      TERMINO_CONFERENCIA: new Date(
-        transporte.terminoConferencia ?? '',
-      ).getTime(),
-      INICIO_CARREGAMENTO: new Date(
-        transporte.inicioCarregamento ?? '',
-      ).getTime(),
-      TERMINO_CARREGAMENTO: new Date(
-        transporte.terminoCarregamento ?? '',
-      ).getTime(),
+      nomeTransportadora: transporte.nomeTransportadora ?? '',
+      placa: transporte.placa ?? '',
+      prioridade: transporte.prioridade ?? 0,
+      carregamento: transporte.carregamento ?? '',
+      conferencia: transporte.conferencia ?? '',
+      separacao: transporte.separacao ?? '',
+      cargaParada: transporte.cargaParada ?? false,
     };
 
     console.log(facts);
