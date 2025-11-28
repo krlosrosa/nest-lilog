@@ -136,9 +136,9 @@ export class AnomaliasProdutividadeService {
       for (const event of result.events) {
         console.log(event);
         await this.registroAnomaliaProdutividadeRepo.createTransporteAnomalia({
-          anomalia: 'TRANSPORTE_ANOMALIA',
-          transporteId: transporteId,
-          anomaliaPersonalizada: '',
+          anomalia: event.type.toString(),
+          transporteId: event.params?.transporteId ?? '',
+          anomaliaPersonalizada: event.params?.message ?? '',
         });
       }
     }
