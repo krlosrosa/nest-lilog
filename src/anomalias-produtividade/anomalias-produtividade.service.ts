@@ -130,7 +130,7 @@ export class AnomaliasProdutividadeService {
         console.log(event);
         await this.registroAnomaliaProdutividadeRepo.createTransporteAnomalia({
           anomalia: event.type.toString(),
-          transporteId: event.params?.transporteId ?? '',
+          transporteId: transporteId,
           anomaliaPersonalizada: event.params?.message ?? '',
         });
       }
