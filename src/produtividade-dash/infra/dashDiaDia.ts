@@ -1,5 +1,6 @@
 import { and, asc, desc, eq, gte, isNotNull, lte } from 'drizzle-orm';
 import {
+  viewProdutivdadeProcesso,
   viewProdutividadeFuncionario,
   viewProdutividadePorDia,
 } from 'src/_shared/infra/drizzle';
@@ -54,9 +55,24 @@ export async function dashDiaDia(
     )
     .orderBy(asc(viewProdutividadeFuncionario.produtividadeCaixaPorHora))
     .limit(5);
+
+  const produtividadeProcesso = await db
+    .select()
+    .from(viewProdutivdadeProcesso)
+    .where(
+      and(
+        eq(viewProdutivdadeProcesso.centerid, centerId),
+        gte(viewProdutivdadeProcesso.criadoem, dataInicio),
+        lte(viewProdutivdadeProcesso.criadoem, dataFim),
+      ),
+    );
+
+  console.log('produtividadeProcesso', produtividadeProcesso);
+
   return {
     produtividade: produtividade,
     top5Produtividade: top5Produtividade,
     bottom5Produtividade: bottom5Produtividade,
+    produtividadeProcesso: produtividadeProcesso,
   };
 }

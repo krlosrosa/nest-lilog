@@ -3,6 +3,7 @@ import { createZodDto } from 'nestjs-zod';
 import {
   viewProdutividadePorDia,
   viewProdutividadeFuncionario,
+  viewProdutivdadeProcesso,
 } from 'src/_shared/infra/drizzle/migrations/schema';
 import z from 'zod';
 
@@ -14,6 +15,10 @@ export const getProdutividadePorFuncionarioPorDiaSchema = createSelectSchema(
   viewProdutividadeFuncionario,
 );
 
+export const getProdutividadeProcessoSchema = createSelectSchema(
+  viewProdutivdadeProcesso,
+);
+
 export type ProdutividadeDiaDiaGetData = z.infer<
   typeof getProdutividadeDiaDiaSchema
 >;
@@ -22,6 +27,7 @@ const ProdutividadeDiaDiaGetDataSchema = z.object({
   produtividade: z.array(getProdutividadeDiaDiaSchema),
   top5Produtividade: z.array(getProdutividadePorFuncionarioPorDiaSchema),
   bottom5Produtividade: z.array(getProdutividadePorFuncionarioPorDiaSchema),
+  produtividadeProcesso: z.array(getProdutividadeProcessoSchema),
 });
 
 export class ProdutividadeDiaDiaGetDataDto extends createZodDto(

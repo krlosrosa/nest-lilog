@@ -298,13 +298,16 @@ export class TransporteService {
     accountId: string,
   ) {
     const transportesIds = paletes.map((palete) => palete.transporteId);
+    const tiposProcessos: DemandaProcesso[] = [
+      ...new Set(paletes.map((item) => item.tipoProcesso as DemandaProcesso)),
+    ];
     const paletesEmTransporte = await this.db
       .select()
       .from(palete)
       .where(
         and(
           inArray(palete.transporteId, transportesIds),
-          eq(palete.tipoProcesso, paletes[0].tipoProcesso as DemandaProcesso),
+          inArray(palete.tipoProcesso, tiposProcessos),
         ),
       );
     if (paletesEmTransporte.length > 0) {

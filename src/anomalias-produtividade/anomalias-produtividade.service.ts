@@ -121,13 +121,9 @@ export class AnomaliasProdutividadeService {
       separacao: transporte.separacao ?? '',
       cargaParada: transporte.cargaParada ?? false,
     };
-
-    console.log(facts);
     const result = await engine.run(facts);
-    console.log(result);
     if (result.events) {
       for (const event of result.events) {
-        console.log(event);
         await this.registroAnomaliaProdutividadeRepo.createTransporteAnomalia({
           anomalia: event.type.toString(),
           transporteId: transporteId,
