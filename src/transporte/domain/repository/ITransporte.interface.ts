@@ -19,4 +19,8 @@ export interface ITransporteRepository {
   findTransporteByNumeroTransporte(
     numeroTransporte: string,
   ): Promise<TransporteComRelacionamentosGetDto | null>;
+  trocarDataExpedicaoTransportes(
+    transporteIds: string[],
+    dataExpedicao: string,
+  ): Promise<void>;
 }

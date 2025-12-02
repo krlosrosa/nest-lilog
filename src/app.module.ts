@@ -19,6 +19,7 @@ import { SentryGlobalFilter, SentryModule } from '@sentry/nestjs/setup';
 import { APP_FILTER } from '@nestjs/core';
 import { HealthModule } from './health/health.module';
 import { DevolucaoModule } from './devolucao/devolucao.module';
+import { ElasticsearchnpmModule } from './run/elasticsearchnpm/elasticsearchnpm.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { DevolucaoModule } from './devolucao/devolucao.module';
     CorteProdutoModule,
     HealthModule,
     DevolucaoModule,
+    ElasticsearchnpmModule,
   ],
   controllers: [],
   providers: [

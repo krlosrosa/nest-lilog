@@ -43,6 +43,10 @@ export class TransporteRepositoryDrizzle implements ITransporteRepository {
     transporteId: string,
     transporteParams: TransporteUpdateData,
   ): Promise<void> {
+    if (transporteParams.carregamento === 'CONCLUIDO') {
+      transporteParams.cargaParada = false;
+    }
+
     await this.db
       .update(transporte)
       .set(transporteParams)
@@ -83,5 +87,15 @@ export class TransporteRepositoryDrizzle implements ITransporteRepository {
     }
 
     return agruparTransporteComTodosRelacionamentos(transporteData);
+  }
+
+  async trocarDataExpedicaoTransportes(
+    transporteIds: string[],
+    dataExpedicao: string,
+  ): Promise<void> {
+    await this.db
+      .update(transporte)
+      .set({ dataExpedicao: dataExpedicao, cargaParada: false })
+      .where(inArray(transporte.numeroTransporte, transporteIds));
   }
 }

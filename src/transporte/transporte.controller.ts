@@ -164,4 +164,20 @@ export class TransporteController {
       numeroTransporte,
     );
   }
+
+  @Post('trocar-data-expedicao-transporte/:dataExpedicao')
+  @ApiOperation({
+    summary: 'Trocar data de expedição de transportes',
+    operationId: 'trocarDataExpedicaoTransportes',
+  })
+  @ApiBody({ type: [String] })
+  trocarDataExpedicaoTransporte(
+    @Body() body: string[],
+    @Param('dataExpedicao') dataExpedicao: string,
+  ) {
+    return this.transporteService.trocarDataExpedicaoTransporte(
+      body,
+      dataExpedicao,
+    );
+  }
 }

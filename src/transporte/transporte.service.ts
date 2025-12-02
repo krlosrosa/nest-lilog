@@ -29,6 +29,7 @@ import { ListarClientesDto } from './dto/listarClientes.dto';
 import { TipoEvento } from 'src/_shared/enums/tipoEvento.enum';
 import { type ICargaParadaRepository } from './domain/repository/ICargaParadaInterface';
 import { CreateCargaParadaDto } from './dto/cargaParada/createCargaParada.dto';
+import { type ITransporteRepository } from './domain/repository/ITransporte.interface';
 
 interface HoraHoraResult {
   hora: number;
@@ -42,6 +43,8 @@ export class TransporteService {
     private readonly redis: RedisService,
     @Inject('ICargaParadaRepository')
     private readonly cargaParadaRepository: ICargaParadaRepository,
+    @Inject('ITransporteRepository')
+    private readonly transporteRepository: ITransporteRepository,
   ) {}
 
   async findTransporteByNumeroTransporte(
@@ -354,6 +357,16 @@ export class TransporteService {
   ): Promise<GetTransporteDto | null> {
     return this.cargaParadaRepository.getInfoTransporteByTransportId(
       transportId,
+    );
+  }
+
+  async trocarDataExpedicaoTransporte(
+    transporteIds: string[],
+    dataExpedicao: string,
+  ) {
+    await this.transporteRepository.trocarDataExpedicaoTransportes(
+      transporteIds,
+      dataExpedicao,
     );
   }
 }
