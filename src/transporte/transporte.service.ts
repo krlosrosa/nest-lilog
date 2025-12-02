@@ -130,7 +130,7 @@ export class TransporteService {
         `transporte:${item.key}`,
         item.value,
         'EX',
-        1 * 24 * 60 * 60,
+        14 * 24 * 60 * 60,
       );
     });
     await pipeline.exec();
