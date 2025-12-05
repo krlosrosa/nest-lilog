@@ -66,9 +66,6 @@ export async function dashDiaDia(
         lte(viewProdutivdadeProcesso.criadoem, dataFim),
       ),
     );
-
-  console.log('produtividadeProcesso', produtividadeProcesso);
-
   return {
     produtividade: produtividade,
     top5Produtividade: top5Produtividade,

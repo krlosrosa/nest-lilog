@@ -95,6 +95,9 @@ export class ProdutividadeRepositoryDrizzle
   }
 
   async finalizarPalete(paletes: Palete[]): Promise<void> {
+    console.log('paletes', paletes);
+    const paletesIds = paletes.map((palete) => palete.id);
+    console.log('paletesIds', paletesIds);
     await this.db
       .update(palete)
       .set({
@@ -103,12 +106,7 @@ export class ProdutividadeRepositoryDrizzle
         atualizadoEm: new Date().toISOString(),
         fim: new Date().toISOString(),
       })
-      .where(
-        inArray(
-          palete.id,
-          paletes.map((palete) => palete.id),
-        ),
-      );
+      .where(inArray(palete.id, paletesIds));
   }
 
   async finalizarDemandas(demandas: Demanda[]): Promise<void> {

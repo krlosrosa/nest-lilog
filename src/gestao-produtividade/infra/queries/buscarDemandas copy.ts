@@ -65,8 +65,6 @@ export async function buscarDemandasQuery(
     conditions.push(eq(palete.empresa, params.empresa));
   }
 
-  console.log(params);
-
   if (params?.dataInicio && params?.dataFim) {
     // Converte a data recebida para o início do dia (00:00:00.000)
     const dataInicio = new Date(params.dataInicio);
