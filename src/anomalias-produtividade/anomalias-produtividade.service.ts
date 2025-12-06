@@ -128,6 +128,7 @@ export class AnomaliasProdutividadeService {
           anomalia: event.type.toString(),
           transporteId: transporteId,
           anomaliaPersonalizada: event.params?.message ?? '',
+          createdAt: new Date().toISOString(),
         });
       }
     }

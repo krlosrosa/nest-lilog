@@ -69,35 +69,38 @@ export class ProdutividadeRepositoryDrizzle
   }
 
   async create(demandaData: Demanda, paletesIds: string[]): Promise<void> {
-    const demandaCriada = await this.db
-      .insert(demanda)
-      .values({
-        cadastradoPorId: demandaData.cadastradoPorId,
-        funcionarioId: demandaData.funcionarioId,
-        centerId: demandaData.centerId,
-        processo: demandaData.processo,
-        turno: demandaData.turno,
-        inicio: demandaData.inicio,
-        dataExpedicao: demandaData.dataExpedicao,
-        obs: demandaData.obs,
-        status: demandaData.status,
-      })
-      .returning();
+    await this.db.transaction(async (tx) => {
+      const demandaCriada = await tx
+        .insert(demanda)
+        .values({
+          cadastradoPorId: demandaData.cadastradoPorId,
+          funcionarioId: demandaData.funcionarioId,
+          centerId: demandaData.centerId,
+          processo: demandaData.processo,
+          turno: demandaData.turno,
+          inicio: demandaData.inicio,
+          dataExpedicao: demandaData.dataExpedicao,
+          obs: demandaData.obs,
+          status: demandaData.status,
+        })
+        .returning();
 
-    await this.db
-      .update(palete)
-      .set({
-        demandaId: demandaCriada[0].id,
-        status: 'EM_PROGRESSO',
-        inicio: demandaData.inicio,
-      })
-      .where(inArray(palete.id, paletesIds));
+      const paletesAtualizados = await tx
+        .update(palete)
+        .set({
+          demandaId: demandaCriada[0].id,
+          status: 'EM_PROGRESSO',
+          inicio: demandaData.inicio,
+        })
+        .where(inArray(palete.id, paletesIds))
+        .returning();
+
+      console.log('paletesAtualizados', paletesAtualizados);
+    });
   }
 
   async finalizarPalete(paletes: Palete[]): Promise<void> {
-    console.log('paletes', paletes);
     const paletesIds = paletes.map((palete) => palete.id);
-    console.log('paletesIds', paletesIds);
     await this.db
       .update(palete)
       .set({
@@ -138,10 +141,12 @@ export class ProdutividadeRepositoryDrizzle
   }
 
   async delete(demandaId: number): Promise<void> {
-    await this.db
-      .update(palete)
-      .set({ demandaId: null })
-      .where(eq(palete.demandaId, demandaId));
-    await this.db.delete(demanda).where(eq(demanda.id, demandaId));
+    await this.db.transaction(async (tx) => {
+      await tx
+        .update(palete)
+        .set({ demandaId: null })
+        .where(eq(palete.demandaId, demandaId));
+      await tx.delete(demanda).where(eq(demanda.id, demandaId));
+    });
   }
 }

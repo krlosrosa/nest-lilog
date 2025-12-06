@@ -1,7 +1,7 @@
 // 1. Remova 'FactoryProvider' daqui
 import { ConfigService } from '@nestjs/config';
-import { drizzle } from 'drizzle-orm/neon-http';
-import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import { Pool } from '@neondatabase/serverless';
 import { DRIZZLE_PROVIDER } from './drizzle.constants';
 import * as schema from './'; // Importe seu schema
 
@@ -27,10 +27,10 @@ export const drizzleProvider = {
         rejectUnauthorized: false,
       },
     });*/
-    const sql = neon(connectionString);
-
+    //const sql = neon(connectionString);
+    const pool = new Pool({ connectionString: connectionString });
     // Instancie o Drizzle e passe o schema
-    return drizzle({ client: sql, schema });
+    return drizzle({ client: pool, schema });
   },
 };
 
