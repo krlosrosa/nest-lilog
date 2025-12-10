@@ -742,22 +742,6 @@ export const devolucaoAnomalias = pgTable(
   ],
 );
 
-export const prismaMigrations = pgTable('_prisma_migrations', {
-  id: varchar({ length: 36 }).primaryKey().notNull(),
-  checksum: varchar({ length: 64 }).notNull(),
-  finishedAt: timestamp('finished_at', { withTimezone: true, mode: 'string' }),
-  migrationName: varchar('migration_name', { length: 255 }).notNull(),
-  logs: text(),
-  rolledBackAt: timestamp('rolled_back_at', {
-    withTimezone: true,
-    mode: 'string',
-  }),
-  startedAt: timestamp('started_at', { withTimezone: true, mode: 'string' })
-    .defaultNow()
-    .notNull(),
-  appliedStepsCount: integer('applied_steps_count').default(0).notNull(),
-});
-
 export const devolucaoCheckList = pgTable(
   'devolucao_check_list',
   {
@@ -876,6 +860,22 @@ export const devolucaoNotas = pgTable(
       .onDelete('cascade'),
   ],
 );
+
+export const prismaMigrations = pgTable('_prisma_migrations', {
+  id: varchar({ length: 36 }).primaryKey().notNull(),
+  checksum: varchar({ length: 64 }).notNull(),
+  finishedAt: timestamp('finished_at', { withTimezone: true, mode: 'string' }),
+  migrationName: varchar('migration_name', { length: 255 }).notNull(),
+  logs: text(),
+  rolledBackAt: timestamp('rolled_back_at', {
+    withTimezone: true,
+    mode: 'string',
+  }),
+  startedAt: timestamp('started_at', { withTimezone: true, mode: 'string' })
+    .defaultNow()
+    .notNull(),
+  appliedStepsCount: integer('applied_steps_count').default(0).notNull(),
+});
 
 export const user = pgTable(
   'User',
@@ -1066,13 +1066,15 @@ export const devolucaoTransportadoras = pgTable(
 export const transporteCargaParada = pgTable(
   'TransporteCargaParada',
   {
-    id: integer().primaryKey().generatedAlwaysAsIdentity({
-      name: 'transporte_carga_parada_id_seq',
-      startWith: 1,
-      increment: 1,
-      minValue: 1,
-      maxValue: 2147483647,
-    }),
+    id: integer()
+      .primaryKey()
+      .generatedAlwaysAsIdentity({
+        name: 'TransporteCargaParada_id_seq',
+        startWith: 1,
+        increment: 1,
+        minValue: 1,
+        maxValue: 2147483647,
+      }),
     motivo: text(),
     dataExpedicao: date(),
     transportId: text(),
@@ -1148,14 +1150,16 @@ export const produtividadeAnomalia = pgTable(
 export const transporteAnomalia = pgTable(
   'transporte_anomalia',
   {
-    id: integer().primaryKey().generatedAlwaysAsIdentity({
-      name: 'transporte_anomalia_id_seq',
-      startWith: 1,
-      increment: 1,
-      minValue: 1,
-      maxValue: 2147483647,
-      cache: 1,
-    }),
+    id: integer()
+      .primaryKey()
+      .generatedAlwaysAsIdentity({
+        name: 'transporte_anomalia_id_seq',
+        startWith: 1,
+        increment: 1,
+        minValue: 1,
+        maxValue: 2147483647,
+        cache: 1,
+      }),
     transporteId: text(),
     anomalia: text(),
     anomaliaPersonalizada: text(),
@@ -1168,6 +1172,52 @@ export const transporteAnomalia = pgTable(
       name: 'transporteId',
     }),
     unique('uq_transporte_anomalia').on(table.transporteId, table.anomalia),
+  ],
+);
+
+export const movimentacao = pgTable(
+  'movimentacao',
+  {
+    idMov: integer('id_mov')
+      .primaryKey()
+      .generatedAlwaysAsIdentity({
+        name: 'movimentacao_id_mov_seq',
+        startWith: 1,
+        increment: 1,
+        minValue: 1,
+        maxValue: 2147483647,
+        cache: 1,
+      }),
+    idUsuario: text('id_usuario'),
+    idCentro: text('id_centro').notNull(),
+    palete: varchar({ length: 50 }).notNull(),
+    origem: varchar({ length: 50 }).notNull(),
+    destino: varchar({ length: 50 }).notNull(),
+    prioridade: integer().notNull(),
+    status: varchar({ length: 20 }).default('pendente'),
+    dataCriacao: timestamp('data_criacao', { mode: 'string' }).defaultNow(),
+    dataExecucao: timestamp('data_execucao', { mode: 'string' }),
+    sku: text(),
+    descricao: text(),
+    lote: text(),
+    executadoPor: text('executado_por'),
+  },
+  (table) => [
+    foreignKey({
+      columns: [table.idUsuario],
+      foreignColumns: [user.id],
+      name: 'movimentacao_id_usuario_fkey',
+    }),
+    foreignKey({
+      columns: [table.idCentro],
+      foreignColumns: [center.centerId],
+      name: 'movimentacao_id_centro_fkey',
+    }),
+    foreignKey({
+      columns: [table.executadoPor],
+      foreignColumns: [user.id],
+      name: 'id_executado_por',
+    }),
   ],
 );
 

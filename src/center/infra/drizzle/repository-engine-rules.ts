@@ -38,6 +38,7 @@ export class EngineRulesRepositoryDrizzle implements IEngineRulesRepository {
   }
 
   findOne(id: string): Promise<EngineRuleGetData | undefined> {
+    console.log('id', id);
     return Promise.resolve(undefined);
   }
 

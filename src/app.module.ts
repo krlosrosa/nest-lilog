@@ -20,6 +20,7 @@ import { APP_FILTER } from '@nestjs/core';
 import { HealthModule } from './health/health.module';
 import { DevolucaoModule } from './devolucao/devolucao.module';
 import { ElasticsearchnpmModule } from './run/elasticsearchnpm/elasticsearchnpm.module';
+import { MovimentacaoModule } from './movimentacao/movimentacao.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { ElasticsearchnpmModule } from './run/elasticsearchnpm/elasticsearchnpm.
     HealthModule,
     DevolucaoModule,
     ElasticsearchnpmModule,
+    MovimentacaoModule,
   ],
   controllers: [],
   providers: [
