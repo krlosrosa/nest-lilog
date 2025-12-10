@@ -4,7 +4,7 @@ import { UpdateMovimentacaoDto } from './dto/update-movimentacao.dto';
 import { type DrizzleClient } from 'src/_shared/infra/drizzle/drizzle.provider';
 import { DRIZZLE_PROVIDER } from 'src/_shared/infra/drizzle/drizzle.constants';
 import { movimentacao } from 'src/_shared/infra/drizzle';
-import { and, asc, eq } from 'drizzle-orm';
+import { and, asc, desc, eq, or } from 'drizzle-orm';
 import { GetMovimentacaoDto } from './dto/get-movimentacao.dto';
 
 @Injectable()
@@ -41,17 +41,25 @@ export class MovimentacaoService {
     return listResult;
   }
 
-  async getNextMovimentacao(centerId: string): Promise<GetMovimentacaoDto> {
+  async getNextMovimentacao(
+    centerId: string,
+    userId: string,
+  ): Promise<GetMovimentacaoDto> {
+    console.log({ centerId, userId });
     const nextMovimentacaoResult = await this.db
       .select()
       .from(movimentacao)
       .where(
         and(
           eq(movimentacao.idCentro, centerId),
-          eq(movimentacao.status, 'pendente'),
+          eq(movimentacao.executadoPor, userId),
+          or(
+            eq(movimentacao.status, 'pendente'),
+            eq(movimentacao.status, 'iniciada'),
+          ),
         ),
       )
-      .orderBy(asc(movimentacao.prioridade))
+      .orderBy(desc(movimentacao.status), asc(movimentacao.prioridade))
       .limit(1);
     return nextMovimentacaoResult[0];
   }
@@ -102,5 +110,17 @@ export class MovimentacaoService {
       .where(eq(movimentacao.idMov, id))
       .returning();
     return anomaliaResult.length > 0;
+  }
+
+  async registerStartMovement(id: number): Promise<boolean> {
+    const startMovementResult = await this.db
+      .update(movimentacao)
+      .set({
+        status: 'iniciada',
+        iniciado: new Date().toISOString(),
+      })
+      .where(eq(movimentacao.idMov, id))
+      .returning();
+    return startMovementResult.length > 0;
   }
 }
