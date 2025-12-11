@@ -1,5 +1,5 @@
 import { Inject } from '@nestjs/common';
-import { type IPausaRepository } from '../domain/repository/IPausa.repository';
+import { type IPausaRepository } from '../../domain/repository/IPausa.repository';
 import { DemandaProcesso, DemandaTurno } from 'src/_shared/enums';
 
 export class FinalizarPausaGeral {

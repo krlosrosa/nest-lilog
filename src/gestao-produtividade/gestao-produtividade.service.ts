@@ -1,15 +1,15 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CriarDemandaProdutividade } from './aplication/criarDemanda.usecase';
+import { CriarDemandaProdutividade } from './aplication/demanda/criarDemanda.usecase';
 import { DemandaCreateDataComPaletesIds } from './dtos/demanda/demanda.create.dto';
-import { FinalizarPaleteProdutividade } from './aplication/finalizarPalete.usecase';
-import { AddPausaIndividual } from './aplication/addPausaIndividual.usecase';
+import { FinalizarPaleteProdutividade } from './aplication/demanda/finalizarPalete.usecase';
+import { AddPausaIndividual } from './aplication/pausa/addPausaIndividual.usecase';
 import { PausaCreateDataDto } from './dtos/pausa/pausa.create.dto';
-import { FinalizarPausaIndividual } from './aplication/finalizarPausaIndividual.usecase';
+import { FinalizarPausaIndividual } from './aplication/pausa/finalizarPausaIndividual.usecase';
 import { PausaGeralCreateDataDto } from './dtos/pausaGeral/pausaGeral.create.dto';
-import { AddPausaGeral } from './aplication/addPausaGeral.usecase';
+import { AddPausaGeral } from './aplication/pausa/addPausaGeral.usecase';
 import { PausaGeralSearchParamsDto } from './dtos/pausaGeral/pausaGeral.update.dto';
-import { BuscarPausasAtivas } from './aplication/buscarPausasAtivas';
-import { FinalizarPausaGeral } from './aplication/finalizarPausaGeral.usecase';
+import { BuscarPausasAtivas } from './aplication/pausa/buscarPausasAtivas';
+import { FinalizarPausaGeral } from './aplication/pausa/finalizarPausaGeral.usecase';
 import { DemandaProcesso, DemandaTurno } from 'src/_shared/enums';
 import { FindAllParams } from './dtos/params.dto';
 import { GetProdutividadeUsecase } from './aplication/get-produtividade.usecase';
@@ -20,7 +20,10 @@ import {
 import { OverViewProdutividadeDataDto } from './dtos/produtividade/produtivididade.overView.dto';
 import { OverViewProdutividade } from './aplication/overViewProdutividade.usecase';
 import { GetProdutividadeByIdUsecase } from './aplication/get-produtividadeById.usecase';
-import { DeletarDemandaUsecase } from './aplication/deletarDemanda.usecase';
+import { DeletarDemandaUsecase } from './aplication/demanda/deletarDemanda.usecase';
+import GetDemandaUsecase from './aplication/demanda/getDemanda.usecase';
+import { DemandaDto } from './dtos/produtividade/demanda.dto';
+import { DeletarDemandaAnomaliaUsecase } from './aplication/demanda/deletarDemandaAnomalia.usecase';
 
 @Injectable()
 export class GestaoProdutividadeService {
@@ -47,6 +50,10 @@ export class GestaoProdutividadeService {
     private readonly getProdutividadeByIdUsecase: GetProdutividadeByIdUsecase,
     @Inject(DeletarDemandaUsecase)
     private readonly deletarDemandaUsecase: DeletarDemandaUsecase,
+    @Inject(GetDemandaUsecase)
+    private readonly getDemandaUsecase: GetDemandaUsecase,
+    @Inject(DeletarDemandaAnomaliaUsecase)
+    private readonly deletarDemandaAnomaliaUsecase: DeletarDemandaAnomaliaUsecase,
   ) {}
 
   create(params: DemandaCreateDataComPaletesIds, cadastradoPorId: string) {
@@ -122,5 +129,13 @@ export class GestaoProdutividadeService {
 
   deletarDemandaController(paleteId: string) {
     return this.deletarDemandaUsecase.execute(paleteId);
+  }
+
+  getDemandaById(idDemanda: string): Promise<DemandaDto> {
+    return this.getDemandaUsecase.execute(idDemanda);
+  }
+
+  deletarDemandaAnomalia(idDemanda: string) {
+    return this.deletarDemandaAnomaliaUsecase.execute(idDemanda);
   }
 }

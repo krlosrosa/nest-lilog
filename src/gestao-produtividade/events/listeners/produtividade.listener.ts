@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 import { DemandaProdutividadeCreatedEvent } from '../events/demanda-created.event';
-import { AtualizarDemandaProdutividade } from '../../aplication/atualizarDemanda.usecase';
+import { AtualizarDemandaProdutividade } from '../../aplication/demanda/atualizarDemanda.usecase';
 
 @Injectable()
 export class ProdutividadeListener {

@@ -1,8 +1,8 @@
 import { BadRequestException, Inject } from '@nestjs/common';
-import { type IPausaRepository } from '../domain/repository/IPausa.repository';
-import { type IDemandaProdutividadeRepository } from '../domain/repository/IDemandaProdutividade.repository';
+import { type IPausaRepository } from '../../domain/repository/IPausa.repository';
+import { type IDemandaProdutividadeRepository } from '../../domain/repository/IDemandaProdutividade.repository';
 import { DemandaStatus, DemandaTurno } from 'src/_shared/enums';
-import { PausaGeralCreateDataDto } from '../dtos/pausaGeral/pausaGeral.create.dto';
+import { PausaGeralCreateDataDto } from '../../dtos/pausaGeral/pausaGeral.create.dto';
 
 export class AddPausaGeral {
   constructor(

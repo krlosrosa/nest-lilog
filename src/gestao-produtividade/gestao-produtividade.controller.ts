@@ -25,6 +25,7 @@ import {
 } from './dtos/produtividade/produtividade.model.dto';
 import { OverViewProdutividadeDataDto } from './dtos/produtividade/produtivididade.overView.dto';
 import { PausaGeralGetDataDto } from './dtos/pausaGeral/pausaGeral.get.dto';
+import { DemandaDto } from './dtos/produtividade/demanda.dto';
 
 @Controller('gestao-produtividade')
 @ApiTags('gestao-produtividade')
@@ -194,5 +195,28 @@ export class GestaoProdutividadeController {
   })
   deletarDemandaController(@Param('paleteId') paleteId: string) {
     return this.gestaoProdutividadeService.deletarDemandaController(paleteId);
+  }
+
+  @Delete('deletar-demanda-anomalia/:idDemanda')
+  @ApiOperation({
+    summary: 'Deletar uma demanda de produtividade por ID',
+    operationId: 'deletarDemandaAnomalia',
+  })
+  deletarDemandaAnomaliaController(@Param('idDemanda') idDemanda: string) {
+    return this.gestaoProdutividadeService.deletarDemandaAnomalia(idDemanda);
+  }
+
+  @Get('get-demanda-by-id/:idDemanda')
+  @ApiOperation({
+    summary: 'Buscar uma demanda de produtividade por ID',
+    operationId: 'getDemandaById',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Demanda encontrada com sucesso',
+    type: DemandaDto,
+  })
+  getDemandaById(@Param('idDemanda') idDemanda: string) {
+    return this.gestaoProdutividadeService.getDemandaById(idDemanda);
   }
 }

@@ -1,8 +1,8 @@
 import { Inject, NotFoundException } from '@nestjs/common';
-import { type IPausaRepository } from '../domain/repository/IPausa.repository';
-import { type IDemandaProdutividadeRepository } from '../domain/repository/IDemandaProdutividade.repository';
-import { PausaCreateDataDto } from '../dtos/pausa/pausa.create.dto';
-import { Pausa } from '../domain/entities/pausa.entity';
+import { type IPausaRepository } from '../../domain/repository/IPausa.repository';
+import { type IDemandaProdutividadeRepository } from '../../domain/repository/IDemandaProdutividade.repository';
+import { PausaCreateDataDto } from '../../dtos/pausa/pausa.create.dto';
+import { Pausa } from '../../domain/entities/pausa.entity';
 
 export class AddPausaIndividual {
   constructor(

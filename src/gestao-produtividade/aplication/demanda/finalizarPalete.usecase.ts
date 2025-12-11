@@ -1,7 +1,7 @@
 import { Inject, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { type IDemandaProdutividadeRepository } from '../domain/repository/IDemandaProdutividade.repository';
-import { DemandaProdutividadeCreatedEvent } from '../events/events/demanda-created.event';
+import { type IDemandaProdutividadeRepository } from '../../domain/repository/IDemandaProdutividade.repository';
+import { DemandaProdutividadeCreatedEvent } from '../../events/events/demanda-created.event';
 import { TransporteUpdatedEvent } from 'src/transporte/events/events/transporte-update.event';
 
 export class FinalizarPaleteProdutividade {

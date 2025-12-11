@@ -1,6 +1,6 @@
 import { Inject, NotFoundException } from '@nestjs/common';
-import { type IPausaRepository } from '../domain/repository/IPausa.repository';
-import { type IDemandaProdutividadeRepository } from '../domain/repository/IDemandaProdutividade.repository';
+import { type IPausaRepository } from '../../domain/repository/IPausa.repository';
+import { type IDemandaProdutividadeRepository } from '../../domain/repository/IDemandaProdutividade.repository';
 
 export class FinalizarPausaIndividual {
   constructor(

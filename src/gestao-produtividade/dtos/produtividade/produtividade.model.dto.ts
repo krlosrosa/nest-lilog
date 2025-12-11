@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createZodDto } from 'nestjs-zod'; // 1. Importe a função
+import { createZodDto } from 'nestjs-zod';
 
 const ProdutividadeSchema = z.object({
   idDemanda: z.number(),

@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
-import { type IDemandaProdutividadeRepository } from '../domain/repository/IDemandaProdutividade.repository';
-import { Palete } from '../domain/entities/palete.entity';
-import { Demanda } from '../domain/entities/demanda.entity';
+import { type IDemandaProdutividadeRepository } from '../../domain/repository/IDemandaProdutividade.repository';
+import { Palete } from '../../domain/entities/palete.entity';
+import { Demanda } from '../../domain/entities/demanda.entity';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { DashProdutividadeCreatedEvent } from 'src/produtividade-dash/events/events/dash-created.event';
 import { DashUserProdutividadeCreatedEvent } from 'src/produtividade-dash/events/events/dash-user-created.event';

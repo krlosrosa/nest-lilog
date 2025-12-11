@@ -1,8 +1,8 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { type IDemandaProdutividadeRepository } from '../domain/repository/IDemandaProdutividade.repository';
-import { DemandaCreateDataComPaletesIds } from '../dtos/demanda/demanda.create.dto';
+import { type IDemandaProdutividadeRepository } from '../../domain/repository/IDemandaProdutividade.repository';
+import { DemandaCreateDataComPaletesIds } from '../../dtos/demanda/demanda.create.dto';
 import { DemandaStatus } from 'src/_shared/enums';
-import { Demanda } from '../domain/entities/demanda.entity';
+import { Demanda } from '../../domain/entities/demanda.entity';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { TransporteUpdatedEvent } from 'src/transporte/events/events/transporte-update.event';
 

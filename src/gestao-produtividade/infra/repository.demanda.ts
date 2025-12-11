@@ -33,7 +33,7 @@ export class ProdutividadeRepositoryDrizzle
       .leftJoin(pausa, eq(demanda.id, pausa.demandaId))
       .leftJoin(palete, eq(demanda.id, palete.demandaId))
       .leftJoin(user, eq(demanda.funcionarioId, user.id));
-    if (!demandaData) {
+    if (!demandaData || demandaData.length === 0) {
       return undefined;
     }
 
