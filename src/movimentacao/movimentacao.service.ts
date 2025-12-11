@@ -76,6 +76,7 @@ export class MovimentacaoService {
     await this.db
       .update(movimentacao)
       .set({
+        idMov: id,
         ...updateMovimentacaoDto,
       })
       .where(eq(movimentacao.idMov, id));
