@@ -15,11 +15,18 @@ import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { GetMovimentacaoDto } from './dto/get-movimentacao.dto';
 import { AccountId } from 'src/_shared/decorators/account-id.decorator';
 import { AuthGuard } from 'src/_shared/guard/auth.guard';
+import { ContagemService } from './contagem.service';
+import { CreateContagemDto } from './dto/contagem/create-contagem.dto';
+import { GetContagemDto } from './dto/contagem/get-contagem.dto';
+import { CreateAnomaliaContagemLiteDto } from './dto/contagem/create-anomalia-validacao.dto';
 
 @UseGuards(AuthGuard)
 @Controller('movimentacao')
 export class MovimentacaoController {
-  constructor(private readonly movimentacaoService: MovimentacaoService) {}
+  constructor(
+    private readonly movimentacaoService: MovimentacaoService,
+    private readonly contagemService: ContagemService,
+  ) {}
 
   @Post()
   @ApiOperation({
@@ -162,5 +169,91 @@ export class MovimentacaoController {
   })
   registerStartMovement(@Param('id') id: number) {
     return this.movimentacaoService.registerStartMovement(+id);
+  }
+
+  @Post('add-contagem-lite')
+  @ApiOperation({
+    summary: 'Adicionar uma contagem lite validation',
+    operationId: 'addContagemLiteValidation',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Contagem lite validation adicionada com sucesso',
+    type: Boolean,
+  })
+  @ApiBody({
+    type: [CreateContagemDto],
+  })
+  addContagemLiteValidation(@Body() createContagemDto: CreateContagemDto[]) {
+    return this.contagemService.create(createContagemDto);
+  }
+
+  @Get('get-endereco/:endereco')
+  @ApiOperation({
+    summary: 'Buscar uma contagem lite validation por endereço',
+    operationId: 'getEndereco',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Contagem lite validation encontrada com sucesso',
+    type: [GetContagemDto],
+  })
+  @ApiParam({
+    name: 'endereco',
+    description: 'Endereço da contagem lite validation',
+    type: String,
+  })
+  getEndereco(@Param('endereco') endereco: string) {
+    return this.contagemService.getEndereco(endereco);
+  }
+
+  @Put('validar-endereco/:endereco/:centerId')
+  @ApiOperation({
+    summary: 'Validar um endereço',
+    operationId: 'validarEndereco',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Endereço validado com sucesso',
+    type: Boolean,
+  })
+  @ApiParam({
+    name: 'endereco',
+    description: 'Endereço da contagem lite validation',
+    type: String,
+  })
+  validarEndereco(
+    @Param('endereco') endereco: string,
+    @Param('centerId') centerId: string,
+    @AccountId() contadoPor: string,
+  ) {
+    return this.contagemService.validarEndereco(endereco, centerId, contadoPor);
+  }
+
+  @Post('add-anomalia-contagem-lite/:centerId/:endereco')
+  @ApiOperation({
+    summary: 'Adicionar uma anomalia contagem lite',
+    operationId: 'addAnomaliaContagemLite',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Anomalia contagem lite adicionada com sucesso',
+    type: Boolean,
+  })
+  @ApiBody({
+    type: CreateAnomaliaContagemLiteDto,
+  })
+  addAnomaliaContagemLite(
+    @Body() createAnomaliaContagemLiteDto: CreateAnomaliaContagemLiteDto,
+    @Param('centerId') centerId: string,
+    @Param('endereco') endereco: string,
+    @AccountId() cadastradoPor: string,
+  ) {
+    return this.movimentacaoService.addAnomaliaContagemLite(
+      centerId,
+      endereco,
+      cadastradoPor,
+      createAnomaliaContagemLiteDto,
+    );
   }
 }

@@ -27,6 +27,8 @@ import {
   produtividadeAnomalia,
   movimentacao,
   transporteAnomalia,
+  liteValidacao,
+  liteAnomalia,
   userCenter,
 } from './schema';
 
@@ -96,6 +98,13 @@ export const userRelations = relations(user, ({ one, many }) => ({
   movimentacaos_executadoPor: many(movimentacao, {
     relationName: 'movimentacao_executadoPor_user_id',
   }),
+  liteValidacaos_adicionarPor: many(liteValidacao, {
+    relationName: 'liteValidacao_adicionarPor_user_id',
+  }),
+  liteValidacaos_contadoPor: many(liteValidacao, {
+    relationName: 'liteValidacao_contadoPor_user_id',
+  }),
+  liteAnomalias: many(liteAnomalia),
   userCenters: many(userCenter),
 }));
 
@@ -113,6 +122,8 @@ export const centerRelations = relations(center, ({ many }) => ({
   rulesEngines: many(rulesEngines),
   devolucaoTransportadoras: many(devolucaoTransportadoras),
   movimentacaos: many(movimentacao),
+  liteValidacaos: many(liteValidacao),
+  liteAnomalias: many(liteAnomalia),
   userCenters: many(userCenter),
 }));
 
@@ -437,6 +448,34 @@ export const transporteAnomaliaRelations = relations(
     }),
   }),
 );
+
+export const liteValidacaoRelations = relations(liteValidacao, ({ one }) => ({
+  user_adicionarPor: one(user, {
+    fields: [liteValidacao.adicionarPor],
+    references: [user.id],
+    relationName: 'liteValidacao_adicionarPor_user_id',
+  }),
+  user_contadoPor: one(user, {
+    fields: [liteValidacao.contadoPor],
+    references: [user.id],
+    relationName: 'liteValidacao_contadoPor_user_id',
+  }),
+  center: one(center, {
+    fields: [liteValidacao.centroId],
+    references: [center.centerId],
+  }),
+}));
+
+export const liteAnomaliaRelations = relations(liteAnomalia, ({ one }) => ({
+  user: one(user, {
+    fields: [liteAnomalia.addPor],
+    references: [user.id],
+  }),
+  center: one(center, {
+    fields: [liteAnomalia.centroId],
+    references: [center.centerId],
+  }),
+}));
 
 export const userCenterRelations = relations(userCenter, ({ one }) => ({
   center: one(center, {

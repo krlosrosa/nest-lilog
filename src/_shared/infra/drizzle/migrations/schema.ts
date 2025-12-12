@@ -1209,6 +1209,74 @@ export const transporteAnomalia = pgTable(
   ],
 );
 
+export const liteValidacao = pgTable(
+  'lite_validacao',
+  {
+    id: serial().primaryKey().notNull(),
+    dataRef: date('data_ref').notNull(),
+    endereco: text().notNull(),
+    sku: text(),
+    descricao: text(),
+    dataValidade: date('data_validade'),
+    lote: text(),
+    peso: numeric().default('0'),
+    caixas: integer(),
+    qtdPalete: integer('qtd_palete'),
+    capacidadePalete: integer('capacidade_palete'),
+    area: text(),
+    centroId: text('centro_id').notNull(),
+    codigoBloqueio: text('codigo_bloqueio'),
+    validado: boolean().default(false),
+    adicionarPor: text('adicionar_por'),
+    contadoPor: text('contado_por'),
+    horaRegistro: timestamp('hora_registro', { mode: 'string' }),
+  },
+  (table) => [
+    foreignKey({
+      columns: [table.adicionarPor],
+      foreignColumns: [user.id],
+      name: 'adicionado_por',
+    }),
+    foreignKey({
+      columns: [table.contadoPor],
+      foreignColumns: [user.id],
+      name: 'contado_por',
+    }),
+    foreignKey({
+      columns: [table.centroId],
+      foreignColumns: [center.centerId],
+      name: 'center_id',
+    }),
+  ],
+);
+
+export const liteAnomalia = pgTable(
+  'lite_anomalia',
+  {
+    id: serial().primaryKey().notNull(),
+    endereco: text(),
+    centroId: text('centro_id'),
+    sku: text(),
+    lote: text(),
+    quantidade: integer(),
+    peso: numeric(),
+    dataReferencia: date('data_referencia'),
+    addPor: text('add_por'),
+  },
+  (table) => [
+    foreignKey({
+      columns: [table.addPor],
+      foreignColumns: [user.id],
+      name: 'add_por_id',
+    }),
+    foreignKey({
+      columns: [table.centroId],
+      foreignColumns: [center.centerId],
+      name: 'centro_id',
+    }),
+  ],
+);
+
 export const userCenter = pgTable(
   'UserCenter',
   {
