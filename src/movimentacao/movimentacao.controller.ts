@@ -19,6 +19,7 @@ import { ContagemService } from './contagem.service';
 import { CreateContagemDto } from './dto/contagem/create-contagem.dto';
 import { GetContagemDto } from './dto/contagem/get-contagem.dto';
 import { CreateAnomaliaContagemLiteDto } from './dto/contagem/create-anomalia-validacao.dto';
+import { ResumoContagemLiteDto } from './dto/contagem/resumo-contamge.dto';
 
 @UseGuards(AuthGuard)
 @Controller('movimentacao')
@@ -255,5 +256,43 @@ export class MovimentacaoController {
       cadastradoPor,
       createAnomaliaContagemLiteDto,
     );
+  }
+
+  @Get('resumo-contagem-lite/:centerId')
+  @ApiOperation({
+    summary: 'Buscar o resumo da contagem lite',
+    operationId: 'resumoContagemLite',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Resumo da contagem lite encontrado com sucesso',
+    type: [ResumoContagemLiteDto],
+  })
+  @ApiParam({
+    name: 'centerId',
+    description: 'ID do centro',
+    type: String,
+  })
+  resumoContagemLite(@Param('centerId') centerId: string) {
+    return this.contagemService.resumoContagemLite(centerId);
+  }
+
+  @Delete('delete-contagem-lite/:centerId')
+  @ApiOperation({
+    summary: 'Deletar a contagem lite',
+    operationId: 'deleteContagemLite',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Contagem lite deletada com sucesso',
+    type: Boolean,
+  })
+  @ApiParam({
+    name: 'centerId',
+    description: 'ID do centro',
+    type: String,
+  })
+  deleteContagemLite(@Param('centerId') centerId: string) {
+    return this.contagemService.deleteContagemLite(centerId);
   }
 }

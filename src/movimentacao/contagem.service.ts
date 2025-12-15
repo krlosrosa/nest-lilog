@@ -4,7 +4,8 @@ import { DRIZZLE_PROVIDER } from 'src/_shared/infra/drizzle/drizzle.constants';
 import { type DrizzleClient } from 'src/_shared/infra/drizzle/drizzle.provider';
 import { CreateContagemDto } from './dto/contagem/create-contagem.dto';
 import { GetContagemDto } from './dto/contagem/get-contagem.dto';
-import { and, eq, ilike } from 'drizzle-orm';
+import { and, eq, ilike, sql } from 'drizzle-orm';
+import { ResumoContagemLiteDto } from './dto/contagem/resumo-contamge.dto';
 
 @Injectable()
 export class ContagemService {
@@ -52,5 +53,30 @@ export class ContagemService {
         ),
       );
     return true;
+  }
+
+  async resumoContagemLite(centerId: string): Promise<ResumoContagemLiteDto[]> {
+    const query = await this.db
+      .select({
+        endereco_base: sql<string>`split_part(${liteValidacao.endereco}, ' ', 1) || ' ' || split_part(${liteValidacao.endereco}, ' ', 2)`,
+        total_enderecos: sql<number>`count(*)`,
+        enderecos_validados: sql<number>`count(*) FILTER (WHERE ${liteValidacao.validado} = true)`,
+      })
+      .from(liteValidacao)
+      .where(eq(liteValidacao.centroId, centerId))
+      .groupBy(
+        sql<string>`split_part(${liteValidacao.endereco}, ' ', 1) || ' ' || split_part(${liteValidacao.endereco}, ' ', 2)`,
+      )
+      .orderBy(
+        sql<string>`split_part(${liteValidacao.endereco}, ' ', 1) || ' ' || split_part(${liteValidacao.endereco}, ' ', 2)`,
+      );
+
+    return query;
+  }
+
+  async deleteContagemLite(centerId: string): Promise<void> {
+    await this.db
+      .delete(liteValidacao)
+      .where(eq(liteValidacao.centroId, centerId));
   }
 }
