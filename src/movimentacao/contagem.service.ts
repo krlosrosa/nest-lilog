@@ -31,7 +31,10 @@ export class ContagemService {
     const enderecoResult = await this.db
       .select()
       .from(liteValidacao)
-      .where(ilike(liteValidacao.endereco, search));
+      .where(ilike(liteValidacao.endereco, search))
+      .orderBy(
+        sql`SUBSTRING(${liteValidacao.endereco}, LENGTH(${liteValidacao.endereco}) - 1)`,
+      );
     return enderecoResult;
   }
 
