@@ -20,6 +20,7 @@ import { CreateContagemDto } from './dto/contagem/create-contagem.dto';
 import { GetContagemDto } from './dto/contagem/get-contagem.dto';
 import { CreateAnomaliaContagemLiteDto } from './dto/contagem/create-anomalia-validacao.dto';
 import { ResumoContagemLiteDto } from './dto/contagem/resumo-contamge.dto';
+import { GetAnomaliaContagemDto } from './dto/contagem/get-anomalia-contagem.dto';
 
 @UseGuards(AuthGuard)
 @Controller('movimentacao')
@@ -294,5 +295,36 @@ export class MovimentacaoController {
   })
   deleteContagemLite(@Param('centerId') centerId: string) {
     return this.contagemService.deleteContagemLite(centerId);
+  }
+
+  @Get('relatorio-anomalias-contagem-lite/:centerId/:dataReferencia')
+  @ApiOperation({
+    summary: 'Buscar o relatorio de anomalias da contagem lite',
+    operationId: 'relatorioAnomaliasContagemLite',
+  })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Relatorio de anomalias da contagem lite encontrado com sucesso',
+    type: [GetAnomaliaContagemDto],
+  })
+  @ApiParam({
+    name: 'centerId',
+    description: 'ID do centro',
+    type: String,
+  })
+  @ApiParam({
+    name: 'dataReferencia',
+    description: 'Data de referencia',
+    type: String,
+  })
+  relatorioAnomaliasContagemLite(
+    @Param('centerId') centerId: string,
+    @Param('dataReferencia') dataReferencia: string,
+  ) {
+    return this.contagemService.relatorioAnomaliasContagemLite(
+      centerId,
+      dataReferencia,
+    );
   }
 }

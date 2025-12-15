@@ -1,11 +1,12 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { liteValidacao } from 'src/_shared/infra/drizzle';
+import { liteAnomalia, liteValidacao } from 'src/_shared/infra/drizzle';
 import { DRIZZLE_PROVIDER } from 'src/_shared/infra/drizzle/drizzle.constants';
 import { type DrizzleClient } from 'src/_shared/infra/drizzle/drizzle.provider';
 import { CreateContagemDto } from './dto/contagem/create-contagem.dto';
 import { GetContagemDto } from './dto/contagem/get-contagem.dto';
 import { and, eq, ilike, sql } from 'drizzle-orm';
 import { ResumoContagemLiteDto } from './dto/contagem/resumo-contamge.dto';
+import { GetAnomaliaContagemDto } from './dto/contagem/get-anomalia-contagem.dto';
 
 @Injectable()
 export class ContagemService {
@@ -78,5 +79,21 @@ export class ContagemService {
     await this.db
       .delete(liteValidacao)
       .where(eq(liteValidacao.centroId, centerId));
+  }
+
+  async relatorioAnomaliasContagemLite(
+    centerId: string,
+    dataReferencia: string,
+  ): Promise<GetAnomaliaContagemDto[]> {
+    const query = await this.db
+      .select()
+      .from(liteAnomalia)
+      .where(
+        and(
+          eq(liteAnomalia.centroId, centerId),
+          eq(liteAnomalia.dataReferencia, dataReferencia),
+        ),
+      );
+    return query;
   }
 }
