@@ -38,6 +38,18 @@ export class TransporteRepositoryDrizzle implements ITransporteRepository {
     const transportesData = agruparTransportesComRelacionamentos(transportes);
     return transportesData.map((transporte) => Transporte.fromData(transporte));
   }
+  async findTransportesByTransporteIdsAll(
+    transporteIds: string[],
+  ): Promise<Transporte[]> {
+    const transportes = await this.db
+      .select()
+      .from(transporte)
+      .where(and(inArray(transporte.numeroTransporte, transporteIds)))
+      .leftJoin(palete, eq(transporte.numeroTransporte, palete.transporteId));
+
+    const transportesData = agruparTransportesComRelacionamentos(transportes);
+    return transportesData.map((transporte) => Transporte.fromData(transporte));
+  }
 
   async updateTransporte(
     transporteId: string,

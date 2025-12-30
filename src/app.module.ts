@@ -21,6 +21,9 @@ import { HealthModule } from './health/health.module';
 import { DevolucaoModule } from './devolucao/devolucao.module';
 import { ElasticsearchnpmModule } from './run/elasticsearchnpm/elasticsearchnpm.module';
 import { MovimentacaoModule } from './movimentacao/movimentacao.module';
+import { ProdutoModule } from './produto/produto.module';
+import { AxiosModule } from './_shared/infra/axios/axios.module';
+import { MinioModule } from './_shared/infra/minio/minio.module';
 
 @Module({
   imports: [
@@ -50,6 +53,9 @@ import { MovimentacaoModule } from './movimentacao/movimentacao.module';
     DevolucaoModule,
     ElasticsearchnpmModule,
     MovimentacaoModule,
+    ProdutoModule,
+    AxiosModule,
+    MinioModule,
   ],
   controllers: [],
   providers: [

@@ -23,4 +23,7 @@ export interface ITransporteRepository {
     transporteIds: string[],
     dataExpedicao: string,
   ): Promise<void>;
+  findTransportesByTransporteIdsAll(
+    transporteIds: string[],
+  ): Promise<Transporte[]>;
 }

@@ -1,0 +1,5 @@
+export enum TipoDevolucaoNotas {
+  DEVOLUCAO = 'DEVOLUCAO',
+  DEVOLUCAO_PARCIAL = 'DEVOLUCAO_PARCIAL',
+  REENTREGA = 'REENTREGA',
+}

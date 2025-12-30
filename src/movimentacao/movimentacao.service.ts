@@ -141,7 +141,7 @@ export class MovimentacaoService {
         centroId: centerId,
         endereco: endereco,
         addPor: cadastradoPor,
-        dataReferencia: new Date().toISOString(),
+        dataReferencia: createAnomaliaContagemLiteDto?.dataReferencia,
         lote: createAnomaliaContagemLiteDto?.lote || '',
         sku: createAnomaliaContagemLiteDto?.sku || '',
         quantidade: createAnomaliaContagemLiteDto?.quantidade || 0,

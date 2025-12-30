@@ -10,9 +10,9 @@ import {
   boolean,
   numeric,
   doublePrecision,
+  date,
   varchar,
   jsonb,
-  date,
   real,
   unique,
   primaryKey,
@@ -806,7 +806,7 @@ export const devolucaoItens = pgTable(
     sku: text().notNull(),
     descricao: text().notNull(),
     lote: text(),
-    fabricacao: timestamp({ precision: 3, mode: 'string' }),
+    fabricacao: date(),
     sif: text(),
     quantidadeCaixas: integer(),
     quantidadeUnidades: integer(),
@@ -815,8 +815,14 @@ export const devolucaoItens = pgTable(
     demandaId: integer().notNull(),
     avariaCaixas: integer(),
     avariaUnidades: integer(),
+    notaId: integer('nota_id'),
   },
   (table) => [
+    foreignKey({
+      columns: [table.notaId],
+      foreignColumns: [devolucaoNotas.id],
+      name: 'id_nota',
+    }),
     foreignKey({
       columns: [table.demandaId],
       foreignColumns: [devolucaoDemanda.id],
@@ -845,11 +851,10 @@ export const devolucaoNotas = pgTable(
     tipo: tipoDevolucaoNotas().default('DEVOLUCAO').notNull(),
   },
   (table) => [
-    uniqueIndex('devolucao_notas_empresa_notaFiscal_tipo_key').using(
+    index('devolucao_notas_idViagem_key').using(
       'btree',
-      table.empresa.asc().nullsLast().op('enum_ops'),
       table.notaFiscal.asc().nullsLast().op('text_ops'),
-      table.tipo.asc().nullsLast().op('enum_ops'),
+      table.idViagemRavex.asc().nullsLast().op('text_ops'),
     ),
     foreignKey({
       columns: [table.devolucaoDemandaId],
@@ -917,7 +922,6 @@ export const devolucaoDemanda = pgTable(
     idTransportadora: text(),
     telefone: text(),
     cargaSegregada: boolean().default(false).notNull(),
-    retornoPalete: boolean().default(false).notNull(),
     quantidadePaletes: integer().default(0),
     doca: text(),
     centerId: text().notNull(),
@@ -934,6 +938,7 @@ export const devolucaoDemanda = pgTable(
     fimConferenciaEm: timestamp({ precision: 3, mode: 'string' }),
     finalizadoEm: timestamp({ precision: 3, mode: 'string' }),
     senha: text().notNull(),
+    viagemId: text(),
   },
   (table) => [
     foreignKey({

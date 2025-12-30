@@ -1,11 +1,13 @@
-import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { TokenRavexDto } from './dto/tokenRavex.dto';
-import { RavexResponseDto } from './dto/infoAnomalia.dto';
-import { RavexResponseViagemDtoResponse } from './dto/infoViagem.dto';
+import { IRavexRepository } from '../repositories/ravex.repository';
+import { HttpService } from '@nestjs/axios';
+import FormData from 'form-data';
+import { TokenRavexDto } from '../dto/tokenRavex.dto';
+import { RavexResponseDto } from '../dto/infoAnomalia.dto';
+import { RavexResponseViagemDtoResponse } from '../dto/infoViagem.dto';
 
 @Injectable()
-export class RavexService {
+export class Ravex implements IRavexRepository {
   constructor(private readonly axios: HttpService) {}
 
   async authRavex(

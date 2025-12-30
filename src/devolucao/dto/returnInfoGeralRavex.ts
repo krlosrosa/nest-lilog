@@ -1,5 +1,5 @@
 import { createZodDto } from 'nestjs-zod';
-import { TipoDevolucaoNotas } from './addItensEmDemanda.dto';
+import { TipoDevolucaoNotas } from 'src/_shared/enums/devolucao/devolucao.type';
 import { z } from 'zod';
 
 export const ReturnInfoGeralRavexSchema = z
@@ -16,6 +16,7 @@ export const ReturnInfoGeralRavexSchema = z
         motivoDevolucao: z.string(),
         descMotivoDevolucao: z.string().nullable(),
         operador: z.string().nullable().optional(),
+        empresa: z.string(),
         itens: z.array(
           z.object({
             sku: z.string(),

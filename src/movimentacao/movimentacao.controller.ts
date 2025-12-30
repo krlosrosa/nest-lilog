@@ -322,6 +322,7 @@ export class MovimentacaoController {
     @Param('centerId') centerId: string,
     @Param('dataReferencia') dataReferencia: string,
   ) {
+    console.log({ centerId, dataReferencia });
     return this.contagemService.relatorioAnomaliasContagemLite(
       centerId,
       dataReferencia,

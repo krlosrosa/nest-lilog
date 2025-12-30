@@ -158,6 +158,10 @@ export class Transporte {
     return this.props.id;
   }
 
+  public get paletes(): Palete[] {
+    return this._paletes;
+  }
+
   public get status(): TransporteStatus {
     return this.props.status as TransporteStatus;
   }

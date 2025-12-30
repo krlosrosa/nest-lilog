@@ -5,7 +5,7 @@ import z from 'zod';
 
 export const createAnomaliaContagemLiteSchema = createInsertSchema(
   liteAnomalia,
-).omit({ id: true, dataReferencia: true, endereco: true, centroId: true });
+).omit({ id: true, endereco: true, centroId: true });
 
 export type CreateAnomaliaContagemLite = z.infer<
   typeof createAnomaliaContagemLiteSchema

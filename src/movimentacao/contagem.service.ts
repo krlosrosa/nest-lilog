@@ -94,7 +94,7 @@ export class ContagemService {
       .where(
         and(
           eq(liteAnomalia.centroId, centerId),
-          eq(liteAnomalia.dataReferencia, dataReferencia),
+          eq(liteAnomalia.dataReferencia, sql`${dataReferencia}::date`),
         ),
       );
     return query;
