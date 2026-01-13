@@ -18,4 +18,5 @@ export interface IDemandaProdutividadeRepository {
     dataRegistro: string,
   ): Promise<OverViewProdutividadeDataDto>;
   delete(demandaId: number): Promise<void>;
+  countPaletesDemanda(id: number): Promise<number>;
 }

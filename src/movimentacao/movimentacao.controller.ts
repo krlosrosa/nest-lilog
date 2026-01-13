@@ -80,7 +80,6 @@ export class MovimentacaoController {
     @Param('centerId') centerId: string,
     @AccountId() criadoPorId: string,
   ) {
-    console.log({ centerId, criadoPorId });
     return this.movimentacaoService.getNextMovimentacao(centerId, criadoPorId);
   }
 
@@ -322,7 +321,6 @@ export class MovimentacaoController {
     @Param('centerId') centerId: string,
     @Param('dataReferencia') dataReferencia: string,
   ) {
-    console.log({ centerId, dataReferencia });
     return this.contagemService.relatorioAnomaliasContagemLite(
       centerId,
       dataReferencia,

@@ -55,8 +55,8 @@ export class GestaoProdutividadeController {
     operationId: 'finalizarPaleteProdutividade',
   })
   @ApiBody({ type: [String] })
-  finalizarPalete(@Body() paleteId: string[]) {
-    return this.gestaoProdutividadeService.finalizarPalete(paleteId);
+  finalizarPalete(@Body() paleteId: string[], @AccountId() accountId: string) {
+    return this.gestaoProdutividadeService.finalizarPalete(paleteId, accountId);
   }
 
   @Post('add-pausa-individual/:paleteId')

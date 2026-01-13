@@ -19,7 +19,6 @@ export class MovimentacaoService {
   async create(
     createMovimentacaoDto: CreateMovimentacaoDto[],
   ): Promise<GetMovimentacaoDto> {
-    console.log({ createMovimentacaoDto });
 
     const movimentacoes = createMovimentacaoDto.map((movimentacaoItem) => ({
       ...movimentacaoItem,
@@ -50,7 +49,6 @@ export class MovimentacaoService {
     centerId: string,
     userId: string,
   ): Promise<GetMovimentacaoDto> {
-    console.log({ centerId, userId });
     const nextMovimentacaoResult = await this.db
       .select()
       .from(movimentacao)

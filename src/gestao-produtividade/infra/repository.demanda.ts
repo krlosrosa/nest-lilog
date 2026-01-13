@@ -7,7 +7,7 @@ import { FindAllParams } from '../dtos/params.dto';
 // import { buscarDemandasQuery } from './queries/buscarDemandas';
 import { overViewProdutividadeQuery } from './queries/overViewProdutividade';
 import { demanda, palete } from 'src/_shared/infra/drizzle';
-import { eq, inArray } from 'drizzle-orm';
+import { and, count, eq, inArray, ne } from 'drizzle-orm';
 import { Palete } from '../domain/entities/palete.entity';
 import { DemandaProcesso } from 'src/_shared/enums';
 import { OverViewProdutividadeDataDto } from '../dtos/produtividade/produtivididade.overView.dto';
@@ -94,8 +94,6 @@ export class ProdutividadeRepositoryDrizzle
         })
         .where(inArray(palete.id, paletesIds))
         .returning();
-
-      console.log('paletesAtualizados', paletesAtualizados);
     });
   }
 
@@ -116,8 +114,8 @@ export class ProdutividadeRepositoryDrizzle
     await this.db
       .update(demanda)
       .set({
-        status: demandas[0].status,
-        fim: demandas[0].fim,
+        status: 'FINALIZADA',
+        fim: new Date().toISOString(),
       })
       .where(
         inArray(
@@ -148,5 +146,14 @@ export class ProdutividadeRepositoryDrizzle
         .where(eq(palete.demandaId, demandaId));
       await tx.delete(demanda).where(eq(demanda.id, demandaId));
     });
+  }
+
+  async countPaletesDemanda(id: number): Promise<number> {
+    const [row] = await this.db
+      .select({ total: count() })
+      .from(palete)
+      .where(and(eq(palete.demandaId, id), ne(palete.status, 'CONCLUIDO')));
+
+    return Number(row.total);
   }
 }

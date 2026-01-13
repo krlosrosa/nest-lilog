@@ -19,7 +19,6 @@ export class AtualizarStatusTransportesByPalete {
   ) {}
 
   async execute(data: TransporteUpdatedEventData): Promise<void> {
-    console.log('processo corretos');
     // Busca as paletes relacionadas aos transportes
     const transportes =
       await this.transporteRepository.findTransportesByTransporteIdsAll(

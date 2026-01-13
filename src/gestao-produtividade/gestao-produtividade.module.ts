@@ -18,6 +18,8 @@ import { GetProdutividadeByIdUsecase } from './aplication/get-produtividadeById.
 import { DeletarDemandaUsecase } from './aplication/demanda/deletarDemanda.usecase';
 import GetDemandaUsecase from './aplication/demanda/getDemanda.usecase';
 import { DeletarDemandaAnomaliaUsecase } from './aplication/demanda/deletarDemandaAnomalia.usecase';
+import { FinalizarPaleteUpdateDemanda } from './aplication/demanda/finalizarPaleteUpdateDemanda.usecase';
+import { TransporteRepositoryDrizzle } from 'src/transporte/infra/repository';
 
 @Module({
   controllers: [GestaoProdutividadeController],
@@ -38,6 +40,7 @@ import { DeletarDemandaAnomaliaUsecase } from './aplication/demanda/deletarDeman
     DeletarDemandaUsecase,
     GetDemandaUsecase,
     DeletarDemandaAnomaliaUsecase,
+    FinalizarPaleteUpdateDemanda,
     {
       provide: 'IDemandaProdutividadeRepository',
       useClass: ProdutividadeRepositoryDrizzle,
@@ -45,6 +48,10 @@ import { DeletarDemandaAnomaliaUsecase } from './aplication/demanda/deletarDeman
     {
       provide: 'IPausaRepository',
       useClass: PausaRepositoryDrizzle,
+    },
+    {
+      provide: 'ITransporteRepository',
+      useClass: TransporteRepositoryDrizzle,
     },
   ],
 })

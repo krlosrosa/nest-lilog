@@ -24,6 +24,7 @@ import { DeletarDemandaUsecase } from './aplication/demanda/deletarDemanda.useca
 import GetDemandaUsecase from './aplication/demanda/getDemanda.usecase';
 import { DemandaDto } from './dtos/produtividade/demanda.dto';
 import { DeletarDemandaAnomaliaUsecase } from './aplication/demanda/deletarDemandaAnomalia.usecase';
+import { FinalizarPaleteUpdateDemanda } from './aplication/demanda/finalizarPaleteUpdateDemanda.usecase';
 
 @Injectable()
 export class GestaoProdutividadeService {
@@ -54,14 +55,16 @@ export class GestaoProdutividadeService {
     private readonly getDemandaUsecase: GetDemandaUsecase,
     @Inject(DeletarDemandaAnomaliaUsecase)
     private readonly deletarDemandaAnomaliaUsecase: DeletarDemandaAnomaliaUsecase,
+    @Inject(FinalizarPaleteUpdateDemanda)
+    private readonly finalizarPaleteDemandaTeste: FinalizarPaleteUpdateDemanda,
   ) {}
 
   create(params: DemandaCreateDataComPaletesIds, cadastradoPorId: string) {
     return this.criarDemanda.execute(params, cadastradoPorId);
   }
 
-  finalizarPalete(paleteIds: string[]) {
-    return this.finalizarPaleteDemanda.execute(paleteIds);
+  finalizarPalete(paleteIds: string[], atualizadoPor: string) {
+    return this.finalizarPaleteDemandaTeste.execute(paleteIds, atualizadoPor);
   }
 
   addPausaIndividual(

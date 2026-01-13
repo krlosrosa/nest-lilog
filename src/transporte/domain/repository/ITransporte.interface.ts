@@ -3,6 +3,7 @@ import { Transporte } from '../entities/transporte.entity';
 import { DemandaProcesso } from 'src/_shared/enums';
 import { HistoricoStatusTransporteCreateData } from 'src/transporte/dto/historicoTransporte/historicoTransporte.create.dto';
 import { TransporteComRelacionamentosGetDto } from 'src/transporte/dto/transporte.get.dto';
+import { PaleteGetData } from 'src/gestao-produtividade/dtos/palete/palete.get.dto';
 
 export interface ITransporteRepository {
   findTransportesByTransporteIds(
@@ -26,4 +27,16 @@ export interface ITransporteRepository {
   findTransportesByTransporteIdsAll(
     transporteIds: string[],
   ): Promise<Transporte[]>;
+  findPaletesByTransporteIds(transporteIds: string[]): Promise<PaleteGetData[]>;
+  concluirTransporte(
+    transporteId: string,
+    processo: DemandaProcesso,
+    atualizadoPor: string,
+    tx: any,
+  ): Promise<void>;
+  countPaletesPendentes(
+    transporteId: string,
+    processo: DemandaProcesso,
+    tx: any,
+  ): Promise<number>;
 }
