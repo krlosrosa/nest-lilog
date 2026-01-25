@@ -2,8 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { and, eq, or } from 'drizzle-orm';
 import {
   devolucaImagens,
+  devolucaoAnomalias,
   devolucaoCheckList,
   devolucaoDemanda,
+  devolucaoItens,
   devolucaoNotas,
 } from 'src/_shared/infra/drizzle';
 import { DRIZZLE_PROVIDER } from 'src/_shared/infra/drizzle/drizzle.constants';
@@ -14,6 +16,9 @@ import { AddCheckListDto } from './dto/mobile/checkList.dto';
 import { parseBase64Image } from './utils/convertImage';
 import { EntradaDto, ItensContabilDto } from './dto/mobile/itensContabil.dto';
 import { agruparPorTipoSkuEDevolucao } from './utils/agruparESomarItens';
+import { StartDemandaDto } from './dto/mobile/startDemanda.dto';
+import { AddConferenciaCegaDto } from './dto/mobile/addConferenciaCega.dto';
+import { AnomaliaDevolucaoDto } from './dto/mobile/anomaliaDevolucao.dto';
 
 @Injectable()
 export class DevolucaoMobileService {
@@ -45,7 +50,7 @@ export class DevolucaoMobileService {
 
     const inserImgs = urls.map((url) => ({
       demandaId: Number(demandaId),
-      processo: 'devolucao',
+      processo: 'devolucao-checklist',
       tag: url,
     }));
 
@@ -62,15 +67,25 @@ export class DevolucaoMobileService {
     });
   }
 
-  async startDemanda(demandaId: string, accountId: string): Promise<void> {
+  async startDemanda(
+    demanda: StartDemandaDto,
+    accountId: string,
+  ): Promise<ItensContabilDto[]> {
     await this.db
       .update(devolucaoDemanda)
       .set({
         status: 'EM_CONFERENCIA',
         inicioConferenciaEm: new Date().toISOString(),
         conferenteId: accountId,
+        doca: demanda.doca,
       })
-      .where(eq(devolucaoDemanda.id, Number(demandaId)));
+      .where(eq(devolucaoDemanda.id, Number(demanda.demandaId)));
+
+    const itensContabeis = await this.getItensContabilizados(
+      demanda.demandaId.toString(),
+    );
+
+    return itensContabeis;
   }
 
   async listarDemandasEmAberto(
@@ -113,5 +128,88 @@ export class DevolucaoMobileService {
     const itensAgrupados = agruparPorTipoSkuEDevolucao(subItens);
 
     return itensAgrupados;
+  }
+
+  async addConferenciaFisica(
+    demandaId: string,
+    conferencia: AddConferenciaCegaDto[],
+  ) {
+    const withTipo = conferencia.map((item) => ({
+      ...item,
+      tipo: 'FISICO' as 'CONTABIL' | 'FISICO',
+      demandaId: Number(demandaId),
+    }));
+    await this.db.transaction(async (tx) => {
+      await tx
+        .delete(devolucaoItens)
+        .where(
+          and(
+            eq(devolucaoItens.demandaId, Number(demandaId)),
+            eq(devolucaoItens.tipo, 'FISICO'),
+          ),
+        );
+      await tx.insert(devolucaoItens).values(withTipo);
+    });
+  }
+
+  async finalizarDemanda(demandaId: string): Promise<void> {
+    await this.db
+      .update(devolucaoDemanda)
+      .set({
+        status: 'CONFERENCIA_FINALIZADA',
+        finalizadoEm: new Date().toISOString(),
+      })
+      .where(eq(devolucaoDemanda.id, Number(demandaId)));
+  }
+
+  async getDemandaById(demandaId: string): Promise<string> {
+    const data = await this.db.query.devolucaoDemanda.findFirst({
+      where: eq(devolucaoDemanda.id, Number(demandaId)),
+    });
+
+    return data?.status || '';
+  }
+
+  async addAnomaliaDevolucao(anomalia: AnomaliaDevolucaoDto): Promise<void> {
+    const fotosForBase64 = anomalia.imagens.map((imagem) =>
+      parseBase64Image(imagem),
+    );
+
+    await this.db.transaction(async (tx) => {
+      const fotosUrls = await Promise.all(
+        fotosForBase64.map(async (foto, index) => {
+          return await this.minioService.upload(
+            'devolucaoanomalias',
+            `${anomalia.demandaId}-${anomalia.sku}-${index}.${foto.type.split('/')[1]}`,
+            Buffer.from(await foto.arrayBuffer()),
+            foto.type,
+          );
+        }),
+      );
+
+      const urls = fotosUrls.map((url) => url.etag);
+
+      await tx.insert(devolucaoAnomalias).values({
+        demandaId: anomalia.demandaId,
+        sku: anomalia.sku,
+        descricao: anomalia.descricao,
+        lote: anomalia.lote,
+        tipo: anomalia.tipo,
+        natureza: anomalia.natureza,
+        causa: anomalia.causa,
+        quantidadeCaixas: anomalia.quantidadeCaixas,
+        quantidadeUnidades: anomalia.quantidadeUnidades,
+        atualizadoEm: new Date().toISOString(),
+        criadoEm: new Date().toISOString(),
+      });
+
+      await tx.insert(devolucaImagens).values(
+        urls.map((url) => ({
+          demandaId: anomalia.demandaId,
+          processo: 'devolucao-anomalias',
+          tag: url,
+        })),
+      );
+    });
   }
 }

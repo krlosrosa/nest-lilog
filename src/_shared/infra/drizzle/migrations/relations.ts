@@ -16,11 +16,11 @@ import {
   pausaGeral,
   pausa,
   historicoStatusTransporte,
-  devolucaoAnomalias,
   devolucaoCheckList,
   devolucaoHistoricoStatus,
   devolucaoNotas,
   devolucaoItens,
+  devolucaoAnomalias,
   rulesEngines,
   devolucaoTransportadoras,
   transporteCargaParada,
@@ -213,7 +213,6 @@ export const devolucaoDemandaRelations = relations(
   devolucaoDemanda,
   ({ one, many }) => ({
     devolucaImagens: many(devolucaImagens),
-    devolucaoAnomaliases: many(devolucaoAnomalias),
     devolucaoCheckLists: many(devolucaoCheckList),
     devolucaoHistoricoStatuses: many(devolucaoHistoricoStatus),
     devolucaoItens: many(devolucaoItens),
@@ -232,6 +231,7 @@ export const devolucaoDemandaRelations = relations(
       references: [user.id],
       relationName: 'devolucaoDemanda_conferenteId_user_id',
     }),
+    devolucaoAnomaliases: many(devolucaoAnomalias),
   }),
 );
 
@@ -319,16 +319,6 @@ export const historicoStatusTransporteRelations = relations(
   }),
 );
 
-export const devolucaoAnomaliasRelations = relations(
-  devolucaoAnomalias,
-  ({ one }) => ({
-    devolucaoDemanda: one(devolucaoDemanda, {
-      fields: [devolucaoAnomalias.demandaId],
-      references: [devolucaoDemanda.id],
-    }),
-  }),
-);
-
 export const devolucaoCheckListRelations = relations(
   devolucaoCheckList,
   ({ one }) => ({
@@ -370,6 +360,16 @@ export const devolucaoNotasRelations = relations(
     devolucaoItens: many(devolucaoItens),
     devolucaoDemanda: one(devolucaoDemanda, {
       fields: [devolucaoNotas.devolucaoDemandaId],
+      references: [devolucaoDemanda.id],
+    }),
+  }),
+);
+
+export const devolucaoAnomaliasRelations = relations(
+  devolucaoAnomalias,
+  ({ one }) => ({
+    devolucaoDemanda: one(devolucaoDemanda, {
+      fields: [devolucaoAnomalias.demandaId],
       references: [devolucaoDemanda.id],
     }),
   }),
