@@ -1,5 +1,5 @@
 # Dockerfile simplificado para NestJS + Prisma
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Definir diretório de trabalho
 WORKDIR /app
@@ -8,8 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar dependências
-RUN npm cache clean --force 
-RUN npm install --loglevel=error --loglevel=error
+RUN npm install --legacy-peer-deps --loglevel=error
 
 # Copiar código fonte
 COPY . .
