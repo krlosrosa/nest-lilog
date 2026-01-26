@@ -2,8 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { and, eq, or } from 'drizzle-orm';
 import {
   devolucaImagens,
+  devolucaoAnomalias,
   devolucaoCheckList,
   devolucaoDemanda,
+  devolucaoItens,
   devolucaoNotas,
 } from 'src/_shared/infra/drizzle';
 import { DRIZZLE_PROVIDER } from 'src/_shared/infra/drizzle/drizzle.constants';
@@ -13,6 +15,9 @@ import { ListarDemandasDto } from './dto/demanda/listar-demandas.dto';
 import { AddCheckListDto } from './dto/mobile/checkList.dto';
 import { EntradaDto, ItensContabilDto } from './dto/mobile/itensContabil.dto';
 import { agruparPorTipoSkuEDevolucao } from './utils/agruparESomarItens';
+import { StartDemandaDto } from './dto/mobile/startDemanda.dto';
+import { AddConferenciaCegaDto } from './dto/mobile/addConferenciaCega.dto';
+import { AnomaliaDevolucaoDto } from './dto/mobile/anomaliaDevolucao.dto';
 
 @Injectable()
 export class DevolucaoMobileService {
@@ -46,7 +51,7 @@ export class DevolucaoMobileService {
 
     const inserImgs = urls.map((url) => ({
       demandaId: Number(demandaId),
-      processo: 'devolucao',
+      processo: 'devolucao-checklist',
       tag: url,
     }));
 
@@ -63,15 +68,25 @@ export class DevolucaoMobileService {
     });
   }
 
-  async startDemanda(demandaId: string, accountId: string): Promise<void> {
+  async startDemanda(
+    demanda: StartDemandaDto,
+    accountId: string,
+  ): Promise<ItensContabilDto[]> {
     await this.db
       .update(devolucaoDemanda)
       .set({
         status: 'EM_CONFERENCIA',
         inicioConferenciaEm: new Date().toISOString(),
         conferenteId: accountId,
+        doca: demanda.doca,
       })
-      .where(eq(devolucaoDemanda.id, Number(demandaId)));
+      .where(eq(devolucaoDemanda.id, Number(demanda.demandaId)));
+
+    const itensContabeis = await this.getItensContabilizados(
+      demanda.demandaId.toString(),
+    );
+
+    return itensContabeis;
   }
 
   async listarDemandasEmAberto(
@@ -115,7 +130,6 @@ export class DevolucaoMobileService {
 
     return itensAgrupados;
   }
-<<<<<<< HEAD
 
   async addConferenciaFisica(
     demandaId: string,
@@ -198,6 +212,4 @@ export class DevolucaoMobileService {
       );
     });
   }
-=======
->>>>>>> parent of 8fea1f0 (devolucao)
 }

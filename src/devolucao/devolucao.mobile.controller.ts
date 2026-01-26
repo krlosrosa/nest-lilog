@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   Body,
   Controller,
@@ -16,15 +15,10 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-=======
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
->>>>>>> parent of 8fea1f0 (devolucao)
 import { DevolucaoMobileService } from './devolucao.mobile.service';
 import { ListarDemandasDto } from './dto/demanda/listar-demandas.dto';
 import { AddCheckListDto } from './dto/mobile/checkList.dto';
 import { ItensContabilDto } from './dto/mobile/itensContabil.dto';
-<<<<<<< HEAD
 import { StartDemandaDto } from './dto/mobile/startDemanda.dto';
 import { AddConferenciaCegaDto } from './dto/mobile/addConferenciaCega.dto';
 import { AuthGuard } from 'src/_shared/guard/auth.guard';
@@ -35,10 +29,9 @@ import {
   FileFieldsInterceptor,
   FilesInterceptor,
 } from '@nestjs/platform-express';
-=======
->>>>>>> parent of 8fea1f0 (devolucao)
 
 @ApiTags('devolucao-mobile')
+@UseGuards(AuthGuard)
 @Controller('devolucao-mobile')
 export class DevolucaoMobileController {
   constructor(
@@ -100,14 +93,15 @@ export class DevolucaoMobileController {
   })
   async listarDemandasEmAberto(
     @Param('centerId') centerId: string,
+    @AccountId() accountId: string, // ✅ direto aqui
   ): Promise<ListarDemandasDto[]> {
     return this.devolucaoMobileService.listarDemandasEmAberto(
       centerId,
-      '421931',
+      accountId,
     );
   }
 
-  @Post('start-demanda/:demandaId')
+  @Post('start-demanda/')
   @ApiOperation({
     summary: 'Iniciar conferência',
     operationId: 'startDemandaDevolucaoMobile',
@@ -115,10 +109,47 @@ export class DevolucaoMobileController {
   @ApiResponse({
     status: 200,
     description: 'Conferência iniciada com sucesso',
-    type: String,
+    type: [ItensContabilDto],
   })
-  async startDemanda(@Param('demandaId') demandaId: string): Promise<void> {
-    return this.devolucaoMobileService.startDemanda(demandaId, '421931');
+  @ApiBody({ type: StartDemandaDto })
+  async startDemanda(
+    @Body() demanda: StartDemandaDto,
+    @AccountId() accountId: string, // ✅ direto aqui
+  ): Promise<ItensContabilDto[]> {
+    return this.devolucaoMobileService.startDemanda(demanda, accountId);
+  }
+
+  @Post('add-contagem-cega/:demandaId')
+  @ApiOperation({
+    summary: 'Iniciar conferência',
+    operationId: 'addContagemCega',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Conferência iniciada com sucesso',
+  })
+  @ApiBody({ type: [AddConferenciaCegaDto] })
+  async addContagemCega(
+    @Param('demandaId') demandaId: string,
+    @Body() conferencia: AddConferenciaCegaDto[],
+  ): Promise<void> {
+    return this.devolucaoMobileService.addConferenciaFisica(
+      demandaId,
+      conferencia,
+    );
+  }
+
+  @Post('finalizar-demanda/:demandaId')
+  @ApiOperation({
+    summary: 'Finalizar demanda',
+    operationId: 'finalizarDemandaDevolucaoMobile',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Demanda finalizada com sucesso',
+  })
+  async finalizarDemanda(@Param('demandaId') demandaId: string): Promise<void> {
+    return this.devolucaoMobileService.finalizarDemanda(demandaId);
   }
 
   @Get('get-itens-contabil/:demandaId')
@@ -136,7 +167,6 @@ export class DevolucaoMobileController {
   ): Promise<ItensContabilDto[]> {
     return this.devolucaoMobileService.getItensContabilizados(demandaId);
   }
-<<<<<<< HEAD
 
   @Get('get-status-by-id/:demandaId')
   @ApiOperation({
@@ -177,6 +207,4 @@ export class DevolucaoMobileController {
     // Passamos o DTO e o array de arquivos para o Service
     return this.devolucaoMobileService.addAnomaliaDevolucao(anomalia, imagens);
   }
-=======
->>>>>>> parent of 8fea1f0 (devolucao)
 }
