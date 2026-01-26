@@ -3,12 +3,14 @@ import { ApiProperty } from '@nestjs/swagger';
 export class AddCheckListDto {
   @ApiProperty({
     type: 'string',
-    description: 'Foto do baú aberto',
+    format: 'binary',
+    description: 'Foto do baú fechado',
   })
   fotoBauAberto: any;
 
   @ApiProperty({
     type: 'string',
+    format: 'binary',
     description: 'Foto do baú fechado',
   })
   fotoBauFechado: any;

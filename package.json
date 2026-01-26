@@ -39,7 +39,7 @@
     "@nestjs/jwt": "^11.0.1",
     "@nestjs/mapped-types": "*",
     "@nestjs/microservices": "^11.1.8",
-    "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/platform-express": "^11.1.12",
     "@nestjs/platform-socket.io": "^11.1.8",
     "@nestjs/swagger": "^11.2.1",
     "@nestjs/terminus": "^11.0.0",

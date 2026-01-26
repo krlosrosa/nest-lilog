@@ -13,7 +13,6 @@ import { type DrizzleClient } from 'src/_shared/infra/drizzle/drizzle.provider';
 import { MinioService } from 'src/_shared/infra/minio/minio.service';
 import { ListarDemandasDto } from './dto/demanda/listar-demandas.dto';
 import { AddCheckListDto } from './dto/mobile/checkList.dto';
-import { parseBase64Image } from './utils/convertImage';
 import { EntradaDto, ItensContabilDto } from './dto/mobile/itensContabil.dto';
 import { agruparPorTipoSkuEDevolucao } from './utils/agruparESomarItens';
 import { StartDemandaDto } from './dto/mobile/startDemanda.dto';
@@ -28,22 +27,24 @@ export class DevolucaoMobileService {
     @Inject(DRIZZLE_PROVIDER) private readonly db: DrizzleClient,
   ) {}
 
-  async addCheckList(info: AddCheckListDto, demandaId: string): Promise<void> {
-    const bauAberto = parseBase64Image(info.fotoBauAberto);
-    const bauFechado = parseBase64Image(info.fotoBauFechado);
-
+  async addCheckList(
+    info: AddCheckListDto,
+    demandaId: string,
+    fotoAberto: Express.Multer.File,
+    fotoFechado: Express.Multer.File,
+  ): Promise<void> {
     const bauAbertoUrl = await this.minioService.upload(
       'devolucaochecklist',
-      `${demandaId}-bau-aberto.${bauAberto.type.split('/')[1]}`,
-      Buffer.from(await bauAberto.arrayBuffer()),
-      bauAberto.type,
+      `${demandaId}-bau-aberto.${fotoAberto.mimetype.split('/')[1]}`,
+      fotoAberto.buffer,
+      fotoAberto.mimetype,
     );
 
     const bauFechadoUrl = await this.minioService.upload(
       'devolucaochecklist',
-      `${demandaId}-bau-fechado.${bauFechado.type.split('/')[1]}`,
-      Buffer.from(await bauFechado.arrayBuffer()),
-      bauFechado.type,
+      `${demandaId}-bau-fechado.${fotoFechado.mimetype.split('/')[1]}`,
+      fotoFechado.buffer,
+      fotoFechado.mimetype,
     );
 
     const urls = [bauAbertoUrl.etag, bauFechadoUrl.etag];
@@ -170,19 +171,18 @@ export class DevolucaoMobileService {
     return data?.status || '';
   }
 
-  async addAnomaliaDevolucao(anomalia: AnomaliaDevolucaoDto): Promise<void> {
-    const fotosForBase64 = anomalia.imagens.map((imagem) =>
-      parseBase64Image(imagem),
-    );
-
+  async addAnomaliaDevolucao(
+    anomalia: AnomaliaDevolucaoDto,
+    imagens: Express.Multer.File[],
+  ): Promise<void> {
     await this.db.transaction(async (tx) => {
       const fotosUrls = await Promise.all(
-        fotosForBase64.map(async (foto, index) => {
+        imagens.map(async (foto, index) => {
           return await this.minioService.upload(
             'devolucaoanomalias',
-            `${anomalia.demandaId}-${anomalia.sku}-${index}.${foto.type.split('/')[1]}`,
-            Buffer.from(await foto.arrayBuffer()),
-            foto.type,
+            `${anomalia.demandaId}-${anomalia.sku}-${index}.${foto.mimetype.split('/')[1]}`,
+            foto.buffer,
+            foto.mimetype,
           );
         }),
       );
