@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  produtividadenest:
+  produtividadenestlilog:
     build:
       context: .
       args:
         - DATABASE_URL=${DATABASE_URL}
-    container_name: produtividadenest
+    container_name: produtividadenestlilog
     restart: unless-stopped
     environment:
       - NODE_ENV=${NODE_ENV:-production}
@@ -28,10 +28,10 @@ services:
     labels:
       # --- Habilita o Traefik para este serviço ---
       - "traefik.enable=true"
-      - "traefik.http.routers.produtividadenest.rule=Host(`${PRODUTIVIDADE_HOST}`)"
-      - "traefik.http.routers.produtividadenest.service=produtividadenest"
-      - "traefik.http.routers.produtividadenest.tls.certresolver=letsencrypt"
-      - "traefik.http.services.produtividadenest.loadbalancer.server.port=4000"
+      - "traefik.http.routers.produtividadenestlilog.rule=Host(`${PRODUTIVIDADE_HOST}`)"
+      - "traefik.http.routers.produtividadenestlilog.service=produtividadenestlilog"
+      - "traefik.http.routers.produtividadenestlilog.tls.certresolver=letsencrypt"
+      - "traefik.http.services.produtividadenestlilog.loadbalancer.server.port=4000"
 
 networks:
   proxy:
