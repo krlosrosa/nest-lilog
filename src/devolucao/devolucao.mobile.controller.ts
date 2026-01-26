@@ -30,6 +30,19 @@ import {
   FilesInterceptor,
 } from '@nestjs/platform-express';
 
+// Tipo para arquivos Multer compatível com Express 5
+type MulterFile = {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  size: number;
+  buffer: Buffer;
+  destination?: string;
+  filename?: string;
+  path?: string;
+};
+
 @ApiTags('devolucao-mobile')
 @UseGuards(AuthGuard)
 @Controller('devolucao-mobile')
@@ -66,8 +79,8 @@ export class DevolucaoMobileController {
     @Param('demandaId') demandaId: string,
     @UploadedFiles()
     files: {
-      fotoBauAberto?: Express.Multer.File[];
-      fotoBauFechado?: Express.Multer.File[];
+      fotoBauAberto?: MulterFile[];
+      fotoBauFechado?: MulterFile[];
     },
     @Body() addCheckListDto: AddCheckListDto,
   ): Promise<void> {
@@ -76,8 +89,8 @@ export class DevolucaoMobileController {
     return this.devolucaoMobileService.addCheckList(
       addCheckListDto,
       demandaId,
-      fotoAberto as Express.Multer.File,
-      fotoFechado as Express.Multer.File,
+      fotoAberto as MulterFile,
+      fotoFechado as MulterFile,
     );
   }
 
@@ -202,7 +215,7 @@ export class DevolucaoMobileController {
   )
   async addAnomaliaDevolucao(
     @Body() anomalia: AnomaliaDevolucaoDto,
-    @UploadedFiles() imagens: Express.Multer.File[], // Captura o array de arquivos
+    @UploadedFiles() imagens: MulterFile[], // Captura o array de arquivos
   ): Promise<void> {
     // Passamos o DTO e o array de arquivos para o Service
     return this.devolucaoMobileService.addAnomaliaDevolucao(anomalia, imagens);

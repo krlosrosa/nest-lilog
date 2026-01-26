@@ -1,5 +1,18 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { and, eq, or } from 'drizzle-orm';
+
+// Tipo para arquivos Multer compatível com Express 5
+type MulterFile = {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  size: number;
+  buffer: Buffer;
+  destination?: string;
+  filename?: string;
+  path?: string;
+};
 import {
   devolucaImagens,
   devolucaoAnomalias,
@@ -30,8 +43,8 @@ export class DevolucaoMobileService {
   async addCheckList(
     info: AddCheckListDto,
     demandaId: string,
-    fotoAberto: Express.Multer.File,
-    fotoFechado: Express.Multer.File,
+    fotoAberto: MulterFile,
+    fotoFechado: MulterFile,
   ): Promise<void> {
     const bauAbertoUrl = await this.minioService.upload(
       'devolucaochecklist',
@@ -173,7 +186,7 @@ export class DevolucaoMobileService {
 
   async addAnomaliaDevolucao(
     anomalia: AnomaliaDevolucaoDto,
-    imagens: Express.Multer.File[],
+    imagens: MulterFile[],
   ): Promise<void> {
     await this.db.transaction(async (tx) => {
       const fotosUrls = await Promise.all(
