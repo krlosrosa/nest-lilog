@@ -19,6 +19,7 @@ export class MovimentacaoService {
   async create(
     createMovimentacaoDto: CreateMovimentacaoDto[],
   ): Promise<GetMovimentacaoDto> {
+
     const movimentacoes = createMovimentacaoDto.map((movimentacaoItem) => ({
       ...movimentacaoItem,
       status: 'pendente',

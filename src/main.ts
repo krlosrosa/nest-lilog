@@ -26,7 +26,7 @@ async function bootstrap() {
   app.enableCors({
     origin: '*', // permite todas as origens (pode substituir pelo domínio específico)
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-center'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   });
   app.setGlobalPrefix('api');
   setupSwagger(app); // 2. Chame a função para configurar o Swagger

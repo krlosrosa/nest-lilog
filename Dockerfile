@@ -9,7 +9,7 @@ COPY package*.json ./
 
 # Instalar dependências
 RUN npm cache clean --force 
-RUN npm install --legacy-peer-deps --loglevel=error
+RUN npm install --loglevel=error --loglevel=error
 
 # Copiar código fonte
 COPY . .

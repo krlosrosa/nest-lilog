@@ -17,7 +17,7 @@ import { UpdateProdutoDto } from './dto/update-produto.dto';
 
 @Controller('produto')
 @ApiTags('produto')
-//@UseGuards(AuthGuard)
+@UseGuards(AuthGuard)
 @ApiStandardResponses()
 export class ProdutoController {
   constructor(private readonly produtoService: ProdutoService) {}
