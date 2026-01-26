@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar dependências
-RUN npm install --legacy-peer-deps --loglevel=error
+RUN npm install --force --loglevel=error
 
 # Copiar código fonte
 COPY . .
