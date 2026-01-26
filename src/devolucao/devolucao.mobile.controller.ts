@@ -4,21 +4,31 @@ import {
   Get,
   Param,
   Post,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import {
   ApiBody,
+  ApiConsumes,
   ApiOperation,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { DevolucaoMobileService } from './devolucao.mobile.service';
 import { ListarDemandasDto } from './dto/demanda/listar-demandas.dto';
+import { AddCheckListDto } from './dto/mobile/checkList.dto';
 import { ItensContabilDto } from './dto/mobile/itensContabil.dto';
 import { StartDemandaDto } from './dto/mobile/startDemanda.dto';
 import { AddConferenciaCegaDto } from './dto/mobile/addConferenciaCega.dto';
 import { AuthGuard } from 'src/_shared/guard/auth.guard';
 import { AccountId } from 'src/_shared/decorators/account-id.decorator';
+import { AnomaliaDevolucaoDto } from './dto/mobile/anomaliaDevolucao.dto';
+import { memoryStorage } from 'multer';
+import {
+  FileFieldsInterceptor,
+  FilesInterceptor,
+} from '@nestjs/platform-express';
 
 @ApiTags('devolucao-mobile')
 @UseGuards(AuthGuard)
@@ -27,6 +37,49 @@ export class DevolucaoMobileController {
   constructor(
     private readonly devolucaoMobileService: DevolucaoMobileService,
   ) {}
+
+  @Post('add-check-list/:demandaId')
+  @ApiOperation({
+    summary: 'Adicionar check list',
+    operationId: 'addCheckListDevolucaoMobile',
+  })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({ type: AddCheckListDto })
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'fotoBauAberto', maxCount: 1 },
+        { name: 'fotoBauFechado', maxCount: 1 },
+      ],
+      {
+        storage: memoryStorage(), // Mantém como Buffer para não lixar o container
+        limits: { fileSize: 10 * 1024 * 1024 }, // Limite de 10MB por foto
+      },
+    ),
+  )
+  @ApiResponse({
+    status: 200,
+    description: 'Check list adicionado com sucesso',
+    type: String,
+  })
+  async addCheckList(
+    @Param('demandaId') demandaId: string,
+    @UploadedFiles()
+    files: {
+      fotoBauAberto?: Express.Multer.File[];
+      fotoBauFechado?: Express.Multer.File[];
+    },
+    @Body() addCheckListDto: AddCheckListDto,
+  ): Promise<void> {
+    const fotoAberto = files.fotoBauAberto?.[0];
+    const fotoFechado = files.fotoBauFechado?.[0];
+    return this.devolucaoMobileService.addCheckList(
+      addCheckListDto,
+      demandaId,
+      fotoAberto as Express.Multer.File,
+      fotoFechado as Express.Multer.File,
+    );
+  }
 
   @Get('listar-demandas-em-aberto/:centerId')
   @ApiOperation({
@@ -127,5 +180,31 @@ export class DevolucaoMobileController {
   })
   async getDemandaById(@Param('demandaId') demandaId: string): Promise<string> {
     return this.devolucaoMobileService.getDemandaById(demandaId);
+  }
+
+  @Post('add-anomalia-devolucao')
+  @ApiOperation({
+    summary: 'Adicionar anomalia de devolução',
+    operationId: 'addAnomaliaDevolucao',
+  })
+  @ApiConsumes('multipart/form-data') // Necessário para arquivos
+  @ApiBody({ type: AnomaliaDevolucaoDto })
+  @ApiResponse({
+    status: 200,
+    description: 'Anomalia de devolução adicionada com sucesso',
+  })
+  @UseInterceptors(
+    FilesInterceptor('imagens', 10, {
+      // Nome do campo deve ser 'imagens'
+      storage: memoryStorage(),
+      limits: { fileSize: 5 * 1024 * 1024 }, // Limite de 5MB por foto
+    }),
+  )
+  async addAnomaliaDevolucao(
+    @Body() anomalia: AnomaliaDevolucaoDto,
+    @UploadedFiles() imagens: Express.Multer.File[], // Captura o array de arquivos
+  ): Promise<void> {
+    // Passamos o DTO e o array de arquivos para o Service
+    return this.devolucaoMobileService.addAnomaliaDevolucao(anomalia, imagens);
   }
 }
