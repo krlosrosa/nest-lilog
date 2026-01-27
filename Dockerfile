@@ -1,27 +1,24 @@
-# ---------- BUILD ----------
-  FROM node:22 AS builder
+# Dockerfile simplificado para NestJS + Prisma
+FROM node:22-alpine
 
-  WORKDIR /app
-  
-  COPY package.json package-lock.json ./
-  RUN npm install
-  
-  COPY . .
-  RUN npm install -g @nestjs/cli
-  RUN npm run build
-  
-  
-  # ---------- RUNTIME ----------
-  FROM node:22-alpine
-  
-  WORKDIR /app
-  
-  COPY package.json package-lock.json ./
-  RUN npm ci --omit=dev --legacy-peer-deps
-  
-  COPY --from=builder /app/dist ./dist
-  
-  EXPOSE 3000
-  CMD ["node", "dist/src/main.js"]
-  
-  
+# Definir diretório de trabalho
+WORKDIR /app
+
+# Copiar arquivos de dependências
+COPY package*.json ./
+
+# Instalar dependências
+RUN npm cache clean --force 
+RUN npm install --legacy-peer-deps --loglevel=error
+
+# Copiar código fonte
+COPY . .
+
+# Fazer build da aplicação
+RUN npm run build
+
+# Expor porta
+EXPOSE 4000
+
+# Comando para iniciar a aplicação
+CMD ["npm", "run", "start:prod"]
