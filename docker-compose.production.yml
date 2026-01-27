@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  lilog-nest-production:
+  lilog-nest-production-dev:
     build:
       context: .
       args:
         - DATABASE_URL=${DATABASE_URL}
-    container_name: lilog-nest-production
+    container_name: lilog-nest-production-dev
     restart: unless-stopped
     environment:
       - NODE_ENV=${NODE_ENV:-production}
@@ -29,9 +29,9 @@ services:
       # --- Habilita o Traefik para este serviço ---
       - "traefik.enable=true"
       - "traefik.http.routers.nestproduction.rule=Host(`${PRODUTIVIDADE_HOST}`)"
-      - "traefik.http.routers.nestproduction.service=nestproduction"
-      - "traefik.http.routers.nestproduction.tls.certresolver=letsencrypt"
-      - "traefik.http.services.nestproduction.loadbalancer.server.port=4000"
+      - "traefik.http.routers.nestproductiondev.service=nestproductiondev"
+      - "traefik.http.routers.nestproductiondev.tls.certresolver=letsencrypt"
+      - "traefik.http.services.nestproductiondev.loadbalancer.server.port=4000"
 
 networks:
   proxy:
