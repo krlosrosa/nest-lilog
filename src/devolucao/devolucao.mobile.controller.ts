@@ -194,7 +194,7 @@ export class DevolucaoMobileController {
     description: 'Anomalia de devolução adicionada com sucesso',
   })
   @UseInterceptors(
-    FilesInterceptor('imagens', 10, {
+    FilesInterceptor('imagens', 9, {
       // Nome do campo deve ser 'imagens'
       storage: memoryStorage(),
       limits: { fileSize: 5 * 1024 * 1024 }, // Limite de 5MB por foto
